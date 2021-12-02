@@ -2,13 +2,16 @@ package logica.ficheros;
 
 
 import java.io.*;
+
+import android.app.Activity;
 import logica.usuario.*;
 import org.json.*;
 
 public class GuardarDatos {
 
-    public static void procesoGuardadoClientes() {
+    public static void procesoGuardadoClientes(Activity activity) {
         Cliente cliente;
+        GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
         for (Cliente usuarioCliente : ListaUsuariosClientes.getListaUsuariosClientes()) {
             if (!ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())) {
@@ -16,6 +19,11 @@ public class GuardarDatos {
                 if (cliente != null) {
                     cliente.llenarObjetoClienteJson(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());
+                    try {
+                        a.escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(),activity,"usuariosClientes.json");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     //ListaUsuariosClientes.agregarUsuarioAListaJSON(cliente.getUsuarioJSON(), ListaUsuariosClientes.getListaUsuariosClientesJSON());
                 }
             }
@@ -23,8 +31,10 @@ public class GuardarDatos {
         //guardar.agregarAJsonClientes(ListaUsuariosClientes.getListaUsuariosClientesJSON());
     }
 
-    public static void procesoGuardadoEmpresas() {
+    public static void procesoGuardadoEmpresas(Activity activity) {
         Empresa empresa;
+
+        GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
         for (Empresa usuarioEmpresa : ListaUsuariosEmpresas.getListaUsuariosEmpresas()) {
             if (!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(usuarioEmpresa.getEmail())) {
@@ -32,7 +42,11 @@ public class GuardarDatos {
                 if (empresa != null) {
                     empresa.llenarObjetoEmpresaJson(empresa);
                     ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().add(empresa.getUsuarioJSON());
-                    //ListaUsuariosEmpresas.agregarUsuarioAListaJSON(empresa.getUsuarioJSON(), ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
+                    try {
+                        a.escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(),activity,"usuariosEmpresas.json");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }//ListaUsuariosEmpresas.agregarUsuarioAListaJSON(empresa.getUsuarioJSON(), ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
 
                 }
             }

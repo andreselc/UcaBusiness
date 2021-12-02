@@ -114,7 +114,7 @@ public class InterfazRegistro extends AppCompatActivity {
                 //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
                // else {
 
-                    GuardarDatos.procesoGuardadoEmpresas();
+                    GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
                     escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
                 //}
@@ -128,7 +128,7 @@ public class InterfazRegistro extends AppCompatActivity {
                     //else {
 
 
-                        GuardarDatos.procesoGuardadoClientes();
+                        GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
                         escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
                         Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
                     //}
