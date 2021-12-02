@@ -21,7 +21,7 @@ public class Usuario{
         password = new Password();
         email = new Correo();
     }
-
+    //TODO:Falta aquí agregar el atributo "bloqueo" y "username".
     public Usuario(String password,String email,char tipoCuenta){
         this.password= new Password(password);
         this.email=new Correo(email);

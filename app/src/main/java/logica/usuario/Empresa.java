@@ -27,6 +27,7 @@ public class Empresa extends Usuario{
         Encrypt encriptar=new Encrypt();
         empresa.setPassword(encriptar.getAES(empresa.getPassword()));
           try {
+              //TODO:Falta agregar aquí el ciclo que llena todas las publicaciones de una empresa en el ArrayList
               empresa.usuarioJSON.put("contraseña",empresa.getPassword());
               empresa.usuarioJSON.put("correo",empresa.getEmail());
               empresa.usuarioJSON.put("tipo",empresa.getTipoCuenta());

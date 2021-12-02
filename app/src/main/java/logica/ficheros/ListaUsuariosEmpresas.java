@@ -65,6 +65,7 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         return false;
     }
 
+    //TODO:Falta agregar el ciclo que me llene las publicaciones en la lista.
     public static void llenarListaEstaticaEmpresas() {
         Encrypt desencriptar = new Encrypt();
         LeerDatos leer = new LeerDatos();

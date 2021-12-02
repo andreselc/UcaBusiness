@@ -2,9 +2,7 @@ package logica.usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.util.LinkedHashMap;
 
 public class Cliente extends Usuario{
 

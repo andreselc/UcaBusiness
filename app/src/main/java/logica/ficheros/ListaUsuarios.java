@@ -19,6 +19,7 @@ public class ListaUsuarios {
         listaUsuariosJSON= new JSONArray();
     }
 
+    //TODO:Con este método se puede validar si un usuario se encuentra en una lista. Esto es para cuando te registras
     public static boolean correoExiste(String correo) {
         for (Usuario usuario: listaUsuarios) {
             if (usuario.getEmail().compareTo(correo)==0)
