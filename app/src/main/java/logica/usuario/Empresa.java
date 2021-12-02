@@ -12,7 +12,7 @@ public class Empresa extends Usuario{
     private ArrayList<Producto> listaPublicaciones;
     private String direccion;
 
-    public Empresa(){
+    public Empresa(){usuarioJSON=new JSONObject();
     }
 
     public Empresa(String email,String password, char tipoCuenta, String direccion) {

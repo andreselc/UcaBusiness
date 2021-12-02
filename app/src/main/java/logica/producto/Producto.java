@@ -1,7 +1,7 @@
 package logica.producto;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 public class Producto {
     private String descripcion, nombre, ubicImg, userID;
@@ -12,6 +12,7 @@ public class Producto {
 
     public Producto(int disponibilidad) {
         this.cantidad= disponibilidad;
+        productoJSON=new JSONObject();
     }
 
     public Producto(String descripcion, String nombre,
