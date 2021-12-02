@@ -1,6 +1,8 @@
 package logica.ficheros;
 
 import logica.producto.Producto;
+import logica.usuario.Cliente;
+import logica.usuario.Encrypt;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,5 +92,29 @@ public class ListaProductos {
     }
 
 
+    public static void llenarListaEstaticaProductos() {
 
+            Encrypt desencriptar=new Encrypt();
+            LeerDatos leer=new LeerDatos();
+            leer.leerListaProductos();
+            org.json.simple.JSONObject json;
+            for(int i=0;i<listaProductosJSON.size();i++){
+                Producto producto=new Producto();
+                try {
+                    json = (org.json.simple.JSONObject) listaProductosJSON.get(i);
+                    producto.setDescripcion((String) json.get("desc"));
+                    producto.setNombre((String) json.get("name"));
+                    producto.setPrecio((Float) json.get("price"));
+                    producto.setCantidad((Integer) json.get("quantity"));
+                    producto.setPrecioVisible((Boolean) json.get("visible"));
+                    producto.setUbicImg((String) json.get("imgroute"));
+                    producto.setUserID((String) json.get("userID"));
+
+                    listaProductosJSON.add(producto);
+                } catch (Exception e) {
+                    System.out.println("Error al guardar datos del json en lista de clientes");
+                }
+
+        }
+    }
 }

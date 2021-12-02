@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import logica.ficheros.ListaProductos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Cliente;
@@ -59,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ListaProductos listaP=new ListaProductos();
         ListaUsuariosClientes listaC= new ListaUsuariosClientes();
         ListaUsuariosEmpresas listaE= new ListaUsuariosEmpresas();
+        ListaProductos.llenarListaEstaticaProductos();
         ListaUsuariosClientes.llenarListaEstaticaClientes();
         ListaUsuariosEmpresas.llenarListaEstaticaEmpresas();
 

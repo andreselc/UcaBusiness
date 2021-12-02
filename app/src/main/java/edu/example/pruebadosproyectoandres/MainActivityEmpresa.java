@@ -24,7 +24,6 @@ public class MainActivityEmpresa extends AppCompatActivity {
     //para recibir datos de menuPublicacion
     public void onActivityResult(int requestCode, int resultCode, Intent datos){
         Bundle bundle=datos.getExtras();
-        ListaProductos lista= new ListaProductos();
         super.onActivityResult(requestCode, resultCode, datos);
         if ((requestCode==1)&&(resultCode==RESULT_OK)){
             //agregar los datos al producto
@@ -36,8 +35,7 @@ public class MainActivityEmpresa extends AppCompatActivity {
             //aqui se agregaria a la lista de empresa (lista de empresa actualiza automaticamente lista gral)
             //por ahora, solo lista de empresa gen
             l.leerListaProductos();
-            System.out.println(ListaProductos.getListaProductosJSON());
-            lista.agregarProductoALista(p);
+            ListaProductos.agregarProductoALista(p);
             GuardarDatosProducto.guardarProducto(MainActivityEmpresa.this);
         }
     }
