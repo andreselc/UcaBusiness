@@ -7,12 +7,13 @@
     tools:context="edu.example.pruebadosproyectoandres.MainActivityCliente"
     android:padding="10dp"
     android:id="@+id/parent"
-    android:background="@drawable/ucabusiness1d">
+    android:background="@drawable/ucabusiness2d">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactsRecView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:fontFamily="@font/roboto_regular"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:src="@drawable/ic_filter"
         android:visibility="invisible"
         android:backgroundTint="#4CAF50"
-        android:contentDescription="@string/filter" />
+        android:contentDescription="@string/filter"
+        android:fontFamily="@font/roboto_regular"/>
 
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

@@ -19,7 +19,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226" />
+        app:layout_constraintVertical_bias="0.226"
+        android:fontFamily="@font/roboto_regular"/>
 
     <Button
         android:id="@+id/verificar"
@@ -32,7 +33,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
+        app:layout_constraintVertical_bias="0.449"
+        android:fontFamily="@font/roboto_regular"/>
 
     <TextView
         android:id="@+id/advertencia"
@@ -43,6 +45,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.345"
+        android:fontFamily="@font/roboto_regular"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

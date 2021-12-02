@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:label="@string/men_principal"
-        tools:context=".MainActivityEmpresa">
+        tools:context=".MainActivityEmpresa"
+        android:background="@drawable/ucabusiness2d">
 
     <TextView
             android:layout_width="wrap_content"
@@ -14,27 +15,15 @@
             android:text="@string/crear_publicaci_n"
             android:id="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="40dp" android:layout_marginStart="16dp"/>
+            android:layout_marginTop="40dp" android:layout_marginStart="16dp"
+            android:fontFamily="@font/roboto_regular"/>
     <Button
             android:text="@string/crear_publicaci_n"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button"
             android:onClick="siguienteActivity"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"/>
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:srcCompat="@drawable/ucabusiness1d" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:fontFamily="@font/roboto_regular"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

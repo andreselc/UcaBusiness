@@ -18,7 +18,8 @@
             app:layout_constraintHorizontal_bias="0.478"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.521"/>
+            app:layout_constraintVertical_bias="0.521"
+            android:fontFamily="@font/roboto_regular"/>
 
     <TextView
             android:id="@+id/textView6"
@@ -29,7 +30,8 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.852"/>
+            app:layout_constraintVertical_bias="0.852"
+            android:fontFamily="@font/roboto_regular"/>
 
     <Button
             android:id="@+id/button3"
@@ -44,7 +46,8 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.916"/>
+            app:layout_constraintVertical_bias="0.916"
+            android:fontFamily="@font/roboto_regular"/>
     <EditText
             android:id="@+id/editTextTextPassword2"
             android:layout_width="wrap_content"
@@ -60,7 +63,8 @@
             app:layout_constraintHorizontal_bias="0.393"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.349"/>
+            app:layout_constraintVertical_bias="0.349"
+            android:fontFamily="@font/roboto_regular"/>
 
     <EditText
             android:id="@+id/editTextTextPassword3"
@@ -77,7 +81,8 @@
             app:layout_constraintHorizontal_bias="0.393"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.448"/>
+            app:layout_constraintVertical_bias="0.448"
+            android:fontFamily="@font/roboto_regular"/>
 
     <RadioGroup
             android:id="@+id/radioGroup"
@@ -89,7 +94,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.648"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            android:fontFamily="@font/roboto_regular">
 
         <RadioButton
                 android:id="@+id/radioButton"
@@ -102,7 +108,8 @@
                 app:layout_constraintHorizontal_bias="0.244"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.591"/>
+                app:layout_constraintVertical_bias="0.591"
+                android:fontFamily="@font/roboto_regular"/>
 
         <RadioButton
                 android:id="@+id/radioButton2"
@@ -115,7 +122,8 @@
                 app:layout_constraintHorizontal_bias="0.235"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.661"/>
+                app:layout_constraintVertical_bias="0.661"
+                android:fontFamily="@font/roboto_regular"/>
     </RadioGroup>
     <EditText
             android:id="@+id/editTextTextEmailAddress2"
@@ -132,7 +140,8 @@
             app:layout_constraintHorizontal_bias="0.393"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.247"/>
+            app:layout_constraintVertical_bias="0.247"
+            android:fontFamily="@font/roboto_regular"/>
 
     <ImageView
             android:id="@+id/imageView3"
@@ -143,7 +152,8 @@
             app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_foreground"/>
+            app:srcCompat="@mipmap/ic_launcher_foreground"
+            android:fontFamily="@font/roboto_regular"/>
     <Spinner
             android:layout_width="213dp"
             android:layout_height="33dp" android:id="@+id/edadSpinner"
@@ -151,7 +161,8 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.67"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.767" android:layout_marginStart="17dp"
-            app:layout_constraintStart_toEndOf="@+id/radioGroup"/>
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            android:fontFamily="@font/roboto_regular"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -162,7 +173,8 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.767" app:layout_constraintVertical_bias="0.6"
             android:layout_marginStart="17dp" app:layout_constraintStart_toEndOf="@+id/radioGroup"
-            android:hint="Dirección"/>
+            android:hint="Dirección"
+            android:fontFamily="@font/roboto_regular"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
