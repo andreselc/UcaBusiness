@@ -89,9 +89,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
             @Override
             public boolean onClose() {
                 //productosRecView.setVisibility(View.INVISIBLE);
-                myButton.setVisibility(View.INVISIBLE);
                 return false;
-
             }
 
         });
@@ -153,7 +151,6 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
 
         productos = ListaProductos.getListaProductos();
         adapter.setProductos(productos, this);
-        productos.add(new Producto("grande", "perro", false, 28, 10,"https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", "polar"));
         //productos.add(new Producto("perro", 10, 28.0, "grande", "https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", false, "jorge_l8"));
 
         // unir productos = lista de productos del sistema

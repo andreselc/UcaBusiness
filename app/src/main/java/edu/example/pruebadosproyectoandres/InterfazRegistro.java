@@ -197,7 +197,6 @@ public class InterfazRegistro extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void UserName(Usuario usuario){

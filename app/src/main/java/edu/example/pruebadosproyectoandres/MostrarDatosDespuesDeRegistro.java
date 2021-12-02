@@ -1,9 +1,13 @@
 package edu.example.pruebadosproyectoandres;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import logica.ficheros.ListaUsuariosClientes;
@@ -13,8 +17,8 @@ import logica.usuario.*;
 public class MostrarDatosDespuesDeRegistro extends AppCompatActivity {
 
     public void BuscarDatos(){
-        Intent intent = getIntent();
-        String correo=intent.getStringExtra("correo");
+        Intent myintent = getIntent();
+        String correo = myintent.getStringExtra("correo");
         Cliente currCliente = ListaUsuariosClientes.buscarUsuarioClientes(correo);
         Empresa currEmpresa = ListaUsuariosEmpresas.buscarUsuarioEmpresa(correo);
 
@@ -30,9 +34,8 @@ public class MostrarDatosDespuesDeRegistro extends AppCompatActivity {
             TextView tipoEmpresa = findViewById(R.id.tipoCuenta);
             tipoEmpresa.setText("Cliente");
         }
-
-
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
