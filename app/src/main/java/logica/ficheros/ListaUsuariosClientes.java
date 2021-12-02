@@ -1,7 +1,6 @@
 package logica.ficheros;
 
 import java.util.*;
-import org.json.*;
 import logica.usuario.Cliente;
 import logica.usuario.Encrypt;
 
@@ -11,14 +10,14 @@ import java.lang.*;
 public class ListaUsuariosClientes extends ListaUsuarios {
 
     private static ArrayList<Cliente> listaUsuariosClientes;
-    private static JSONArray listaUsuariosClientesJSON;
+    private static org.json.simple.JSONArray listaUsuariosClientesJSON;
 
     /**
      * Constructor donde se declaran los atributos
      */
     public ListaUsuariosClientes() {
         ListaUsuariosClientes.listaUsuariosClientes=new ArrayList<>();
-        listaUsuariosClientesJSON= new JSONArray();
+        listaUsuariosClientesJSON= new org.json.simple.JSONArray();
     }
     /**
      * Getter
@@ -38,14 +37,14 @@ public class ListaUsuariosClientes extends ListaUsuarios {
      * Getter
      * @return devuelve el atributo listaUsuariosJSON
      */
-    public static JSONArray getListaUsuariosClientesJSON() {
+    public static org.json.simple.JSONArray getListaUsuariosClientesJSON() {
         return listaUsuariosClientesJSON;
     }
     /**
      * Setter, modifica la información dentro del atributo listaUsuariosJSON
-     * @param listaUsuariosJSON parametro a modificar
+     * @param listaUsuariosClientesJSON parametro a modificar
      */
-    public static void setListaUsuariosClientesJSON(JSONArray listaUsuariosJSON) {
+    public static void setListaUsuariosClientesJSON(org.json.simple.JSONArray listaUsuariosClientesJSON) {
         ListaUsuariosClientes.listaUsuariosClientesJSON = listaUsuariosClientesJSON;
     }
     /**
@@ -60,13 +59,13 @@ public class ListaUsuariosClientes extends ListaUsuarios {
 
     public static boolean correoExisteEnClientesJSON(String correo)  {
         String palabra;
-        for(int i=0;i<listaUsuariosClientesJSON.length();i++) {
+        for(int i=0;i<listaUsuariosClientesJSON.size();i++) {
             try {
-                JSONObject json= (JSONObject) listaUsuariosClientesJSON.get(i);
+                org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 System.out.println("Error en verificar si el correo existe o no");
             }
         }
@@ -77,18 +76,19 @@ public class ListaUsuariosClientes extends ListaUsuarios {
         Encrypt desencriptar=new Encrypt();
         LeerDatos leer=new LeerDatos();
         leer.leerListaClientes();
-        JSONObject json;
-        for(int i=0;i<listaUsuariosClientesJSON.length();i++){
+        org.json.simple.JSONObject json;
+        for(int i=0;i<listaUsuariosClientesJSON.size();i++){
             Cliente cliente=new Cliente();
             try {
-                json = (JSONObject) listaUsuariosClientesJSON.get(i);
+                json = (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
                 cliente.setAddress((String) json.get("correo"));
                 cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
+                cliente.setTipoCuenta((char) json.get("tipo"));
                 listaUsuariosClientes.add(cliente);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 System.out.println("Error al guardar datos del json en lista de clientes");
             }
-           }
+        }
      }
 
 }

@@ -36,10 +36,11 @@ public class Empresa extends Usuario{
         Encrypt encriptar=new Encrypt();
         empresa.setPassword(encriptar.getAES(empresa.getPassword()));
           try {
-              usuarioJSON.put("contraseña",empresa.getPassword());
-              usuarioJSON.put("correo",empresa.getEmail());
+              empresa.usuarioJSON.put("contraseña",empresa.getPassword());
+              empresa.usuarioJSON.put("correo",empresa.getEmail());
+              empresa.usuarioJSON.put("tipo",empresa.getTipoCuenta());
               } catch (JSONException e) {
-              System.out.println("Error al insertar datos en JSON de Empresas");
+              System.out.println("Error al insertar datos en JSON de Empresas, Clase Empresa.");
           }
     }
 

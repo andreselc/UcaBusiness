@@ -38,6 +38,7 @@ public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecVi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contacts_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view, mOnNoteListener);
         return holder;
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -53,6 +54,7 @@ public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecVi
                 .asBitmap()
                 .load(productos.get(position).getUbicImg())
                 .into(holder.image);
+
     }
 
     @Override

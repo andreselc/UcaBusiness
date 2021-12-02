@@ -80,7 +80,9 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
             public void onClick(View v) {
                 myButton.setVisibility(View.VISIBLE);
             }
+
         });
+
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
@@ -88,7 +90,9 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
                 //productosRecView.setVisibility(View.INVISIBLE);
                 myButton.setVisibility(View.INVISIBLE);
                 return false;
+
             }
+
         });
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

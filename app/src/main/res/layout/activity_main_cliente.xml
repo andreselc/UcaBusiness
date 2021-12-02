@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context="edu.example.pruebadosproyectoandres.MainActivityCliente"
     android:padding="10dp"
-    android:id="@+id/parent">
+    android:id="@+id/parent"
+    android:background="@drawable/ucabusiness1d">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactsRecView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_filter"
         android:visibility="invisible"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:backgroundTint="#4CAF50"
         android:contentDescription="@string/filter" />
 
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
