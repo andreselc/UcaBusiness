@@ -23,6 +23,7 @@ public class MainActivityEmpresa extends AppCompatActivity {
 
     //para recibir datos de menuPublicacion
     public void onActivityResult(int requestCode, int resultCode, Intent datos){
+        if (datos!=null){
         Bundle bundle=datos.getExtras();
         super.onActivityResult(requestCode, resultCode, datos);
         if ((requestCode==1)&&(resultCode==RESULT_OK)){
@@ -37,7 +38,7 @@ public class MainActivityEmpresa extends AppCompatActivity {
             l.leerListaProductos();
             ListaProductos.agregarProductoALista(p);
             GuardarDatosProducto.guardarProducto(MainActivityEmpresa.this);
-        }
+        }}
     }
 
 
