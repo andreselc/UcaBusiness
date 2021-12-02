@@ -8,9 +8,18 @@ import logica.producto.Producto;
 
 public class Empresa extends Usuario{
 
+    //por ahora, no se llena esta
     private ArrayList<Producto> listaPublicaciones;
 
     public Empresa (){
+    }
+
+    public ArrayList<Producto> getListaPublicaciones() {
+        return listaPublicaciones;
+    }
+
+    public void setListaPublicaciones(ArrayList<Producto> listaPublicaciones) {
+        this.listaPublicaciones = listaPublicaciones;
     }
 
     public Empresa(String password, String email, char tipoCuenta) {
@@ -32,6 +41,11 @@ public class Empresa extends Usuario{
               } catch (JSONException e) {
               System.out.println("Error al insertar datos en JSON de Empresas");
           }
+    }
+
+    public String getEmailWithoutAt(){
+        String temp=getEmail().replace("@","---");
+        return temp;
     }
 
 }

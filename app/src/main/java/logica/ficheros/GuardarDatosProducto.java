@@ -1,91 +1,86 @@
 package logica.ficheros;
 
 import android.app.Activity;
+import edu.example.pruebadosproyectoandres.MainActivityEmpresa;
 import logica.producto.Producto;
+import logica.usuario.Empresa;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class GuardarDatosProducto {
 
-
-    // On decoding, the default concrete class of java.util.List is org.json.simple.JSONArray and the default concrete class of java.util.Map is org.json.simple.JSONObject.
-
-   // Encoding JSON in Java
-   // Following is a simple example to encode a JSON object using Java JSONObject which is a subclass of java.util.HashMap. No ordering is provided. If you need the strict ordering of elements, use JSONValue.toJSONString ( map ) method with ordered map implementation such as java.util.LinkedHashMap.
-
-    public JSONObject crearJsonProducto(Producto p) {
-
-
-
-        JSONObject producto = new JSONObject();
-
-        try {
-            producto.put("name", p.getNombre());
-        } catch (JSONException e) {
-            e.printStackTrace();
+   /* public static void guardarProducto(Activity activityActual, Empresa e){
+        Producto producto;
+        GuardarDatosProducto guardar = new GuardarDatosProducto();
+        //guardar en listaempresa
+        for (Producto p: ListaProductosEmpresa.getListaProductosEmpresa()){
+            if (!ListaProductosEmpresa.productoExisteJSON(p.getNombre())){
+                //si no esta repetido el producto
+                producto=(Producto) ListaProductosEmpresa.buscarProductoEnEmpresa(p.getNombre());
+                producto.llenarObjetoProductoJSON(producto);
+                ListaProductosEmpresa.agregarProductoAListaJSON(producto.getProductoJSON(), ListaProductosEmpresa.getListaProductosEmpresaJSON());
+            }
         }
         try {
-            producto.put("price", p.getPrecio());
-        } catch (JSONException e) {
-            e.printStackTrace();
+            guardar.escribirArchivo(ListaProductosEmpresa.getListaProductosEmpresaJSON(), activityActual,"listaEmpresa"+e.getEmailWithoutAt()+".json");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }*/
+
+    //para empresa gral
+    public static void guardarProducto(Activity activityActual){
+        Producto producto;
+        GuardarDatosProducto guardar = new GuardarDatosProducto();
+        //guardar en listaempresa
+        for (Producto p: ListaProductos.getListaProductos()){
+            if (!ListaProductos.productoExisteJSONGral(p.getNombre())){
+                //si no esta repetido el producto
+                producto=(Producto) ListaProductosEmpresa.buscarProductoGral(p.getNombre());
+                producto.llenarObjetoProductoJSON(producto);
+                ListaProductos.agregarProductoAListaJSON(producto.getProductoJSON(), ListaProductos.getListaProductosJSON());
+            }
         }
         try {
-            producto.put("desc", p.getDescripcion());
-        } catch (JSONException e) {
-            e.printStackTrace();
+            guardar.escribirArchivo(ListaProductosEmpresa.getListaProductosJSON(), activityActual,"listaEmpresaGral.json");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        try {
-            producto.put("quantity", p.getCantidad());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            producto.put("visible",p.isPrecioVisible());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            producto.put("imgroute", p.getUbicImg());
-        } catch (JSONException e) {
-            e.printStackTrace();
+    }
+
+
+    //debe agregarse al json de lista de productos de empresa y al json de lista de productos en general
+    public void agregarAJSONProductos(JSONArray ListaJson) {
+        try(FileWriter archivo= new FileWriter (" C:\\Users\\Andres\\AndroidStudioProjects\\pruebaDosProyectoAndres\\app\\files\\usuariosEmpresas.json")){
+            BufferedWriter buffer= new BufferedWriter (archivo);
+            buffer.write(ListaJson.toString());
+            buffer.close();
         }
 
-        try {
-            producto.put("userID",p.getUserID());
-        } catch (JSONException e) {
-            e.printStackTrace();
+        catch (IOException e){
+            System.out.println("Problemas al ingresar un dato al archivo");
         }
-
-        return producto;
     }
 
 
 
-    public void escribirArchivo(JSONObject producto, Activity a) throws IOException {
+    public void escribirArchivo(org.json.simple.JSONArray listaProducto, Activity a,String nombreArchivo) throws IOException {
+        //nombre archivo debe incluir .json
 
-        /*try (FileWriter archivo = new FileWriter("app\\files\\producto.json")) {
-            BufferedWriter buffer = new BufferedWriter(archivo);
-            buffer.write(producto.toString());
-            buffer.close();
-        } catch (IOException e) {
-            System.out.println("Problemas al ingresar un dato al archivo");
-            e.printStackTrace();
-        }*/
-
-        File file = new File(a.getFilesDir(),"app/files");
+        File file = new File(a.getFilesDir(),"");
         if (!file.exists()) {
             file.mkdir();
         }
 
         try{
-        File f = new File (file, "producto.json");
+        File f = new File (file, nombreArchivo);
         FileWriter fileW=new FileWriter(f);
-        fileW.append(producto.toString());
+        fileW.append(listaProducto.toString());
         fileW.flush();
         fileW.close();
         System.out.println(file);}
@@ -93,6 +88,43 @@ public class GuardarDatosProducto {
             e.printStackTrace();
         }
     }
+
+    //leer listas de productos del json
+
+    public void leerProductos(Empresa e){//para una empresa especifica
+        org.json.simple.JSONArray jsonLista;
+        JSONParser lectura = new JSONParser();
+        //La ruta del archivo no debe ser específico.
+        try (FileReader reader = new FileReader("files/listaEmpresa"+e.getEmailWithoutAt()+".json")) {
+            Object objeto = lectura.parse(reader);
+            jsonLista = (org.json.simple.JSONArray) objeto;
+            ListaProductosEmpresa.setListaProductosEmpresaJSON(jsonLista);
+        }catch (FileNotFoundException er) {
+        }
+        catch (IOException er) {
+        }
+        catch (ParseException er) {
+        }
+
+    }
+    public void leerProductos(){//para todas empresas
+        org.json.simple.JSONArray jsonLista;
+        JSONParser lectura = new JSONParser();
+        //La ruta del archivo no debe ser específico.
+        try (FileReader reader = new FileReader("files/listaEmpresaGral.json")) {
+            Object objeto = lectura.parse(reader);
+            jsonLista = (org.json.simple.JSONArray) objeto;
+            ListaProductosEmpresa.setListaProductosEmpresaJSON(jsonLista);
+        }catch (FileNotFoundException er) {
+        }
+        catch (IOException er) {
+        }
+        catch (ParseException er) {
+        }
+
+    }
+
+
 
     }
 

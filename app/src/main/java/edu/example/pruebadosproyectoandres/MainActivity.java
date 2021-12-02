@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
     public void btnIniciarSesion(View v){
 
         //este carga el menú del cliente (buscar producto)
-        Intent newIntent = new Intent(this, MainActivityCliente.class);
+        //Intent newIntent = new Intent(this, MainActivityCliente.class);
         getSupportActionBar().setTitle("Busqueda de Productos");
         //o, alternativamente, se carga el menú de la empresa (crear producto)
-        //Intent newIntent=new Intent(this,MainActivityEmpresa.class);
+        Intent newIntent=new Intent(this,MainActivityEmpresa.class);
         //getSupportActionBar().setTitle("Publicar Producto");
         startActivity(newIntent);
     }

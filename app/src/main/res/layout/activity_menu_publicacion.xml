@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="siguienteActivity" app:layout_constraintTop_toBottomOf="@+id/switch1"/>
 
-    <EditText
+    <EditText android:autofillHints="Nombre"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,12 +58,14 @@
         app:layout_constraintVertical_bias="0.0" />
     <EditText
             android:hint="@string/descripci_n_del_producto"
+            android:autofillHints="Descripción"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:inputType="text"
             android:ems="10"
             android:maxLength="280"
-            android:singleLine="true"
+            android:singleLine="false"
+            android:maxLines="6"
             android:id="@+id/editTextTextPersonName2"
             android:layout_marginTop="19dp"
             android:layout_marginBottom="22dp" app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +75,7 @@
 
     <EditText
         android:id="@+id/editTextNumberDecimal"
+        android:autofillHints="Precio"
         android:layout_width="116dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -88,6 +91,7 @@
 
     <EditText
         android:id="@+id/editTextNumber"
+        android:autofillHints="Cantidad"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
@@ -118,16 +122,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button3"
             android:onClick="solicitarImagen"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintVertical_bias="0.473"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintVertical_bias="0.032"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
     <TextView
             android:text="@string/nombre_del_producto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"/>
+            app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName" android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/button3"/>
     <TextView
             android:text="@string/descripci_n_del_producto"
             android:layout_width="wrap_content"
