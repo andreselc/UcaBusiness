@@ -19,7 +19,7 @@ public class Cliente extends Usuario{
         cliente.setPassword(encriptar.getAES(cliente.getPassword()));
         try {
             cliente.usuarioJSON.put("contraseña",cliente.getPassword());
-            cliente.usuarioJSON.put("correo",cliente.getEmail());
+            cliente.usuarioJSON.put("correo",cliente.getEmailNoAt());
             cliente.usuarioJSON.put("tipo",cliente.getTipoCuenta());
         } catch (JSONException e) {
             System.out.println("Error al insertar datos en JSON de Clientes. Clase Cliente");

@@ -81,7 +81,7 @@ public class ListaUsuariosClientes extends ListaUsuarios {
             Cliente cliente=new Cliente();
             try {
                 json = (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
-                cliente.setAddress((String) json.get("correo"));
+                cliente.setAddressFromJSON((String) json.get("correo"));
                 cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                 cliente.setTipoCuenta((char) json.get("tipo"));
                 listaUsuariosClientes.add(cliente);
