@@ -1,5 +1,6 @@
 package edu.example.pruebadosproyectoandres;
 
+import android.view.MotionEvent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,8 @@ import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
+
+import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             //currPassword.setText("");
             //currCorreo.setText("");
             //Display toast message con un mensaje prompting the user to enter los datos nuevamente
+
             Intent newIntent = new Intent(this, MainActivityCliente.class);
             getSupportActionBar().setTitle("Busqueda de Productos");
             //o, alternativamente, se carga el menú de la empresa (crear producto)
@@ -92,6 +96,17 @@ public class MainActivity extends AppCompatActivity {
                     txtCorreo.setText("");
                     Toast.makeText(MainActivity.this, "Correo no está registrado", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        //para esconder el teclado
+
+        //para esconder el teclado
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                esconderTeclado(MainActivity.this);
+                return false;
             }
         });
     }
