@@ -88,7 +88,7 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                 json = (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
                 cliente.setAddressFromJSON((String) json.get("correo"));
                 cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
-                cliente.setTipoCuenta((char) json.get("tipo"));
+                cliente.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
                 listaUsuariosClientes.add(cliente);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
