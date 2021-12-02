@@ -82,8 +82,7 @@ public class GuardarDatosProducto {
         FileWriter fileW=new FileWriter(f);
         fileW.append(listaProducto.toString());
         fileW.flush();
-        fileW.close();
-        System.out.println(file);}
+        fileW.close();}
         catch (Exception e){
             e.printStackTrace();
         }
@@ -91,7 +90,7 @@ public class GuardarDatosProducto {
 
     //leer listas de productos del json
 
-    public void leerProductos(Empresa e){//para una empresa especifica
+   /* public void leerProductos(Empresa e){//para una empresa especifica
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
@@ -125,7 +124,7 @@ public class GuardarDatosProducto {
     }
 
 
-
+*/
     }
 
 

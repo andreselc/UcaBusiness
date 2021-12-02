@@ -8,7 +8,7 @@ public class Producto {
     private int cantidad;
     private float precio;
     private boolean precioVisible;
-    protected JSONObject productoJSON;
+    protected org.json.simple.JSONObject productoJSON;
 
     public Producto(int disponibilidad) {
         this.cantidad= disponibilidad;
@@ -24,7 +24,7 @@ public class Producto {
         this.precioVisible=precioVisible;
         this.ubicImg = ubicImg;
         this.userID = userID;
-        productoJSON=new JSONObject();
+        productoJSON=new org.json.simple.JSONObject();
     }
 
     public Producto() {
@@ -105,27 +105,24 @@ public class Producto {
         this.precio = precio;
     }
 
-    public JSONObject getProductoJSON() {
+    public org.json.simple.JSONObject getProductoJSON() {
         return productoJSON;
     }
 
-    public void setProductoJSON(JSONObject productoJSON) {
+    public void setProductoJSON(org.json.simple.JSONObject productoJSON) {
         this.productoJSON = productoJSON;
     }
 
     public void llenarObjetoProductoJSON(Producto producto){
-        try {
-            getProductoJSON().put("name", producto.getNombre());
-            getProductoJSON().put("desc", producto.getDescripcion());
-            getProductoJSON().put("price", producto.getPrecio());
-            getProductoJSON().put("quantity", producto.getCantidad());
-            getProductoJSON().put("visible",producto.isPrecioVisible());
-            getProductoJSON().put("imgroute", producto.getUbicImg());
-            getProductoJSON().put("userID",producto.getUserID());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        getProductoJSON().put("name", producto.getNombre());
+        getProductoJSON().put("desc", producto.getDescripcion());
+        getProductoJSON().put("price", producto.getPrecio());
+        getProductoJSON().put("quantity", producto.getCantidad());
+        getProductoJSON().put("visible",producto.isPrecioVisible());
+        getProductoJSON().put("imgroute", producto.getUbicImg());
+        getProductoJSON().put("userID",producto.getUserID());
     }
+
 
 
 }

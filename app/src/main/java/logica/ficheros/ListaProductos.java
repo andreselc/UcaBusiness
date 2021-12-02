@@ -4,7 +4,8 @@ import logica.producto.Producto;
 import logica.usuario.Cliente;
 import logica.usuario.Encrypt;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+import com.google.*;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class ListaProductos {
     * */
 
     //agregar a lista JSON
-    public static void agregarProductoAListaJSON(JSONObject producto, org.json.simple.JSONArray lista){
+    public static void agregarProductoAListaJSON(org.json.simple.JSONObject producto, org.json.simple.JSONArray lista){
         lista.add(producto);
     }
 
@@ -93,28 +94,25 @@ public class ListaProductos {
 
 
     public static void llenarListaEstaticaProductos() {
-
-            Encrypt desencriptar=new Encrypt();
-            LeerDatos leer=new LeerDatos();
-            leer.leerListaProductos();
-            org.json.simple.JSONObject json;
-            for(int i=0;i<listaProductosJSON.size();i++){
-                Producto producto=new Producto();
-                try {
-                    json = (org.json.simple.JSONObject) listaProductosJSON.get(i);
-                    producto.setDescripcion((String) json.get("desc"));
-                    producto.setNombre((String) json.get("name"));
-                    producto.setPrecio((Float) json.get("price"));
-                    producto.setCantidad((Integer) json.get("quantity"));
-                    producto.setPrecioVisible((Boolean) json.get("visible"));
-                    producto.setUbicImg((String) json.get("imgroute"));
-                    producto.setUserID((String) json.get("userID"));
-
-                    listaProductosJSON.add(producto);
-                } catch (Exception e) {
-                    System.out.println("Error al guardar datos del json en lista de clientes");
-                }
-
+        LeerDatos leer=new LeerDatos();
+        leer.leerListaProductos();
+        org.json.simple.JSONObject json;
+        for(int i=0;i<listaProductosJSON.size();i++){
+            Producto p=new Producto();
+            try {
+                json = (org.json.simple.JSONObject) listaProductosJSON.get(i);
+                p.setNombre(json.get("name").toString());
+                p.setDescripcion(json.get("desc").toString());
+                p.setUserID(json.get("userID").toString());
+                p.setPrecio(Float.parseFloat(json.get("price").toString()));
+                p.setCantidad(Integer.parseInt(json.get("quantity").toString()));
+                p.setPrecioVisible(Boolean.parseBoolean(json.get("visible").toString()));
+                p.setUbicImg(json.get("imgroute").toString());
+                listaProductos.add(p);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 }

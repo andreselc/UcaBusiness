@@ -72,6 +72,11 @@ public class ListaUsuariosClientes extends ListaUsuarios {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "ListaUsuariosClientes{}";
+    }
+
     public static void llenarListaEstaticaClientes() {
         Encrypt desencriptar=new Encrypt();
         LeerDatos leer=new LeerDatos();
@@ -83,10 +88,10 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                 json = (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
                 cliente.setAddressFromJSON((String) json.get("correo"));
                 cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
-                cliente.setTipoCuenta((char) json.get("tipo"));
+                cliente.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
                 listaUsuariosClientes.add(cliente);
-            } catch (Exception e) {
-                System.out.println("Error al guardar datos del json en lista de clientes");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
         }
      }

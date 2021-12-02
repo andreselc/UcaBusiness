@@ -56,6 +56,7 @@ public class LeerDatos {
         try (FileReader reader = new FileReader("/data/data/edu.example.pruebadosproyectoandres/files/listaEmpresaGral.json")) {
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
+            //hasta aqui bien
             ListaProductos.setListaProductosJSON(jsonLista);
         }catch (FileNotFoundException e) {
             System.out.println("archivo no encontrado");
