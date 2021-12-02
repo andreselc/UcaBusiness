@@ -38,7 +38,7 @@ public class Empresa extends Usuario{
           try {
               //TODO:Falta agregar aquí el ciclo que llena todas las publicaciones de una empresa en el ArrayList
               empresa.usuarioJSON.put("contraseña",empresa.getPassword());
-              empresa.usuarioJSON.put("correo",empresa.getEmail());
+              empresa.usuarioJSON.put("correo",empresa.getEmailNoAt());
               empresa.usuarioJSON.put("tipo",empresa.getTipoCuenta());
               } catch (JSONException e) {
               System.out.println("Error al insertar datos en JSON de Empresas, Clase Empresa.");

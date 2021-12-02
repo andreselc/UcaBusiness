@@ -30,7 +30,7 @@ public class ListaUsuarios {
         String palabra;
         for(int i=0;i<listaUsuariosJSON.length();i++) {
             try {
-                JSONObject json= (JSONObject) listaUsuariosJSON.get(i);
+                org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosJSON.get(i);
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
