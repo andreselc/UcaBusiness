@@ -1,18 +1,19 @@
 package edu.example.pruebadosproyectoandres;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import logica.ficheros.GuardarDatos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.*;
-
 import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileWriter;
 
 
 public class InterfazRegistro extends AppCompatActivity {
@@ -52,6 +53,24 @@ public class InterfazRegistro extends AppCompatActivity {
         return false;
     }
 
+    public void escribirArchivo (org.json.simple.JSONArray listaUsuario, Activity a, String nombreFichero) {
+
+        File file =new File(a.getFilesDir(), "files");
+        if (!file.exists()){
+            file.mkdir();
+        }
+        try {
+            File f =new File (file, nombreFichero);
+            FileWriter fileW= new FileWriter(f);
+            fileW.append(listaUsuario.toString());
+            fileW.flush();
+            fileW.close();
+            System.out.println(file);}
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
      public void buttonPress(View view) {
         EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
         EditText passwordIngresado = findViewById (R.id.editTextTextPassword2);
@@ -66,26 +85,33 @@ public class InterfazRegistro extends AppCompatActivity {
             if (userEmpresa.isChecked()) {
                 empresa = new Empresa(correo, password, 'e');
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-                System.out.println("Empresa Llena");
-                GuardarDatos.procesoGuardadoEmpresas();
-                Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+               // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
+                //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
+               // else {
+                    System.out.println("Empresa en lista");
+                    GuardarDatos.procesoGuardadoEmpresas();
+                    escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
+                    Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+                //}
             }
-            if (userCliente.isChecked()) {
-                cliente = new Cliente(password, correo, 'c');
-                ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
-                /*if (ListaUsuariosClientes.getListaUsuariosClientes().isEmpty())
-                    Toast.makeText(getApplicationContext(), "La lista de clientes está vacía", Toast.LENGTH_SHORT).show();
-                else{*/
-                System.out.println("Cliente Lleno");
-                GuardarDatos.procesoGuardadoClientes();
-                Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
+                if (userCliente.isChecked()) {
+                    cliente = new Cliente(password, correo, 'c');
+                    ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
+                    //if (ListaUsuariosClientes.getListaUsuariosClientes().isEmpty())
+                    //   Toast.makeText(getApplicationContext(), "La lista de clientes está vacía", Toast.LENGTH_SHORT).show();
+                    //else {
+                        System.out.println("Cliente en lista");
+                        GuardarDatos.procesoGuardadoClientes();
+                        escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
+                        Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
+                    //}
+                }
             }
         }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interfaz_registro);
     }
 
-}
+    }

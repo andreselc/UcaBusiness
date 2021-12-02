@@ -1,6 +1,5 @@
 package logica.ficheros;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import logica.usuario.Empresa;
@@ -10,11 +9,11 @@ import logica.usuario.*;
 public class ListaUsuariosEmpresas extends ListaUsuarios{
 
     private static ArrayList<Empresa> listaUsuariosEmpresas;
-    private static JSONArray listaUsuariosEmpresasJSON;
+    private static org.json.simple.JSONArray listaUsuariosEmpresasJSON;
 
     public ListaUsuariosEmpresas() {
         ListaUsuariosEmpresas.listaUsuariosEmpresas = new ArrayList<Empresa>();
-        listaUsuariosEmpresasJSON = new JSONArray();
+        listaUsuariosEmpresasJSON = new org.json.simple.JSONArray();
     }
     /**
      * Getter
@@ -31,14 +30,14 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         ListaUsuariosEmpresas.listaUsuariosEmpresas = listaUsuariosEmpresas;
     }
 
-    public static JSONArray getListaUsuariosEmpresasJSON() {
+    public static org.json.simple.JSONArray getListaUsuariosEmpresasJSON() {
         return listaUsuariosEmpresasJSON;
     }
     /**
      * Setter, modifica la información dentro del atributo listaUsuariosJSON
      * @param listaUsuariosEmpresasJSON parametro a modificar
      */
-    public static void setListaUsuariosEmpresasJSON(JSONArray listaUsuariosEmpresasJSON) {
+    public static void setListaUsuariosEmpresasJSON(org.json.simple.JSONArray listaUsuariosEmpresasJSON) {
         ListaUsuariosEmpresas.listaUsuariosEmpresasJSON = listaUsuariosEmpresasJSON;
     }
     /**
@@ -53,13 +52,13 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
 
     public static boolean correoExisteEnEmpresasJSON(String correo)  {
         String palabra;
-        for(int i=0;i<listaUsuariosEmpresasJSON.length();i++) {
+        for(int i=0;i<listaUsuariosEmpresasJSON.size();i++) {
             try {
-                JSONObject json= (JSONObject) listaUsuariosEmpresasJSON.get(i);
+                org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 System.out.println("Error en verificar si el correo existe o no");
             }
         }
@@ -70,15 +69,16 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         Encrypt desencriptar = new Encrypt();
         LeerDatos leer = new LeerDatos();
         leer.leerListaEmpresas();
-        JSONObject json = new JSONObject();
-        for (int i = 0; i < listaUsuariosEmpresasJSON.length(); i++) {
+        org.json.simple.JSONObject json;
+        for (int i = 0; i < listaUsuariosEmpresasJSON.size(); i++) {
             Empresa empresa = new Empresa();
             try {
-                json = listaUsuariosEmpresasJSON.getJSONObject(i);
+                json = (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
                 empresa.setAddress((String) json.get("correo"));
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
+                empresa.setTipoCuenta((char) json.get("tipo"));
                 listaUsuariosEmpresas.add(empresa);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

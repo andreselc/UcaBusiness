@@ -3,6 +3,8 @@ package logica.ficheros;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 /**
@@ -14,12 +16,12 @@ public class LeerDatos {
      * almacenada dentro del archivo JSON
      */
     public void leerListaClientes() {
-        org.json.JSONArray jsonLista;
+        org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try (FileReader reader = new FileReader("files/usuariosClientes.json")) {
+        try (FileReader reader = new FileReader("/data/user/0/edu.example.pruebadosproyectoandres/files/files/usuariosClientes.json")) {
             Object objeto = lectura.parse(reader);
-            jsonLista = (org.json.JSONArray) objeto;
+            jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosClientes.setListaUsuariosClientesJSON(jsonLista);
         }catch (FileNotFoundException e) {
         }
@@ -30,12 +32,12 @@ public class LeerDatos {
     }
 
        public void leerListaEmpresas() {
-        org.json.JSONArray jsonLista;
+        org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try (FileReader reader = new FileReader("files/usuariosEmpresas.json")) {
+        try (FileReader reader = new FileReader("/data/user/0/edu.example.pruebadosproyectoandres/files/files/usuariosEmpresas.json")) {
             Object objeto = lectura.parse(reader);
-            jsonLista = (org.json.JSONArray) objeto;
+            jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosEmpresas.setListaUsuariosEmpresasJSON(jsonLista);
         }catch (FileNotFoundException e) {
         }

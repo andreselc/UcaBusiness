@@ -1,6 +1,6 @@
 package logica.ficheros;
 
-import org.json.simple.JSONArray;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -19,12 +19,6 @@ public class ListaUsuarios {
         listaUsuariosJSON= new JSONArray();
     }
 
-    public static Usuario buscarUsuario(String email) {
-        for (Usuario usuario: listaUsuarios) {
-            if (usuario.getEmail().compareTo(email)==0)
-                return usuario;}
-        return null;}
-
     public static boolean correoExiste(String correo) {
         for (Usuario usuario: listaUsuarios) {
             if (usuario.getEmail().compareTo(correo)==0)
@@ -33,7 +27,7 @@ public class ListaUsuarios {
 
     public static boolean correoExisteEnJSON(String correo)  {
         String palabra;
-        for(int i=0;i<listaUsuariosJSON.size();i++) {
+        for(int i=0;i<listaUsuariosJSON.length();i++) {
             try {
                 JSONObject json= (JSONObject) listaUsuariosJSON.get(i);
                 palabra=(String)json.get("correo");
@@ -46,8 +40,7 @@ public class ListaUsuarios {
         return false;
     }
 
-    public static void agregarUsuarioAListaJSON(JSONObject usuario, org.json.JSONArray lista) {
+    public static void agregarUsuarioAListaJSON(JSONObject usuario, JSONArray lista) {
         lista.put(usuario);
     }
-
 }
