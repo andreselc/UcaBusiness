@@ -46,6 +46,9 @@ public class Usuario{
     public String getEmail() {
         return email.getAddress();
     }
+
+    public String getEmailNoAt(){return email.getAddressNoAt();}
+
     /**
      * getter
      * @return devuelve el atributo password
@@ -72,6 +75,8 @@ public class Usuario{
 
     public void setAddress(String address) {
         email.setAddress(address);
+    }
+    public void setAddressFromJSON(String addressFromJSON){email.setAddressFromJSON(addressFromJSON);
     }
     /**
      * Setter, modifica la información del parametro password

@@ -2,6 +2,7 @@ package edu.example.pruebadosproyectoandres;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,6 +15,8 @@ import logica.usuario.*;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.FileWriter;
+
+import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
 
 
 public class InterfazRegistro extends AppCompatActivity {
@@ -45,6 +48,7 @@ public class InterfazRegistro extends AppCompatActivity {
             }
             else{
                 advertencia.setText("La contraseña debe cumplir con las indicaciones");
+                Toast.makeText(InterfazRegistro.this,"Contraseña: mínimo 8 caract., 1 núm., 1 letra mayús y minus, 1 caract. especial",Toast.LENGTH_LONG).show();
             }
         }
         else{
@@ -114,6 +118,16 @@ public class InterfazRegistro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interfaz_registro);
+
+        //para esconder el teclado
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                esconderTeclado(InterfazRegistro.this);
+                return false;
+            }
+        });
+
     }
 
     }

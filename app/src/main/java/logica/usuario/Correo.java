@@ -11,11 +11,16 @@ public class Correo {
      * Unico atributo tipo string donde se almacena el correo ingresado
      */
     private String address;
+
+    //agregué un string temporal donde será el correo sin el @
+    private String addressNoAt;
+
     /**
      * Constructor donde se incializa el atributo en vacio
      */
     public Correo() {
         address = "";
+        addressNoAt="";
     }
     /**
      * Constructor donde se inicializa el atributo address
@@ -23,6 +28,7 @@ public class Correo {
      */
     public Correo(String address) {
         this.address = address;
+        this.addressNoAt=convertToNoAt(address);
     }
     /**
      * Setter, se encarga de modificar el parametro address
@@ -30,6 +36,12 @@ public class Correo {
      */
     public void setAddress(String address) {
         this.address = address;
+        this.addressNoAt=convertToNoAt(address);
+    }
+
+    public void setAddressFromJSON(String addressNoAt){
+        this.addressNoAt=addressNoAt;
+        this.address=convertToAt(addressNoAt);
     }
     /**
      * Getter
@@ -38,6 +50,15 @@ public class Correo {
     public String getAddress() {
         return address;
     }
+
+    public String getAddressNoAt() {
+        return addressNoAt;
+    }
+
+    public void setAddressNoAt(String addressNoAt) {
+        this.addressNoAt = addressNoAt;
+    }
+
     /**
      * Valida que sea un correo sintacticamente correcto
      * @param correo correo a validar
@@ -54,4 +75,14 @@ public class Correo {
             return false;
         }
     }
+
+    public String convertToNoAt(String address){
+        return address.replace("@","+");
+    }
+
+    public String convertToAt(String addressNoAt){
+        return addressNoAt.replace("+","@");
+    }
+
+
 }

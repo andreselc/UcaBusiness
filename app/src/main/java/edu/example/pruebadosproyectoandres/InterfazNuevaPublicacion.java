@@ -193,7 +193,7 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
         });
         }
 
-        //para esconder el teclado al hacer click en otro lado
+    //para esconder el teclado al hacer click en otro lado
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 

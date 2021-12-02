@@ -75,7 +75,7 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
             Empresa empresa = new Empresa();
             try {
                 json = (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
-                empresa.setAddress((String) json.get("correo"));
+                empresa.setAddressFromJSON((String) json.get("correo"));
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                 empresa.setTipoCuenta((char) json.get("tipo"));
                 listaUsuariosEmpresas.add(empresa);
