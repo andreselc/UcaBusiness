@@ -197,7 +197,7 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        if ((inputMethodManager!=null)&&(activity.getCurrentFocus().getWindowToken()!=null)){
+        if ((inputMethodManager!=null)&&(activity.getCurrentFocus()!=null)){
                 inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 
         }

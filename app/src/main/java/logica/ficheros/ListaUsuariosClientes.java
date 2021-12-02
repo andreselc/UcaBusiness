@@ -81,12 +81,17 @@ public class ListaUsuariosClientes extends ListaUsuarios {
             Cliente cliente=new Cliente();
             try {
                 json = (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
-                cliente.setAddressFromJSON((String) json.get("correo"));
-                cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
-                cliente.setTipoCuenta((char) json.get("tipo"));
+                System.out.println("A");
+                cliente.setAddressFromJSON(json.get("correo").toString());
+                System.out.println("B");
+                cliente.setPassword(desencriptar.getAESDecrypt(json.get("contraseña").toString()));
+                System.out.println("C");
+                cliente.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
+                System.out.println("D");
                 listaUsuariosClientes.add(cliente);
-            } catch (Exception e) {
-                System.out.println("Error al guardar datos del json en lista de clientes");
+                System.out.println("E");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
         }
      }
