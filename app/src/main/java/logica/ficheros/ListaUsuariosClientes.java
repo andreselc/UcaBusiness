@@ -72,10 +72,6 @@ public class ListaUsuariosClientes extends ListaUsuarios {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "ListaUsuariosClientes{}";
-    }
 
     public static void llenarListaEstaticaClientes() {
         Encrypt desencriptar=new Encrypt();

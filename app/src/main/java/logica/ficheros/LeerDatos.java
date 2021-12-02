@@ -26,6 +26,7 @@ public class LeerDatos {
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosClientes.setListaUsuariosClientesJSON(jsonLista);
         }catch (FileNotFoundException e) {
+            System.out.println("archivo no encontrado de clientes");
         }
         catch (IOException e) {
         }
@@ -42,6 +43,7 @@ public class LeerDatos {
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosEmpresas.setListaUsuariosEmpresasJSON(jsonLista);
         }catch (FileNotFoundException e) {
+            System.out.println("archivo no encontrado de empresas");
         }
         catch (IOException e) {
         }
@@ -59,7 +61,7 @@ public class LeerDatos {
             //hasta aqui bien
             ListaProductos.setListaProductosJSON(jsonLista);
         }catch (FileNotFoundException e) {
-            System.out.println("archivo no encontrado");
+            System.out.println("archivo no encontrado de productos");
         }
         catch (IOException e) {
             System.out.println("io no encontrado");

@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import logica.ficheros.GuardarDatos;
+import logica.ficheros.ListaUsuarios;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.*;
@@ -33,23 +34,26 @@ public class InterfazRegistro extends AppCompatActivity {
         Correo email= new Correo(correo);
         TextView advertencia = findViewById(R.id.textView6);
         if(email.read(email.getAddress())){
-            if(contrasena1.ValidarPassword(contrasena1.getPassword())){
-                if(contrasena1.getPassword().compareTo(contrasena2.getPassword())==0){
-                    if((empresa.isChecked()) || (cliente.isChecked())){
-                        return true;
+            if (!ListaUsuarios.correoExiste(email.getAddress())) {
+                if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
+                    if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
+                        if ((empresa.isChecked()) || (cliente.isChecked())) {
+                            return true;
+                        } else {
+                            advertencia.setText("Debe seleccionar un tipo de empresa");
+                        }
+                    } else {
+                        advertencia.setText("Las contraseñas no coinciden");
                     }
-                    else{
-                        advertencia.setText("Debe seleccionar un tipo de empresa");
-                    }
-                }
-                else{
-                    advertencia.setText("Las contraseñas no coinciden");
+                } else {
+                    advertencia.setText("La contraseña debe cumplir con las indicaciones");
+                    Toast.makeText(InterfazRegistro.this, "Contraseña: mínimo 8 caract., 1 núm., 1 letra mayús y minus, 1 caract. especial", Toast.LENGTH_LONG).show();
                 }
             }
             else{
-                advertencia.setText("La contraseña debe cumplir con las indicaciones");
-                Toast.makeText(InterfazRegistro.this,"Contraseña: mínimo 8 caract., 1 núm., 1 letra mayús y minus, 1 caract. especial",Toast.LENGTH_LONG).show();
+                Toast.makeText(InterfazRegistro.this, "El Correo ya existe, intente con otro", Toast.LENGTH_LONG).show();
             }
+
         }
         else{
             advertencia.setText("Correo no valido");
