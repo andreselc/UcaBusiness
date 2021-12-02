@@ -2,6 +2,7 @@ package edu.example.pruebadosproyectoandres;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,7 @@ import logica.usuario.*;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.FileWriter;
+import edu.example.pruebadosproyectoandres.R;
 
 import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
 
@@ -160,7 +162,34 @@ public class InterfazRegistro extends AppCompatActivity {
                 return false;
             }
         });
-    }
+
+        EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
+        EditText passwordIngresado = findViewById(R.id.editTextTextPassword2);
+        EditText passwordIngresado2 = findViewById(R.id.editTextTextPassword3);
 
 
+        userEmpresa = findViewById(R.id.radioButton);
+        userCliente = findViewById(R.id.radioButton2);
+        Button button = findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validarDatosRegistro(passwordIngresado.getText().toString(),
+                        passwordIngresado2.getText().toString(), correoIngresado.getText().toString(),
+                        userCliente, userEmpresa)) {
+                    Intent intent = new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
+                    EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
+                    String correo = correoIngresado.getText().toString();
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                } else {
+                    correoIngresado.setText("");
+                    passwordIngresado.setText("");
+                    passwordIngresado2.setText("");
+                    Toast.makeText(InterfazRegistro.this, "Debe llenar los campos correctamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
+}
