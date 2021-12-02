@@ -82,8 +82,7 @@ public class GuardarDatosProducto {
         FileWriter fileW=new FileWriter(f);
         fileW.append(listaProducto.toString());
         fileW.flush();
-        fileW.close();
-        System.out.println(file);}
+        fileW.close();}
         catch (Exception e){
             e.printStackTrace();
         }

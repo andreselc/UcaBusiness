@@ -38,14 +38,12 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
           temp=((EditText)findViewById(R.id.editTextNumber)).getText().toString();
           temp=a.deleteFromString(temp, false);
           ((EditText)findViewById(R.id.editTextNumber)).setText(temp);
-          System.out.println("cant:"+((EditText)findViewById(R.id.editTextNumber)).getText());
       }
 
       if (!flagPrecio){//precio invalido
           temp=((EditText)findViewById(R.id.editTextNumberDecimal)).getText().toString();
           temp=a.deleteFromString(temp, true);
-          ((EditText)findViewById(R.id.editTextNumberDecimal)).setText(temp);
-        System.out.println("precio:"+((EditText)findViewById(R.id.editTextNumberDecimal)).getText());}
+          ((EditText)findViewById(R.id.editTextNumberDecimal)).setText(temp);}
 
     return false;}
 

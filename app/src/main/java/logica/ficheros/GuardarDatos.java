@@ -17,9 +17,7 @@ public class GuardarDatos {
                     cliente.llenarObjetoClienteJson(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());
                     //ListaUsuariosClientes.agregarUsuarioAListaJSON(cliente.getUsuarioJSON(), ListaUsuariosClientes.getListaUsuariosClientesJSON());
-                    System.out.println("entró al if");
-                } else
-                    System.out.println("NO entró al if");
+                }
             }
         }
         //guardar.agregarAJsonClientes(ListaUsuariosClientes.getListaUsuariosClientesJSON());
@@ -35,9 +33,8 @@ public class GuardarDatos {
                     empresa.llenarObjetoEmpresaJson(empresa);
                     ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().add(empresa.getUsuarioJSON());
                     //ListaUsuariosEmpresas.agregarUsuarioAListaJSON(empresa.getUsuarioJSON(), ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
-                    System.out.println("entró al if");
-                } else
-                    System.out.println("NO entró al if");
+
+                }
             }
         }
         //guardar.agregarAJsonEmpresas(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());

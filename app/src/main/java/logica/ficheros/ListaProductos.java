@@ -37,7 +37,6 @@ public class ListaProductos {
 
     public static void setListaProductosJSON(org.json.simple.JSONArray listaProductosJSON) {
         ListaProductos.listaProductosJSON = listaProductosJSON;
-        System.out.println(ListaProductos.listaProductosJSON);
     }
 
     //cosas que debe hacer la lista :)
@@ -102,21 +101,13 @@ public class ListaProductos {
             Producto p=new Producto();
             try {
                 json = (org.json.simple.JSONObject) listaProductosJSON.get(i);
-                System.out.println("A");
                 p.setNombre(json.get("name").toString());
-                System.out.println("B");
                 p.setDescripcion(json.get("desc").toString());
-                System.out.println("C");
                 p.setUserID(json.get("userID").toString());
-                System.out.println("D");
                 p.setPrecio(Float.parseFloat(json.get("price").toString()));
-                System.out.println("E");
                 p.setCantidad(Integer.parseInt(json.get("quantity").toString()));
-                System.out.println("F");
                 p.setPrecioVisible(Boolean.parseBoolean(json.get("visible").toString()));
-                System.out.println("G");
                 p.setUbicImg(json.get("imgroute").toString());
-                System.out.println("H");
                 listaProductos.add(p);
             } catch (NumberFormatException e) {
                 e.printStackTrace();

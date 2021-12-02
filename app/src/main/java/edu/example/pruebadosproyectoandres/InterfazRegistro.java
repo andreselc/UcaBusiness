@@ -67,7 +67,7 @@ public class InterfazRegistro extends AppCompatActivity {
             fileW.append(listaUsuario.toString());
             fileW.flush();
             fileW.close();
-            System.out.println(file);}
+            }
         catch(Exception e){
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class InterfazRegistro extends AppCompatActivity {
         userCliente= findViewById(R.id.radioButton2);
 
         Spinner edad=findViewById(R.id.edadSpinner);
-        if (edad.getSelectedItem().toString().equals("-18")) {
+        if ((userCliente.isChecked())&&(edad.getSelectedItem().toString().equals("-18"))) {
             AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
             alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
             alerta.setCancelable(false);
@@ -106,7 +106,7 @@ public class InterfazRegistro extends AppCompatActivity {
                // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
                 //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
                // else {
-                    System.out.println("Empresa en lista");
+
                     GuardarDatos.procesoGuardadoEmpresas();
                     escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
@@ -118,7 +118,8 @@ public class InterfazRegistro extends AppCompatActivity {
                     //if (ListaUsuariosClientes.getListaUsuariosClientes().isEmpty())
                     //   Toast.makeText(getApplicationContext(), "La lista de clientes está vacía", Toast.LENGTH_SHORT).show();
                     //else {
-                        System.out.println("Cliente en lista");
+
+
                         GuardarDatos.procesoGuardadoClientes();
                         escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
                         Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
