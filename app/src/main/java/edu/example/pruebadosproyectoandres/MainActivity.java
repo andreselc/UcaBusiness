@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(newIntent);
     }
 
+    public void btnClientes(View v){
+        Intent newIntent = new Intent(this, MainActivityCliente.class);
+        startActivity(newIntent);
+    }
+
     public void btnIniciarSesion(View v){
         //este carga el menú del cliente (buscar productoo)
 
