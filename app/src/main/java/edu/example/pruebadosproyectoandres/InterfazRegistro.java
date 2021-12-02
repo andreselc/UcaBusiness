@@ -108,6 +108,7 @@ public class InterfazRegistro extends AppCompatActivity {
             if (userEmpresa.isChecked()) {
                 String direccion=findViewById(R.id.editTextTextPostalAddress).toString();
                 empresa = new Empresa(correo, password, 'e', direccion);
+                UserName(empresa);
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
                // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
                 //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
@@ -120,6 +121,7 @@ public class InterfazRegistro extends AppCompatActivity {
             }
                 if (userCliente.isChecked()) {
                     cliente = new Cliente(password, correo, 'c');
+                    UserName(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
                     //if (ListaUsuariosClientes.getListaUsuariosClientes().isEmpty())
                     //   Toast.makeText(getApplicationContext(), "La lista de clientes está vacía", Toast.LENGTH_SHORT).show();
@@ -196,5 +198,11 @@ public class InterfazRegistro extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void UserName(Usuario usuario){
+        String subCadena = null;
+        subCadena = subCadena.substring(1,5);
+        usuario.setUserName(subCadena+"ucauser");
     }
 }

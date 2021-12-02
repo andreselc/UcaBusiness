@@ -29,8 +29,13 @@ public class VerificacionDelCodigoParaRegistro extends MainActivity  {
 
         Log.d(TAG, "codigo enviado: " + codigoAct + " -- codigo ingresado: " + codigoIngresado);
         if(codigoIngresado.equals(codigoAct)){
-            Toast.makeText(VerificacionDelCodigoParaRegistro.this, "ES IGUAAAL", Toast.LENGTH_SHORT).show();
             TextView advertencia= findViewById(R.id.advertencia);
+            advertencia.setText("Codigo correcto");
+            Intent intent= getIntent();
+            String correo=intent.getStringExtra("correo");
+            Intent myIntent = new Intent(this, MostrarDatosDespuesDeRegistro.class);
+            myIntent.putExtra("correo",correo);
+            startActivity(myIntent);
         }
         else{
             Toast.makeText(VerificacionDelCodigoParaRegistro.this, "NO ES IGUAL :< ", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,25 @@ public class Usuario{
     private Correo email;
     private char tipoCuenta;
     protected JSONObject usuarioJSON;
+    public Boolean bloqueo=false;
+    public String UserName;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String nombreUsuario) {
+        this.UserName = nombreUsuario;
+    }
+
+    public Boolean getBloqueo() {
+        return bloqueo;
+    }
+
+    public void setBloqueo(Boolean bloqueo) {
+        this.bloqueo = bloqueo;
+    }
+
 
     /**
      * Constructor donde se inicializan los atributos por defecto

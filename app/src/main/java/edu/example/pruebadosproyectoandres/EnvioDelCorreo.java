@@ -62,12 +62,15 @@ public class EnvioDelCorreo extends Activity implements View.OnClickListener {
         codigo = getCodigo();
         textMessage="Su código de verificación es: "+codigo;
         Properties properties =new Properties();
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.socketFactory.port","465");
-        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.port","465");
-        Log.d(TAG, "onClick: ");
+        try {
+            properties.put("mail.smtp.host","smtp.gmail.com");
+            properties.put("mail.smtp.socketFactory.port","465");
+            properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+            properties.put("mail.smtp.auth","true");
+            properties.put("mail.smtp.port","465");
+        }catch (Exception e){
+            Log.d(TAG, "onClick: ");
+        }
 
         session = Session.getDefaultInstance(properties, new Authenticator(){
             protected PasswordAuthentication getPasswordAuthentication(){
@@ -106,6 +109,7 @@ public class EnvioDelCorreo extends Activity implements View.OnClickListener {
             Intent newIntent = new Intent(EnvioDelCorreo.this, VerificacionDelCodigoParaRegistro.class);
             newIntent.putExtra("codigo", String.valueOf(codigo));
             startActivity(newIntent);
+            newIntent.putExtra("correo",rec);
         }
     }
     public void buttonPress(View v){
