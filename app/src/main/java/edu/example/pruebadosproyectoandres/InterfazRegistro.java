@@ -1,13 +1,11 @@
 package edu.example.pruebadosproyectoandres;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import logica.ficheros.GuardarDatos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
@@ -87,9 +85,23 @@ public class InterfazRegistro extends AppCompatActivity {
         userEmpresa= findViewById(R.id.radioButton);
         userCliente= findViewById(R.id.radioButton2);
 
+        Spinner edad=findViewById(R.id.edadSpinner);
+        if (edad.getSelectedItem().toString().equals("-18")) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
+            alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
+            alerta.setCancelable(false);
+            alerta.setPositiveButton("Aceptar",(dialog, which) -> {//datos aceptados
+                dialog.cancel();
+                finish();
+            });
+            AlertDialog alertaf = alerta.create();
+            alertaf.show();
+        }
+
         if (validarDatosRegistro(password, passwordConfirmacion,correo, userCliente, userEmpresa)) {
             if (userEmpresa.isChecked()) {
-                empresa = new Empresa(correo, password, 'e');
+                String direccion=findViewById(R.id.editTextTextPostalAddress).toString();
+                empresa = new Empresa(correo, password, 'e',direccion);
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
                // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
                 //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
@@ -118,6 +130,9 @@ public class InterfazRegistro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interfaz_registro);
+        findViewById(R.id.edadSpinner).setEnabled(false);
+        findViewById(R.id.editTextTextPostalAddress).setEnabled(false);
+
 
         //para esconder el teclado
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
@@ -127,7 +142,25 @@ public class InterfazRegistro extends AppCompatActivity {
                 return false;
             }
         });
-
+        findViewById(R.id.radioButton2).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //cliente
+                findViewById(R.id.edadSpinner).setEnabled(true);
+                findViewById(R.id.editTextTextPostalAddress).setEnabled(false);
+                return false;
+            }
+        });
+        findViewById(R.id.radioButton).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //cliente
+                findViewById(R.id.edadSpinner).setEnabled(false);
+                findViewById(R.id.editTextTextPostalAddress).setEnabled(true);
+                return false;
+            }
+        });
     }
+
 
     }

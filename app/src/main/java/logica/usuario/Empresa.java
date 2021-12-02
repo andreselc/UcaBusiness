@@ -10,8 +10,16 @@ public class Empresa extends Usuario{
 
     //por ahora, no se llena esta
     private ArrayList<Producto> listaPublicaciones;
+    private String direccion;
 
     public Empresa (){
+    }
+
+    public Empresa(String password, String email, char tipoCuenta, String direccion) {
+        super(password, email, tipoCuenta);
+        listaPublicaciones = new ArrayList<Producto>();
+        usuarioJSON=new JSONObject();
+        this.direccion=direccion;
     }
 
     public ArrayList<Producto> getListaPublicaciones() {
@@ -22,10 +30,12 @@ public class Empresa extends Usuario{
         this.listaPublicaciones = listaPublicaciones;
     }
 
-    public Empresa(String password, String email, char tipoCuenta) {
-        super(password, email, tipoCuenta);
-         listaPublicaciones = new ArrayList<Producto>();
-         usuarioJSON=new JSONObject();
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public Empresa(String password, String email, ArrayList<Producto> listaPublicaciones) {
@@ -40,7 +50,8 @@ public class Empresa extends Usuario{
               empresa.usuarioJSON.put("contraseña",empresa.getPassword());
               empresa.usuarioJSON.put("correo",empresa.getEmail());
               empresa.usuarioJSON.put("tipo",empresa.getTipoCuenta());
-              } catch (JSONException e) {
+              empresa.usuarioJSON.put("direccion",empresa.getDireccion());
+          } catch (JSONException e) {
               System.out.println("Error al insertar datos en JSON de Empresas, Clase Empresa.");
           }
     }
