@@ -23,6 +23,7 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 
 import edu.example.pruebadosproyectoandres.R;
+import logica.ficheros.ListaProductos;
 import logica.producto.Producto;
 import logica.producto.filtros.Filtro;
 import logica.producto.filtros.FiltroImagenVisible;
@@ -147,9 +148,10 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
     private void buildRecyclerView(){
         productosRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productosRecView.setHasFixedSize(true);
-
         adapter = new ProductosRecViewAdapter(this);
         productosRecView.setAdapter(adapter);
+
+        productos = ListaProductos.getListaProductos();
         adapter.setProductos(productos, this);
         productos.add(new Producto("grande", "perro", false, 28, 10,"https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", "polar"));
         //productos.add(new Producto("perro", 10, 28.0, "grande", "https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", false, "jorge_l8"));

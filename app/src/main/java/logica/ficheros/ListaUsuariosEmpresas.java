@@ -1,7 +1,5 @@
 package logica.ficheros;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import logica.usuario.Empresa;
 import java.util.ArrayList;
 import logica.usuario.*;
