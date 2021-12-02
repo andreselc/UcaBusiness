@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">pruebaDosProyectoAndres</string>
+    <string name="app_name">RecyclerView</string>
+    <string name="crear_publicaci_n">Crear Publicación</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="imagen_del_producto">Imagen del producto</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="cargar_imagen">Cargar Imagen</string>
+    <string name="precio">Precio</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="precio_visible">Precio visible</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="descripci_n_del_producto">Descripción del producto</string>
+    <string name="precio_del_producto">Precio del producto</string>
+    <string name="cantidad_del_producto">Cantidad del producto</string>
+    <string name="filter">Filtrar RecyclerView items</string>
+    <string name="añadir_producto">Añadir producto</string>
+    <string name="men_principal">Menú Principal</string>
 </resources>

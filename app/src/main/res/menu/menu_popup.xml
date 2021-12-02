@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Precio Visible"
+        android:id="@+id/precio_visible"
+        android:checkable="true" />
+    <item android:title="Imagen Visible"
+        android:id="@+id/tiene_imagen"
+        android:checkable="true"/>
+    <item android:title="Límite Precio"
+        android:id="@+id/limite_precio"
+        android:checkable="true" />
+</menu>
