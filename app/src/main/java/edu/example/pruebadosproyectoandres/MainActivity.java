@@ -45,15 +45,12 @@ public class MainActivity extends AppCompatActivity {
             //currPassword.setText("");
             //currCorreo.setText("");
             //Display toast message con un mensaje prompting the user to enter los datos nuevamente
-            Intent newIntent = new Intent(this, MainActivityCliente.class);
-            getSupportActionBar().setTitle("Busqueda de Productos");
+            //Intent newIntent = new Intent(this, MainActivityCliente.class);
             //o, alternativamente, se carga el menú de la empresa (crear producto)
-            //Intent newIntent=new Intent(this,MainActivityEmpresa.class);
+            Intent newIntent=new Intent(this,MainActivityEmpresa.class);
             //getSupportActionBar().setTitle("Publicar Producto");
             startActivity(newIntent);
         }
-
-
     }
 
     @Override

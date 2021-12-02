@@ -16,7 +16,7 @@ public class ListaProductos {
     /**constructor
      */
     public ListaProductos() {
-        ListaProductos.listaProductos=new ArrayList<Producto>();
+        ListaProductos.listaProductos=new ArrayList<>();
         listaProductosJSON=new org.json.simple.JSONArray();
     }
 
