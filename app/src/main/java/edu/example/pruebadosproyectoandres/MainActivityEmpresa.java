@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import logica.ficheros.GuardarDatosProducto;
+import logica.ficheros.*;
 import logica.producto.Producto;
 
 import java.io.IOException;
@@ -14,6 +14,7 @@ import java.io.IOException;
 public class MainActivityEmpresa extends AppCompatActivity {
     private Producto p = new Producto();
     private GuardarDatosProducto j = new GuardarDatosProducto();
+    private LeerDatos l=new LeerDatos();
 
     public void siguienteActivity(View v) {
         startActivityForResult(new Intent(MainActivityEmpresa.this, InterfazNuevaPublicacion.class),1);
@@ -26,28 +27,16 @@ public class MainActivityEmpresa extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, datos);
         if ((requestCode==1)&&(resultCode==RESULT_OK)){
             //agregar los datos al producto
-            p.setNombre(bundle.getString("nombre"));
-            p.setDescripcion(bundle.getString("desc"));
-            p.setPrecio(Float.parseFloat(bundle.getString("precio")));
-            p.setCantidad(Integer.parseInt(bundle.getString("cantidad")));
-            p.setPrecioVisible(Boolean.parseBoolean(bundle.getString("visible")));
-            p.setUbicImg(bundle.getString("img"));
-
-            p.setUserID("USERID_A");//AQUI INSERTAR ID DEL USUARIO
+            p=new Producto(bundle.getString("desc"),bundle.getString("nombre"),
+                    Boolean.parseBoolean(bundle.getString("visible")),
+                    Float.parseFloat(bundle.getString("precio")),Integer.parseInt(bundle.getString("cantidad")),
+                    bundle.getString("img"),"USERID_A");
 
             //aqui se agregaria a la lista de empresa (lista de empresa actualiza automaticamente lista gral)
-
-            //comprueba que se agregaron los datos
-            TextView temp1= findViewById(R.id.textView);
-            temp1.setText(p.getNombre());
-
-            //escribir al json: debe escribirse lista de empresa y lista gral tambien
-            try {
-                j.escribirArchivo(j.crearJsonProducto(p), MainActivityEmpresa.this);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println(j.crearJsonProducto(p));
+            //por ahora, solo lista de empresa gen
+            l.leerListaProductos();
+            ListaProductos.agregarProductoALista(p);
+            GuardarDatosProducto.guardarProducto(MainActivityEmpresa.this);
         }
     }
 

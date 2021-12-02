@@ -1,16 +1,22 @@
 package logica.producto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Producto {
     private String descripcion, nombre, ubicImg, userID;
     private int cantidad;
     private float precio;
     private boolean precioVisible;
+    protected JSONObject productoJSON;
 
     public Producto(int disponibilidad) {
         this.cantidad= disponibilidad;
     }
 
-    public Producto(String descripcion, String nombre, boolean precioVisible, float precio, int cantidad, String ubicImg, String userID) {
+    public Producto(String descripcion, String nombre,
+                    boolean precioVisible, float precio,
+                    int cantidad, String ubicImg, String userID) {
         this.descripcion = descripcion;
         this.precio= precio;
         this.cantidad=cantidad;
@@ -18,6 +24,7 @@ public class Producto {
         this.precioVisible=precioVisible;
         this.ubicImg = ubicImg;
         this.userID = userID;
+        productoJSON=new JSONObject();
     }
 
     public Producto() {
@@ -97,4 +104,28 @@ public class Producto {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
+
+    public JSONObject getProductoJSON() {
+        return productoJSON;
+    }
+
+    public void setProductoJSON(JSONObject productoJSON) {
+        this.productoJSON = productoJSON;
+    }
+
+    public void llenarObjetoProductoJSON(Producto producto){
+        try {
+            getProductoJSON().put("name", producto.getNombre());
+            getProductoJSON().put("desc", producto.getDescripcion());
+            getProductoJSON().put("price", producto.getPrecio());
+            getProductoJSON().put("quantity", producto.getCantidad());
+            getProductoJSON().put("visible",producto.isPrecioVisible());
+            getProductoJSON().put("imgroute", producto.getUbicImg());
+            getProductoJSON().put("userID",producto.getUserID());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
