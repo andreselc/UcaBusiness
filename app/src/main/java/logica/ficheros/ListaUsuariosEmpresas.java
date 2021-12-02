@@ -78,7 +78,7 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
                 empresa.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
                 empresa.setDireccion((String) json.get("direccion"));
                 listaUsuariosEmpresas.add(empresa);
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
