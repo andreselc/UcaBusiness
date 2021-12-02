@@ -19,6 +19,7 @@ import java.io.IOException;
 public class InterfazNuevaPublicacion extends AppCompatActivity {
     //variable para almacenar la direccion de la imagen en el telefono
     static private String URIFoto="files/img/product-category-icon-5.jpg";
+
     //constante para comparar la salida de la imagen
     int SELECT_PICTURE = 200;
     private final Validaciones a = new Validaciones();

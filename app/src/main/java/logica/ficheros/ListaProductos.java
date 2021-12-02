@@ -74,7 +74,7 @@ public class ListaProductos {
 
     public static boolean productoExisteJSONGral(String nombre){
         String palabra;
-        for(int i=0;i<listaProductos.size();i++) {
+        for(int i=0;i<listaProductosJSON.size();i++) {
             org.json.simple.JSONObject json= (org.json.simple.JSONObject)listaProductosJSON.get(i);
             palabra=(String)json.get("name");
             if (palabra.compareTo(nombre)==0)

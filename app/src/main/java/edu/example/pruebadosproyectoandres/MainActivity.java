@@ -1,5 +1,6 @@
 package edu.example.pruebadosproyectoandres;
 
+import android.os.Environment;
 import android.view.MotionEvent;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,8 @@ import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Bloqueo;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
+
+import java.io.File;
 
 import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
 
@@ -41,11 +44,19 @@ public class MainActivity extends AppCompatActivity {
         Cliente currCliente = ListaUsuariosClientes.buscarUsuarioClientes(correoString);
         Empresa currEmpresa = ListaUsuariosEmpresas.buscarUsuarioEmpresa(correoString);
 
+        if ((currCliente==null)&&(currEmpresa==null)){
+            Toast.makeText(MainActivity.this, "Registre un usuario para iniciar", Toast.LENGTH_SHORT).show();
+
+        }
+
         if((currCliente !=null) && (currCliente.getBloqueo()==false)){
             int cont=0;
             if((currCliente != null) && (currCliente.getPassword().equals(currPassword.getText().toString()))){
                 Toast.makeText(MainActivity.this, "Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
                 //start intent actividad jorge
+                Intent newIntent = new Intent(this, MainActivityCliente.class);
+                    getSupportActionBar().setTitle("Busqueda de Productos");
+                    startActivity(newIntent);
             }
             else if((currCliente != null) && !(currCliente.getPassword().equals(currPassword.getText().toString()))){
                 cont++;
@@ -66,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             if(currEmpresa != null && currEmpresa.getPassword().equals(currPassword.getText().toString())){
                 Toast.makeText(MainActivity.this, "Inicion de sesion exitoso", Toast.LENGTH_SHORT).show();
                 //start intent actividad kat
+                Intent newIntent=new Intent(this,MainActivityEmpresa.class);
+                startActivity(newIntent);
             }
             else if((currEmpresa!=null) && !(currEmpresa.getPassword().equals(currPassword.getText().toString()))){
                 cont++;
@@ -81,22 +94,30 @@ public class MainActivity extends AppCompatActivity {
         else if((currCliente !=null) && (currCliente.getBloqueo()==true)){
             Toast.makeText(MainActivity.this, "Usted supero el numero de intentos, intente nuevamente en 24h", Toast.LENGTH_SHORT).show();
         }
-        else{
-            //logica que deberia ir aqui
-            //currPassword.setText("");
-            //currCorreo.setText("");
-            //Display toast message con un mensaje prompting the user to enter los datos nuevamente
-            Intent newIntent = new Intent(this, MainActivityCliente.class);
-            getSupportActionBar().setTitle("Busqueda de Productos");
-            //o, alternativamente, se carga el menú de la empresa (crear producto)
-            //Intent newIntent=new Intent(this,MainActivityEmpresa.class);
-            //getSupportActionBar().setTitle("Publicar Producto");
-            startActivity(newIntent);
-        }/////else si el usuario tiene bloqueo
+        else if (currCorreo.getText().equals("")){
+            Toast.makeText(MainActivity.this, "Introduzca correo", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (currPassword.getText().equals("")){
+            Toast.makeText(MainActivity.this, "Introduzca contraseña", Toast.LENGTH_SHORT).show();
+
+        }
+
+        /////else si el usuario tiene bloqueo
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File file = new File("files/img", "product-category-icon-5.jpg");
+
+        try {
+            // Make sure the Pictures directory exists.
+            path.mkdirs();} catch (Exception e) {
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListaProductos listaP=new ListaProductos();
