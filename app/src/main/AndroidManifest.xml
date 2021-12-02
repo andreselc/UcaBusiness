@@ -16,7 +16,8 @@
                 android:exported="false" />
         <activity
             android:name=".GalleryActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivityCliente"/>
         <activity
             android:name=".MainActivityCliente"
             android:exported="true" />
