@@ -101,7 +101,7 @@ public class InterfazRegistro extends AppCompatActivity {
         if (validarDatosRegistro(password, passwordConfirmacion,correo, userCliente, userEmpresa)) {
             if (userEmpresa.isChecked()) {
                 String direccion=findViewById(R.id.editTextTextPostalAddress).toString();
-                empresa = new Empresa(correo, password, 'e',direccion);
+                empresa = new Empresa(correo, password, 'e', direccion);
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
                // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
                 //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
