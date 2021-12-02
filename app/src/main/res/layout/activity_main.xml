@@ -120,10 +120,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/button2"
             app:layout_constraintStart_toStartOf="@+id/button2"
-            app:layout_constraintTop_toBottomOf="@+id/button2"/>
+            app:layout_constraintTop_toBottomOf="@+id/button2"> </Button>
     <Button
             android:text="Ir a menú ver lista productos"
             android:onClick="btnClientes"
+            android:fontFamily="@font/roboto_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button5"
             app:layout_constraintTop_toBottomOf="@+id/imageView"

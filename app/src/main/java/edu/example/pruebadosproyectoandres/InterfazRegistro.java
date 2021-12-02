@@ -168,6 +168,8 @@ public class InterfazRegistro extends AppCompatActivity {
                 findViewById(R.id.editTextTextPostalAddress).setEnabled(true);
                 return false;
             }
+
+
         });
 
         EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
@@ -194,7 +196,9 @@ public class InterfazRegistro extends AppCompatActivity {
                     passwordIngresado.setText("");
                     passwordIngresado2.setText("");
                     Toast.makeText(InterfazRegistro.this, "Debe llenar los campos correctamente", Toast.LENGTH_SHORT).show();
+
                 }
+
             }
         });
     }
