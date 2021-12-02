@@ -12,11 +12,11 @@ public class Empresa extends Usuario{
     private ArrayList<Producto> listaPublicaciones;
     private String direccion;
 
-    public Empresa (){
+    public Empresa(){
     }
 
-    public Empresa(String password, String email, char tipoCuenta, String direccion) {
-        super(password, email, tipoCuenta);
+    public Empresa(String email,String password, char tipoCuenta, String direccion) {
+        super(email, password, tipoCuenta);
         listaPublicaciones = new ArrayList<Producto>();
         usuarioJSON=new JSONObject();
         this.direccion=direccion;
