@@ -56,9 +56,5 @@ public class Empresa extends Usuario{
           }
     }
 
-    public String getEmailWithoutAt(){
-        String temp=getEmail().replace("@","---");
-        return temp;
-    }
 
 }

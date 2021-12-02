@@ -25,4 +25,6 @@ public class Cliente extends Usuario{
             System.out.println("Error al insertar datos en JSON de Clientes. Clase Cliente");
         }
     }
+
+
 }

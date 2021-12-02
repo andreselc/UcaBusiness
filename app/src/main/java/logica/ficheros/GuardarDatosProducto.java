@@ -95,7 +95,7 @@ public class GuardarDatosProducto {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try (FileReader reader = new FileReader("files/listaEmpresa"+e.getEmailWithoutAt()+".json")) {
+        try (FileReader reader = new FileReader("files/listaEmpresa"+e.getEmailNoAt()+".json")) {
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaProductosEmpresa.setListaProductosEmpresaJSON(jsonLista);
