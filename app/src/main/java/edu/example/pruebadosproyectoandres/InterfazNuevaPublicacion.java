@@ -28,6 +28,7 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
 
     public Boolean validar(){
         String temp;
+        if (URIFoto.equals("files/img/product-category-icon-5.jpg")) URIFoto="n/a";
         flagNombre=a.validar(((EditText)findViewById(R.id.editTextTextPersonName)).getText().toString(),1);
         flagDesc=a.validar((((EditText)findViewById(R.id.editTextTextPersonName2)).getText().toString()),2);
         flagCant=a.validar((((EditText)findViewById(R.id.editTextNumber)).getText().toString()),4);
