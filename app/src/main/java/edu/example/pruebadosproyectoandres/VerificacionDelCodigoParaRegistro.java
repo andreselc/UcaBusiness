@@ -23,6 +23,8 @@ public class VerificacionDelCodigoParaRegistro extends MainActivity  {
             codigoAct = myIntent.getStringExtra("codigo");
     }
 
+    //test para branch
+
     public void buttonPressVerificar(View view){
         EditText codigo= findViewById(R.id.Codigo);
         String codigoIngresado = codigo.getText().toString();
