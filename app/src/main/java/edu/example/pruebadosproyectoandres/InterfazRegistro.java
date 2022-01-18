@@ -1,8 +1,7 @@
 package edu.example.pruebadosproyectoandres;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,9 +12,7 @@ import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.*;
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.File;
-import java.io.FileWriter;
-import edu.example.pruebadosproyectoandres.R;
+
 
 import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
 
@@ -61,7 +58,7 @@ public class InterfazRegistro extends AppCompatActivity {
         return false;
     }
 
-    public void escribirArchivo (org.json.simple.JSONArray listaUsuario, Activity a, String nombreFichero) {
+    /*public void escribirArchivo (org.json.simple.JSONArray listaUsuario, Activity a, String nombreFichero) {
 
         File file =new File(a.getFilesDir(), "files");
         if (!file.exists()){
@@ -77,8 +74,9 @@ public class InterfazRegistro extends AppCompatActivity {
         catch(Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
+    //TODO: Además de agregar lo comentado abajo, se quitaron aspectos irrelevantes
      public void buttonPress(View view) {
         EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
         EditText passwordIngresado = findViewById (R.id.editTextTextPassword2);
@@ -106,30 +104,25 @@ public class InterfazRegistro extends AppCompatActivity {
 
         if (validarDatosRegistro(password, passwordConfirmacion,correo, userCliente, userEmpresa)) {
             if (userEmpresa.isChecked()) {
-                String direccion=findViewById(R.id.editTextTextPostalAddress).toString();
-                empresa = new Empresa(correo, password, 'e', direccion);
+                //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
+                EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress);
+                String direccion=direccionIngresada.getText().toString();
+                System.out.println (correo);
+                //TODO: Como se cambió el orden del constructos, se cambia aquí también al instanciar
+                empresa = new Empresa(password, correo, 'e', direccion);
                 UserName(empresa);
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-               // if (ListaUsuariosEmpresas.getListaUsuariosEmpresas().isEmpty())
-                //    Toast.makeText(getApplicationContext(), "La lista de empresas está vacía", Toast.LENGTH_SHORT).show();
-               // else {
-
                     GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
-                    escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
+                    //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
-                //}
+
             }
                 if (userCliente.isChecked()) {
                     cliente = new Cliente(password, correo, 'c');
                     UserName(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
-                    //if (ListaUsuariosClientes.getListaUsuariosClientes().isEmpty())
-                    //   Toast.makeText(getApplicationContext(), "La lista de clientes está vacía", Toast.LENGTH_SHORT).show();
-                    //else {
-
-
                         GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
-                        escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
+                        //escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
                         Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
                     //}
                 }
@@ -171,11 +164,6 @@ public class InterfazRegistro extends AppCompatActivity {
 
 
         });
-
-        EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
-        EditText passwordIngresado = findViewById(R.id.editTextTextPassword2);
-        EditText passwordIngresado2 = findViewById(R.id.editTextTextPassword3);
-
 
         userEmpresa = findViewById(R.id.radioButton);
         userCliente = findViewById(R.id.radioButton2);

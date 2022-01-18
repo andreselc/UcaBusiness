@@ -95,8 +95,7 @@ public class Usuario{
     public void setAddress(String address) {
         email.setAddress(address);
     }
-    public void setAddressFromJSON(String addressFromJSON){email.setAddressFromJSON(addressFromJSON);
-    }
+
     /**
      * Setter, modifica la información del parametro password
      * @param password contraseña

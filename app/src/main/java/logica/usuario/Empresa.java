@@ -14,9 +14,9 @@ public class Empresa extends Usuario{
 
     public Empresa(){usuarioJSON=new JSONObject();
     }
-
-    public Empresa(String email,String password, char tipoCuenta, String direccion) {
-        super(email, password, tipoCuenta);
+    //TODO: Aquí se cambió el orden de los atributos en función de lo que aparece en el constructor Usuario
+    public Empresa(String password,String email, char tipoCuenta, String direccion) {
+        super(password, email, tipoCuenta);
         listaPublicaciones = new ArrayList<Producto>();
         usuarioJSON=new JSONObject();
         this.direccion=direccion;
@@ -38,19 +38,19 @@ public class Empresa extends Usuario{
         this.direccion = direccion;
     }
 
-    public Empresa(String password, String email, ArrayList<Producto> listaPublicaciones) {
-        super(password, email);
-        this.listaPublicaciones = listaPublicaciones;
-    }
-      public void llenarObjetoEmpresaJson(Empresa empresa) {
+
+      public void llenarObjetoEmpresaJson() {
         Encrypt encriptar=new Encrypt();
-        empresa.setPassword(encriptar.getAES(empresa.getPassword()));
+        setPassword(encriptar.getAES(getPassword()));
           try {
+              if (usuarioJSON!=null){
               //TODO:Falta agregar aquí el ciclo que llena todas las publicaciones de una empresa en el ArrayList
-              empresa.usuarioJSON.put("contraseña",empresa.getPassword());
-              empresa.usuarioJSON.put("correo",empresa.getEmailNoAt());
-              empresa.usuarioJSON.put("tipo",empresa.getTipoCuenta());
-              empresa.usuarioJSON.put("direccion",empresa.getDireccion());
+              usuarioJSON.put("contraseña",getPassword());
+              usuarioJSON.put("correo",getEmail());
+              usuarioJSON.put("tipo",getTipoCuenta());
+              usuarioJSON.put("direccion",getDireccion());}
+              else
+                  System.out.println("nulleado una empresa");
           } catch (JSONException e) {
               System.out.println("Error al insertar datos en JSON de Empresas, Clase Empresa.");
           }
