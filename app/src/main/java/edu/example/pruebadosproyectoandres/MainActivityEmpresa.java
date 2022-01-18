@@ -18,7 +18,6 @@ public class MainActivityEmpresa extends AppCompatActivity {
 
     public void siguienteActivity(View v) {
         startActivityForResult(new Intent(MainActivityEmpresa.this, InterfazNuevaPublicacion.class),1);
-
     }
 
     //para recibir datos de menuPublicacion

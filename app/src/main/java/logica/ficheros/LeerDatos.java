@@ -3,8 +3,6 @@ package logica.ficheros;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 /**
@@ -21,7 +19,7 @@ public class LeerDatos {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try {FileReader reader = new FileReader("/data/data/edu.example.pruebadosproyectoandres/files/files/usuariosClientes.json");
+        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/clientes.json");
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosClientes.setListaUsuariosClientesJSON(jsonLista);
@@ -33,13 +31,13 @@ public class LeerDatos {
         catch (ParseException e) {
         }
     }
-
+       //TODO: Se modificaron los nombres de los archivos para que se leyeran desde el tlf
        public void leerListaEmpresas() {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try {FileReader reader = new FileReader("/data/data/edu.example.pruebadosproyectoandres/files/files/usuariosEmpresas.json");
-          Object objeto = lectura.parse(reader);
+        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/empresas.json");
+            Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosEmpresas.setListaUsuariosEmpresasJSON(jsonLista);
         }catch (FileNotFoundException e) {
@@ -49,8 +47,9 @@ public class LeerDatos {
         }
         catch (ParseException e) {
         }
-
     }
+
+    //TODO: No se está usando por ahora
     public void leerListaProductos() {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();

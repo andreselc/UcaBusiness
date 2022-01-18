@@ -1,5 +1,7 @@
 package logica.ficheros;
 
+import org.json.simple.JSONObject;
+
 import logica.usuario.Empresa;
 import java.util.ArrayList;
 import logica.usuario.*;
@@ -64,22 +66,28 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
     }
 
     //TODO:Falta agregar el ciclo que me llene las publicaciones en la lista.
+    //TODO: Detalles irrelevantes se cambiaron aquí
     public static void llenarListaEstaticaEmpresas() {
         Encrypt desencriptar = new Encrypt();
         LeerDatos leer = new LeerDatos();
         leer.leerListaEmpresas();
-        org.json.simple.JSONObject json;
+        JSONObject json;
         for (int i = 0; i < listaUsuariosEmpresasJSON.size(); i++) {
             Empresa empresa = new Empresa();
             try {
-                json = (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
-                empresa.setAddressFromJSON((String) json.get("correo"));
+                json = (JSONObject) listaUsuariosEmpresasJSON.get(i);
+                empresa.setAddress((String) json.get("correo"));
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                 empresa.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
                 empresa.setDireccion((String) json.get("direccion"));
+                System.out.println(empresa.getTipoCuenta());
+                System.out.println(empresa.getDireccion());
                 listaUsuariosEmpresas.add(empresa);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.out.println(e);
+            }
+            catch (Exception e){
+                System.out.println("Datos de empresa no encontrado en archivo");
             }
         }
     }

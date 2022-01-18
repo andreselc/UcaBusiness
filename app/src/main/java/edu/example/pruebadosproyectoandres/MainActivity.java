@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         ListaProductos.llenarListaEstaticaProductos();
         ListaUsuariosClientes.llenarListaEstaticaClientes();
         ListaUsuariosEmpresas.llenarListaEstaticaEmpresas();
-        ListaUsuariosClientes.getListaUsuariosClientesJSON().toJSONString();
-        ListaUsuariosClientes.getListaUsuariosClientes().toString();
+        //ListaUsuariosClientes.getListaUsuariosClientesJSON().toJSONString();
+        //ListaUsuariosClientes.getListaUsuariosClientes().toString();
         getSupportActionBar().hide();
 
         EditText txtCorreo =findViewById(R.id.editTextTextEmailAddress);
