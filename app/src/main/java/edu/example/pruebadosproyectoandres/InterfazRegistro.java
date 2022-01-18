@@ -179,7 +179,7 @@ public class InterfazRegistro extends AppCompatActivity {
 
         userEmpresa = findViewById(R.id.radioButton);
         userCliente = findViewById(R.id.radioButton2);
-        Button button = findViewById(R.id.button3);
+        /*Button button = findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,19 +192,16 @@ public class InterfazRegistro extends AppCompatActivity {
                     intent.putExtra("correo", correo);
                     startActivity(intent);
                 } else {
-                    correoIngresado.setText("");
-                    passwordIngresado.setText("");
-                    passwordIngresado2.setText("");
                     Toast.makeText(InterfazRegistro.this, "Debe llenar los campos correctamente", Toast.LENGTH_SHORT).show();
 
                 }
 
             }
-        });
+        });*/
     }
 
     public void UserName(Usuario usuario){
-        String subCadena = null;
+        String subCadena = usuario.getEmailNoAt();
         subCadena = subCadena.substring(1,5);
         usuario.setUserName(subCadena+"ucauser");
     }

@@ -12,7 +12,7 @@ public class Usuario{
     private Password password;
     private Correo email;
     private char tipoCuenta;
-    protected JSONObject usuarioJSON;
+    public JSONObject usuarioJSON;
     public Boolean bloqueo=false;
     public String UserName;
 

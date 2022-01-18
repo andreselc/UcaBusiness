@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import logica.ficheros.GuardarDatosProducto;
 import logica.ficheros.ListaProductos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //GuardarDatosProducto g =new GuardarDatosProducto();
+        //usar si hace falta borrar un archivo
+        //g.borrarArchivo("usuariosClientes.json");
+
         File path = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
         File file = new File("files/img", "product-category-icon-5.jpg");

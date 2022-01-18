@@ -10,17 +10,21 @@ import org.json.*;
 public class GuardarDatos {
 
     public static void procesoGuardadoClientes(Activity activity) {
+        System.out.println("entra a guardado");
         Cliente cliente;
         GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
+        ///busca que el cliente no exista en el json
         for (Cliente usuarioCliente : ListaUsuariosClientes.getListaUsuariosClientes()) {
             if (!ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())) {
                 cliente = ListaUsuariosClientes.buscarUsuarioClientes(usuarioCliente.getEmail());
-                if (cliente != null) {
-                    cliente.llenarObjetoClienteJson(cliente);
-                    ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());
+                if (cliente != null) {//si existe en el json
+                    System.out.println(cliente.getEmail());
+                    cliente.llenarObjetoClienteJson(); //crea objeto json
+                    ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());//agrega a la lista json
                     try {
                         a.escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(),activity,"usuariosClientes.json");
+                        //intenta escribir al json
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

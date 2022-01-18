@@ -13,13 +13,18 @@ public class Cliente extends Usuario{
         usuarioJSON =new JSONObject();
     }
 
-    public void llenarObjetoClienteJson(Cliente cliente) {
+    public void llenarObjetoClienteJson() {
         Encrypt encriptar=new Encrypt();
-        cliente.setPassword(encriptar.getAES(cliente.getPassword()));
+        setPassword(encriptar.getAES(getPassword()));
         try {
-            cliente.usuarioJSON.put("contraseña",cliente.getPassword());
-            cliente.usuarioJSON.put("correo",cliente.getEmailNoAt());
-            cliente.usuarioJSON.put("tipo",cliente.getTipoCuenta());
+            System.out.println(getPassword());
+            if (usuarioJSON==null){
+                System.out.println("nulleado");
+                return;
+            }
+            usuarioJSON.put("contraseña",getPassword());
+            usuarioJSON.put("correo",getEmailNoAt());
+            usuarioJSON.put("tipo",getTipoCuenta());
         } catch (JSONException e) {
             System.out.println("Error al insertar datos en JSON de Clientes. Clase Cliente");
         }
