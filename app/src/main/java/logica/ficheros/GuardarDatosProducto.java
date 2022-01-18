@@ -72,20 +72,31 @@ public class GuardarDatosProducto {
     public void escribirArchivo(org.json.simple.JSONArray listaProducto, Activity a,String nombreArchivo) throws IOException {
         //nombre archivo debe incluir .json
 
-        File file = new File(a.getFilesDir(),"");
-        if (!file.exists()) {
-            file.mkdir();
-        }
+        try{File file = new File("/data/data/edu.example.pruebadosproyectoandres/files/files/"+nombreArchivo);
 
-        try{
-        File f = new File (file, nombreArchivo);
-        FileWriter fileW=new FileWriter(f);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        System.out.println("direccion:"+file.getPath());
+
+        FileWriter fileW=new FileWriter(file);
         fileW.append(listaProducto.toString());
         fileW.flush();
         fileW.close();}
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void borrarArchivo(String nombreArchivo){
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter("/data/data/edu.example.pruebadosproyectoandres/files/files/"+nombreArchivo);
+            pw.print("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        pw.close();
     }
 
     //leer listas de productos del json
