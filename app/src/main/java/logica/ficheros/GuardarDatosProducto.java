@@ -4,7 +4,7 @@ import android.app.Activity;
 import edu.example.pruebadosproyectoandres.MainActivityEmpresa;
 import logica.producto.Producto;
 import logica.usuario.Empresa;
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,7 +33,7 @@ public class GuardarDatosProducto {
         }
     }*/
 
-    //para empresa gral
+    //para empresa gral; se guardan todos los productos en una sola lista y se diferencian por id de producto
     public static void guardarProducto(Activity activityActual){
         Producto producto;
         GuardarDatosProducto guardar = new GuardarDatosProducto();
@@ -41,16 +41,13 @@ public class GuardarDatosProducto {
         for (Producto p: ListaProductos.getListaProductos()){
             if (!ListaProductos.productoExisteJSONGral(p.getNombre())){
                 //si no esta repetido el producto
-                producto=(Producto) ListaProductosEmpresa.buscarProductoGral(p.getNombre());
+                producto= ListaProductosEmpresa.buscarProductoGral(p.getNombre());
                 producto.llenarObjetoProductoJSON(producto);
                 ListaProductos.agregarProductoAListaJSON(producto.getProductoJSON(), ListaProductos.getListaProductosJSON());
             }
         }
-        try {
-            guardar.escribirArchivo(ListaProductosEmpresa.getListaProductosJSON(), activityActual,"listaEmpresaGral.json");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
+        guardar.agregarAJSONProductos(ListaProductos.getListaProductosJSON());
     }
 
 

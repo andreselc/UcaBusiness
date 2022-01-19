@@ -37,7 +37,7 @@ public class InterfazRegistro extends AppCompatActivity {
                         if ((empresa.isChecked()) || (cliente.isChecked())) {
                             return true;
                         } else {
-                            advertencia.setText("Debe seleccionar un tipo de empresa");
+                            advertencia.setText("Debe seleccionar un tipo de cuenta");
                         }
                     } else {
                         advertencia.setText("Las contraseñas no coinciden");
@@ -109,7 +109,7 @@ public class InterfazRegistro extends AppCompatActivity {
                 String direccion=direccionIngresada.getText().toString();
                 System.out.println (correo);
                 //TODO: Como se cambió el orden del constructos, se cambia aquí también al instanciar
-                empresa = new Empresa(password, correo, 'e', direccion);
+                empresa = new Empresa(password, correo, "e", direccion);
                 UserName(empresa);
                 ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
                     GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
@@ -118,7 +118,7 @@ public class InterfazRegistro extends AppCompatActivity {
 
             }
                 if (userCliente.isChecked()) {
-                    cliente = new Cliente(password, correo, 'c');
+                    cliente = new Cliente(password, correo, "c");
                     UserName(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
                         GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);

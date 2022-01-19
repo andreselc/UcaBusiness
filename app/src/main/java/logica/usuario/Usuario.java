@@ -1,5 +1,5 @@
 package logica.usuario;
-import org.json.*;
+import org.json.simple.JSONObject;
 /**
  * Clase encargada de manejar la información por usuario
  * @author Grupo4
@@ -11,7 +11,7 @@ public class Usuario{
      */
     private Password password;
     private Correo email;
-    private char tipoCuenta;
+    private String tipoCuenta;
     public JSONObject usuarioJSON;
     public Boolean bloqueo=false;
     public String UserName;
@@ -41,7 +41,7 @@ public class Usuario{
         email = new Correo();
     }
 
-    public Usuario(String password,String email,char tipoCuenta){
+    public Usuario(String password,String email,String tipoCuenta){
         this.password= new Password(password);
         this.email=new Correo(email);
         this.tipoCuenta=tipoCuenta;
@@ -80,13 +80,13 @@ public class Usuario{
      * getter
      * @return devuelve el atriburo tipoCuenta
      */
-    public char getTipoCuenta() { return tipoCuenta; }
+    public String getTipoCuenta() { return tipoCuenta; }
 
     /**
      * setter modifica la información del parametro tipoCuenta
      * @param tipoCuenta valor a pasarle al atributo tipoCuenta
      */
-    public void setTipoCuenta(char tipoCuenta) { this.tipoCuenta = tipoCuenta; }
+    public void setTipoCuenta(String tipoCuenta) { this.tipoCuenta = tipoCuenta; }
     /**
      * setter, modifica la información del parametro address
      * @param address valor a pasarle al atributo address

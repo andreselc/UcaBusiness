@@ -62,7 +62,6 @@ public class ListaUsuariosClientes extends ListaUsuarios {
     public static boolean correoExisteEnClientesJSON(String correo)  {
         String palabra;
         for(int i=0;i<listaUsuariosClientesJSON.size();i++) {
-
                 org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
                 System.out.println("correo cliente: "+json.get("correo"));
                 palabra=(String)json.get("correo");
@@ -88,7 +87,7 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                 if (json!=null) {
                     cliente.setAddress((String) json.get("correo"));
                     cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
-                    cliente.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
+                    cliente.setTipoCuenta((String) json.get("tipo"));
                     listaUsuariosClientes.add(cliente);}
                 } catch (NumberFormatException e) {
                 e.printStackTrace();

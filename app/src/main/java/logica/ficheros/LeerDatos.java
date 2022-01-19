@@ -43,9 +43,9 @@ public class LeerDatos {
         }catch (FileNotFoundException e) {
             System.out.println("archivo no encontrado de empresas");
         }
-        catch (IOException e) {
+        catch (IOException e) {System.out.println("io");
         }
-        catch (ParseException e) {
+        catch (ParseException e) { System.out.println("parse");
         }
     }
 

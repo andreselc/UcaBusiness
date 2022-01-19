@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     public void btnIniciarSesion(View v){
         //este carga el menú del cliente (buscar productoo)
 
+        ListaProductos.llenarListaEstaticaProductos();
+        ListaUsuariosClientes.llenarListaEstaticaClientes();
+        ListaUsuariosEmpresas.llenarListaEstaticaEmpresas();
+
         EditText currPassword = findViewById(R.id.editTextTextPassword);
         EditText currCorreo = findViewById(R.id.editTextTextEmailAddress);
 
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Inicion de sesion exitoso", Toast.LENGTH_SHORT).show();
                 //start intent actividad kat
                 Intent newIntent=new Intent(this,MainActivityEmpresa.class);
+                newIntent.putExtra("userID",correoString);//esto envia el correo a la siguiente activity
                 startActivity(newIntent);
             }
             else if((currEmpresa!=null) && !(currEmpresa.getPassword().equals(currPassword.getText().toString()))){
@@ -118,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         //usar si hace falta borrar un archivo
         //g.borrarArchivo("empresas.json");
         //g.borrarArchivo("clientes.json");
+        //g.borrarArchivo(".json");
 
         File path = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
