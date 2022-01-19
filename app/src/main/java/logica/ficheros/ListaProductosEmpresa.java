@@ -2,7 +2,6 @@ package logica.ficheros;
 
 import logica.producto.Producto;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.simple.JSONArray;
 
 import java.util.ArrayList;
@@ -10,11 +9,11 @@ import java.util.ArrayList;
 public class ListaProductosEmpresa extends ListaProductos{
 
     private static ArrayList<Producto> listaProductosEmpresa;
-    private static JSONArray listaProductosEmpresaJSON;
+    private static org.json.simple.JSONArray listaProductosEmpresaJSON;
 
     public ListaProductosEmpresa() {
         ListaProductosEmpresa.listaProductosEmpresa=new ArrayList<>();
-        listaProductosEmpresaJSON=new JSONArray();
+        listaProductosEmpresaJSON=new org.json.simple.JSONArray();
     }
 
     //getter and setter
@@ -46,18 +45,17 @@ public class ListaProductosEmpresa extends ListaProductos{
         }
         return false;
     }
-
-  /**  public static boolean productoExisteJSON(String nombre){
+/**producto existe en json*/
+    public static boolean productoExisteJSON(String correo)  {
         String palabra;
         for(int i=0;i<listaProductosEmpresaJSON.size();i++) {
-            try {
-                JSONObject json= (JSONObject) listaProductosEmpresaJSON.get(i);
-                palabra=(String)json.get("nombre");
-                if (palabra.compareTo(nombre)==0)
-                    return true;
-            } catch (JSONException e) {
-                System.out.println("Error en verificar si el producto existe o no");
-            }
+
+            org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaProductosEmpresaJSON.get(i);
+            System.out.println("producto: "+json.get("nombre"));
+            palabra=(String)json.get("nombre");
+            if (palabra.compareTo(correo)==0)
+                return true;
+
         }
         return false;
     }
@@ -74,30 +72,25 @@ public class ListaProductosEmpresa extends ListaProductos{
     //llenar la lista de productos :)
 
     public static void llenarListaEstaticaProductos(){
-        JSONObject json;
+        org.json.simple.JSONObject json;
         for (int i=0;i<listaProductosEmpresaJSON.size();i++){
             Producto p=new Producto();
-            try{
-                //obtener datos de la lista json
-                json=(JSONObject) listaProductosEmpresaJSON.get(i);
-                //agregando al producto
-                //agregar los datos al producto
-                p.setNombre(json.getString("nombre"));
-                p.setDescripcion(json.getString("desc"));
-                p.setPrecio(Float.parseFloat(json.getString("precio")));
-                p.setCantidad(Integer.parseInt(json.getString("cantidad")));
-                p.setPrecioVisible(Boolean.parseBoolean(json.getString("visible")));
-                p.setUbicImg(json.getString("img"));
-                //
-                p.setUserID("USERID_A");//AQUI INSERTAR ID DEL USUARIO
-                //agregar a la lista
-                listaProductosEmpresa.add(p);
-            }
-            catch (JSONException e){
-                System.out.println("Error al guardar datos del json en lista de clientes");
-            }
+            //obtener datos de la lista json
+            json=(org.json.simple.JSONObject) listaProductosEmpresaJSON.get(i);
+            //agregando al producto
+            //agregar los datos al producto
+            p.setNombre((String)json.get("nombre"));
+            p.setDescripcion((String)json.get("desc"));
+            p.setPrecio(Float.parseFloat((String)json.get("precio")));
+            p.setCantidad(Integer.parseInt((String)json.get("cantidad")));
+            p.setPrecioVisible(Boolean.parseBoolean((String)json.get("visible")));
+            p.setUbicImg((String)json.get("img"));
+            //
+            p.setUserID((String) json.get("userID"));//AQUI INSERTAR ID DEL USUARIO
+            //agregar a la lista
+            listaProductosEmpresa.add(p);
 
         }
-    }*/
+    }
 
 }

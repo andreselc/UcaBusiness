@@ -62,14 +62,14 @@ public class ListaUsuariosClientes extends ListaUsuarios {
     public static boolean correoExisteEnClientesJSON(String correo)  {
         String palabra;
         for(int i=0;i<listaUsuariosClientesJSON.size();i++) {
-            try {
+
                 org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
+                System.out.println("correo cliente: "+json.get("correo"));
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-            } catch (Exception e) {
-                System.out.println("Error en verificar si el correo existe o no");
-            }
+
+
         }
         return false;
     }

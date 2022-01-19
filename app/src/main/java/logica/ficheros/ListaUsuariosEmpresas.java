@@ -1,10 +1,10 @@
 package logica.ficheros;
 
-import org.json.simple.JSONObject;
 
 import logica.usuario.Empresa;
 import java.util.ArrayList;
 import logica.usuario.*;
+import org.json.simple.JSONArray;
 
 public class ListaUsuariosEmpresas extends ListaUsuarios{
 
@@ -30,7 +30,7 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         ListaUsuariosEmpresas.listaUsuariosEmpresas = listaUsuariosEmpresas;
     }
 
-    public static org.json.simple.JSONArray getListaUsuariosEmpresasJSON() {
+    public static JSONArray getListaUsuariosEmpresasJSON() {
         return listaUsuariosEmpresasJSON;
     }
     /**
@@ -53,14 +53,13 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
     public static boolean correoExisteEnEmpresasJSON(String correo)  {
         String palabra;
         for(int i=0;i<listaUsuariosEmpresasJSON.size();i++) {
-            try {
+
                 org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
+            System.out.println("correo empresa: "+json.get("correo"));
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-            } catch (Exception e) {
-                System.out.println("Error en verificar si el correo existe o no");
-            }
+
         }
         return false;
     }
@@ -71,11 +70,11 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         Encrypt desencriptar = new Encrypt();
         LeerDatos leer = new LeerDatos();
         leer.leerListaEmpresas();
-        JSONObject json;
+        org.json.simple.JSONObject json;
         for (int i = 0; i < listaUsuariosEmpresasJSON.size(); i++) {
             Empresa empresa = new Empresa();
             try {
-                json = (JSONObject) listaUsuariosEmpresasJSON.get(i);
+                json = (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
                 empresa.setAddress((String) json.get("correo"));
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                 empresa.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));

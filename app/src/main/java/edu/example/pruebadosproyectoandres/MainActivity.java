@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //GuardarDatosProducto g =new GuardarDatosProducto();
         //usar si hace falta borrar un archivo
-        //g.borrarArchivo("usuariosClientes.json");
+        //g.borrarArchivo("empresas.json");
+        //g.borrarArchivo("clientes.json");
 
         File path = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
