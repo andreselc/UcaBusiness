@@ -56,7 +56,7 @@ public class GuardarDatosProducto {
 
     //debe agregarse al json de lista de productos de empresa y al json de lista de productos en general
     public void agregarAJSONProductos(JSONArray ListaJson) {
-        try(FileWriter archivo= new FileWriter (" C:\\Users\\Andres\\AndroidStudioProjects\\pruebaDosProyectoAndres\\app\\files\\usuariosEmpresas.json")){
+        try(FileWriter archivo= new FileWriter ("data/data/edu.example.pruebadosproyectoandres/files/productos.json")){
             BufferedWriter buffer= new BufferedWriter (archivo);
             buffer.write(ListaJson.toString());
             buffer.close();
@@ -91,7 +91,7 @@ public class GuardarDatosProducto {
     public void borrarArchivo(String nombreArchivo){
         PrintWriter pw = null;
         try {
-            pw = new PrintWriter("/data/data/edu.example.pruebadosproyectoandres/files/files/"+nombreArchivo);
+            pw = new PrintWriter("/data/data/edu.example.pruebadosproyectoandres/files/"+nombreArchivo);
             pw.print("");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
