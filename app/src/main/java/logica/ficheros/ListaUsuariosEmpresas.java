@@ -52,9 +52,9 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
 
     public static boolean correoExisteEnEmpresasJSON(String correo)  {
         String palabra;
+        System.out.println("listaJSON:"+listaUsuariosEmpresasJSON.toString());
         for(int i=0;i<listaUsuariosEmpresasJSON.size();i++) {
-
-                org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
+            org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
             System.out.println("correo empresa: "+json.get("correo"));
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
@@ -71,22 +71,20 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         LeerDatos leer = new LeerDatos();
         leer.leerListaEmpresas();
         org.json.simple.JSONObject json;
+        if (listaUsuariosEmpresasJSON.isEmpty()) return;
         for (int i = 0; i < listaUsuariosEmpresasJSON.size(); i++) {
             Empresa empresa = new Empresa();
             try {
                 json = (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
                 empresa.setAddress((String) json.get("correo"));
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
-                empresa.setTipoCuenta((char) Integer.parseInt(json.get("tipo").toString()));
+                empresa.setTipoCuenta((String) json.get("tipo"));
                 empresa.setDireccion((String) json.get("direccion"));
                 System.out.println(empresa.getTipoCuenta());
                 System.out.println(empresa.getDireccion());
                 listaUsuariosEmpresas.add(empresa);
             } catch (NumberFormatException e) {
                 System.out.println(e);
-            }
-            catch (Exception e){
-                System.out.println("Datos de empresa no encontrado en archivo");
             }
         }
     }

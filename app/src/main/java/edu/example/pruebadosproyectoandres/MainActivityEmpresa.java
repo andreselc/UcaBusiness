@@ -15,6 +15,7 @@ public class MainActivityEmpresa extends AppCompatActivity {
     private Producto p = new Producto();
     private GuardarDatosProducto j = new GuardarDatosProducto();
     private LeerDatos l=new LeerDatos();
+    private String userID="n/a";
 
     public void siguienteActivity(View v) {
         startActivityForResult(new Intent(MainActivityEmpresa.this, InterfazNuevaPublicacion.class),1);
@@ -30,7 +31,7 @@ public class MainActivityEmpresa extends AppCompatActivity {
             p=new Producto(bundle.getString("desc"),bundle.getString("nombre"),
                     Boolean.parseBoolean(bundle.getString("visible")),
                     Float.parseFloat(bundle.getString("precio")),Integer.parseInt(bundle.getString("cantidad")),
-                    bundle.getString("img"),"USERID_A");
+                    bundle.getString("img"),userID);
 
             //aqui se agregaria a la lista de empresa (lista de empresa actualiza automaticamente lista gral)
             //por ahora, solo lista de empresa gen
@@ -45,6 +46,10 @@ public class MainActivityEmpresa extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Menú de Empresa");
+        //esto permite obtener los datos del primer activity
+        Bundle b= getIntent().getExtras();
+        userID=b.getString("userID");
+        System.out.println("User ID en On Create: "+userID);
         setContentView(R.layout.activity_main_crearproducto);
 
     }
