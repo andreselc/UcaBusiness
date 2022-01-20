@@ -40,11 +40,16 @@ public class Empresa extends Usuario{
 
 
       public void llenarObjetoEmpresaJson() {
-        Encrypt encriptar=new Encrypt();
-        setPassword(encriptar.getAES(getPassword()));
+          Encrypt encriptar=new Encrypt();
+          String passwordAux;
+          passwordAux=encriptar.getAES(getPassword());
           if (usuarioJSON!=null){
           //TODO:Falta agregar aquí el ciclo que llena todas las publicaciones de una empresa en el ArrayList
-          usuarioJSON.put("contraseña",getPassword());
+              //TODO: Aquí se usa passwordAux para guardar la contraseña encriptada solo en los archivos
+              //TODO: ANTES se encriptaba la contraseña con un set y se cambiaba en la lista estática
+              //TODO: Si iniciabas con una cuenta ya registrada, funcionaba, pero si registrabas e inmediatamente iniciabas, no funcionaba
+              //TODO:PROBLEMA RESUELTO
+          usuarioJSON.put("contraseña",passwordAux);
           usuarioJSON.put("correo",getEmail());
           usuarioJSON.put("tipo",getTipoCuenta());
           usuarioJSON.put("direccion",getDireccion());}
