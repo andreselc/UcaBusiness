@@ -15,13 +15,18 @@ public class Cliente extends Usuario{
 
     //TODO: Cambié en el get de EMAIL para que colocara bien los correos
     public void llenarObjetoClienteJson() {
+        //TODO: Aquí se usa passwordAux para guardar la contraseña encriptada solo en los archivos
+        //TODO: ANTES se encriptaba la contraseña con un set y se cambiaba en la lista estática
+        //TODO: Si iniciabas con una cuenta ya registrada, funcionaba, pero si registrabas e inmediatamente iniciabas, no funcionaba
+        //TODO:PROBLEMA RESUELTO
         Encrypt encriptar=new Encrypt();
-        setPassword(encriptar.getAES(getPassword()));
+        String passwordAux;
+        passwordAux=encriptar.getAES(getPassword());
         if (usuarioJSON==null){
             System.out.println("nulleado un cliente");
         }
         else{
-        usuarioJSON.put("contraseña",getPassword());
+        usuarioJSON.put("contraseña",passwordAux);
         usuarioJSON.put("correo",getEmail());
         usuarioJSON.put("tipo",getTipoCuenta());}
     }

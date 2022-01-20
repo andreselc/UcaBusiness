@@ -94,7 +94,7 @@ public class ListaProductos {
     }
 
 
-    public static void llenarListaEstaticaProductos() {
+    /*public static void llenarListaEstaticaProductos() {
         LeerDatos leer=new LeerDatos();
         leer.leerListaProductos();
         org.json.simple.JSONObject json;
@@ -115,5 +115,5 @@ public class ListaProductos {
             }
         }
 
-    }
+    }*/
 }

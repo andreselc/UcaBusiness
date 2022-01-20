@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import logica.ficheros.GuardarDatosProducto;
 import logica.ficheros.ListaProductos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
@@ -43,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public void btnIniciarSesion(View v){
         //este carga el menú del cliente (buscar productoo)
 
-        ListaProductos.llenarListaEstaticaProductos();
-        ListaUsuariosClientes.llenarListaEstaticaClientes();
-        ListaUsuariosEmpresas.llenarListaEstaticaEmpresas();
+        /*ListaProductos.llenarListaEstaticaProductos();*/
 
         EditText currPassword = findViewById(R.id.editTextTextPassword);
         EditText currCorreo = findViewById(R.id.editTextTextEmailAddress);
@@ -56,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
         if ((currCliente==null)&&(currEmpresa==null)){
             Toast.makeText(MainActivity.this, "Registre un usuario para iniciar", Toast.LENGTH_SHORT).show();
-
         }
 
         if((currCliente !=null) && (currCliente.getBloqueo()==false)){
             int cont=0;
+            System.out.println("Entró en el primer if");
             if((currCliente != null) && (currCliente.getPassword().equals(currPassword.getText().toString()))){
                 Toast.makeText(MainActivity.this, "Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
                 //start intent actividad jorge
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         else if((currEmpresa!=null) && (currEmpresa.getBloqueo()==false)){
             int cont=0;
             if(currEmpresa != null && currEmpresa.getPassword().equals(currPassword.getText().toString())){
-                Toast.makeText(MainActivity.this, "Inicion de sesion exitoso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show();
                 //start intent actividad kat
                 Intent newIntent=new Intent(this,MainActivityEmpresa.class);
                 newIntent.putExtra("userID",correoString);//esto envia el correo a la siguiente activity
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         ListaProductos listaP=new ListaProductos();
         ListaUsuariosClientes listaC= new ListaUsuariosClientes();
         ListaUsuariosEmpresas listaE= new ListaUsuariosEmpresas();
-        ListaProductos.llenarListaEstaticaProductos();
+        /*ListaProductos.llenarListaEstaticaProductos();*/
         ListaUsuariosClientes.llenarListaEstaticaClientes();
         ListaUsuariosEmpresas.llenarListaEstaticaEmpresas();
         //ListaUsuariosClientes.getListaUsuariosClientesJSON().toJSONString();
@@ -174,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //para esconder el teclado
-
         //para esconder el teclado
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override

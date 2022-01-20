@@ -19,7 +19,7 @@ public class LeerDatos {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/clientes.json");
+        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/usuariosClientes.json");
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosClientes.setListaUsuariosClientesJSON(jsonLista);
@@ -36,7 +36,7 @@ public class LeerDatos {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/empresas.json");
+        try {FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/usuariosEmpresas.json");
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             ListaUsuariosEmpresas.setListaUsuariosEmpresasJSON(jsonLista);
@@ -54,7 +54,7 @@ public class LeerDatos {
         org.json.simple.JSONArray jsonLista;
         JSONParser lectura = new JSONParser();
         //La ruta del archivo no debe ser específico.
-        try (FileReader reader = new FileReader("/data/data/edu.example.pruebadosproyectoandres/files/listaEmpresaGral.json")) {
+        try (FileReader reader = new FileReader("data/data/edu.example.pruebadosproyectoandres/files/usuariosEmpresas.json")) {
             Object objeto = lectura.parse(reader);
             jsonLista = (org.json.simple.JSONArray) objeto;
             //hasta aqui bien
