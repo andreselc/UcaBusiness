@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class VerificacionDelCodigoParaRegistro extends MainActivity  {
 
-    private String codigoAct, correo;
+    private String codigoAct;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
