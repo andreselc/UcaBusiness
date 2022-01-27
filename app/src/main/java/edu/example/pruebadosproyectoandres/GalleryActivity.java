@@ -46,6 +46,7 @@ public class GalleryActivity extends AppCompatActivity {
                 setImage(imageUrl, imageName, descripcionProducto, "");
         }
     }
+
     @SuppressLint({"LongLogTag", "SetTextI18n"})
     private void setImage(String imageUrl, String imageName, String descripcion, String precio){
         //private void setImage(String imageName){

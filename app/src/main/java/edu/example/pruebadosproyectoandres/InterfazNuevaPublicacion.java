@@ -21,12 +21,12 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
     static private String URIFoto="files/img/como-hacer-empanadas-venezolanas.jpg";
 
     //constante para comparar la salida de la imagen
-    int SELECT_PICTURE = 200;
+    public int SELECT_PICTURE = 200;
     private final Validaciones a = new Validaciones();
     private boolean flagNombre=false,flagDesc=false,flagCant=false,flagPrecio=false;
     private Bitmap bitmap;
 
-    public Boolean validar(){
+    public boolean validar(){
         String temp;
         if (URIFoto.equals("files/img/product-category-icon-5.jpg")) URIFoto="n/a";
         flagNombre=a.validar(((EditText)findViewById(R.id.editTextTextPersonName)).getText().toString(),1);

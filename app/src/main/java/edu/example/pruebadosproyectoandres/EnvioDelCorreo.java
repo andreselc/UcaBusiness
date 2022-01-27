@@ -30,11 +30,11 @@ import javax.mail.internet.MimeMessage;
 public class EnvioDelCorreo extends Activity implements View.OnClickListener {
 
     private static final String TAG = "olaaaaaa";
-    String rec,subject,textMessage;
-    Session session=null;
-    ProgressDialog progressDialog =null;
-    Context context =null;
-    int codigo;
+    public String rec,subject,textMessage;
+    public Session session=null;
+    public ProgressDialog progressDialog =null;
+    public Context context =null;
+    public int codigo;
 
     private int getCodigo(){
         return CodigoAleatoreo();
