@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
                 //start intent actividad jorge
                 Intent newIntent = new Intent(this, MainActivityCliente.class);
+                    newIntent.putExtra("userID",correoString);
                     getSupportActionBar().setTitle("Busqueda de Productos");
                     startActivity(newIntent);
             }

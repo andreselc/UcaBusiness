@@ -53,4 +53,10 @@ public class MainActivityEmpresa extends AppCompatActivity {
         setContentView(R.layout.activity_main_crearproducto);
 
     }
+
+    public void activityPerfil(View view) {
+        Intent intent = new Intent(this, InterfazPerfil.class);
+        intent.putExtra("userID",userID);
+        startActivity(intent);
+    }
 }
