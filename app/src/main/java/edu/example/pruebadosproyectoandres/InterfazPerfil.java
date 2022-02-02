@@ -62,7 +62,8 @@ public class InterfazPerfil extends AppCompatActivity {
         else if (cl!=null){
             //el usuario es cliente, se esconde la direccion
             correo.setText(cl.getEmail());
-            direccion.setText(Math.toIntExact(cl.getEdad()));
+            String temp = String.valueOf(cl.getEdad());
+            direccion.setText(temp);
             direccionLabel.setText("Edad");
             contacto.setVisibility(View.INVISIBLE);
             whatsapp.setVisibility(View.INVISIBLE);
