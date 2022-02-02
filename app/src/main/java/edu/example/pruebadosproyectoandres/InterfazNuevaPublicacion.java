@@ -2,6 +2,7 @@ package edu.example.pruebadosproyectoandres;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.PathUtils;
+
 import logica.producto.validaciones.Validaciones;
 
 import java.io.File;
@@ -116,6 +119,14 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
         //pasar constante para comparar el intent
         startActivityForResult(Intent.createChooser(i,"Seleccione imagen"),SELECT_PICTURE);}
 
+    public static String getRealPathFromUri(Activity activity, Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = activity.managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
     //esta ocurre al seleccionarse la img
     public void onActivityResult(int requestCode, int resultCode,Intent data) {
 
@@ -131,8 +142,10 @@ public class InterfazNuevaPublicacion extends AppCompatActivity {
                     ImageView a= findViewById(R.id.imageView2);
                     //se resizea la imagen
                     resize(uriDeImagen,a);
-
-                    URIFoto = uriDeImagen.toString();
+                    File file = new File(uriDeImagen.getPath());
+                    final String[] split = file.getPath().split(":");
+                    URIFoto = split[1];
+                    System.out.println("URI DE FOTO" + URIFoto);
                 }
             }
         }

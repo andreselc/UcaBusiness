@@ -50,35 +50,28 @@ public class GalleryActivity extends AppCompatActivity {
 
         if(getIntent().hasExtra("product_name")
                 && getIntent().hasExtra("image_url")
-                && getIntent().hasExtra("descripcion_producto")){
-            //if(getIntent().hasExtra("product_name")){
+                && getIntent().hasExtra("descripcion_producto")
+                && getIntent().hasExtra("userID")
+                && getIntent().hasExtra("precio_producto")){
 
             String imageName = getIntent().getStringExtra("product_name");
             String imageUrl = getIntent().getStringExtra("image_url");
             String descripcionProducto = getIntent().getStringExtra("descripcion_producto");
             String disponibilidadActual = getIntent().getStringExtra("disponibilidad");
-
-            if(getIntent().hasExtra("userID")) {
-                String userID = getIntent().getStringExtra("userID");
-                if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID)) {
-                    myButton.setVisibility(View.VISIBLE);
-                    myButton2.setVisibility(View.VISIBLE);
-                    disponibilidad.setVisibility(View.VISIBLE);
-                }
+            String userID = getIntent().getStringExtra("userID");
+            if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID)) {
+                myButton.setVisibility(View.VISIBLE);
+                myButton2.setVisibility(View.VISIBLE);
+                disponibilidad.setVisibility(View.VISIBLE);
             }
-            if(getIntent().hasExtra("precio_producto")) {
-                String precioProducto = getIntent().getStringExtra("precio_producto");
-                setImage(imageUrl, imageName, descripcionProducto, precioProducto, disponibilidadActual);
-            }
-            else
-                setImage(imageUrl, imageName, descripcionProducto, "", disponibilidadActual);
+            String precioProducto = getIntent().getStringExtra("precio_producto");
+            setImage(imageUrl, imageName, descripcionProducto, precioProducto, disponibilidadActual);
         }
     }
 
     @SuppressLint({"LongLogTag", "SetTextI18n"})
     private void setImage(String imageUrl, String imageName, String descripcion, String precio, String disponibilidad){
         //private void setImage(String imageName){
-        Log.d(TAG, "setImage: setting the image and name to widgets ");
 
         //TextViews que aparecen en los detalles del producto
         TextView nameTxt = findViewById(R.id.nombre_producto);
@@ -86,19 +79,26 @@ public class GalleryActivity extends AppCompatActivity {
         TextView disponibilidadTxt = findViewById(R.id.cantidad_disponibles);
 
         //Pasarles el texto del producto seleccionado
+        TextView precioTxt = findViewById(R.id.precio_producto);
         nameTxt.setText(imageName);
-        if(precio.length()>0){
-            TextView precioTxt = findViewById(R.id.precio_producto);
-            precioTxt.setText(precio);
-        }
-        ;
+        String userID = getIntent().getStringExtra("userID");
+        String textoPrecio;
 
-        //ListaUsuariosClientes.correoExisteEnClientesJSON(correo));
+        if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID))
+            textoPrecio = precio;
+        else{
+            Producto producto = ListaProductos.buscarProductoGral(getIntent().getStringExtra("product_name"));
+            if(producto.isPrecioVisible())
+                textoPrecio = precio;
+            else
+                textoPrecio = "- - -";
+        }
+
+        precioTxt.setText(textoPrecio);
         disponibilidadTxt.setText(disponibilidad + " disponibles");
         descripcionTxt.setText(descripcion);
         ImageView image = findViewById(R.id.myImage);
         Glide.with(this).asBitmap().load(imageUrl).into(image);
-        Log.d(TAG, "setImage: Upload the image");
     }
 
     public void onDeleteClick(View view){
@@ -113,16 +113,12 @@ public class GalleryActivity extends AppCompatActivity {
 
         //builder.setCancelable(false);
         builder.setPositiveButton("Seguro", (dialog, which) -> {//datos aceptados
-            dialog.cancel();
             finish();
             ListaProductosSistema.getInstance().eliminarProducto(getIntent().getStringExtra("product_name"));
             Toast.makeText(this, "Producto eliminado exitosamente", Toast.LENGTH_SHORT).show();
         });
-
         builder.setNegativeButton("Cancelar", (dialog, which) -> {
-            dialog.cancel();
-        }
-        );
+        });
         AlertDialog alerta = builder.create();
         alerta.show();
     }
@@ -140,7 +136,7 @@ public class GalleryActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Producto producto = ListaProductos.buscarProductoGral(getIntent().getStringExtra("product_name"));
                 Integer disponibilidad = Integer.parseInt(String.valueOf(input.getText()));
-                if(disponibilidad <= 0 || disponibilidad > 1000)
+                if(disponibilidad <= 0 || disponibilidad > 1000) //validar cantidadd
                     Toast.makeText(GalleryActivity.this, "Disponibilidad no valida", Toast.LENGTH_SHORT).show();
                 else{
                     assert producto != null;

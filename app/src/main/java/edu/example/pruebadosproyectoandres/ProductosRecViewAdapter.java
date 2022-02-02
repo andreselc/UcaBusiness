@@ -2,6 +2,8 @@ package edu.example.pruebadosproyectoandres;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import edu.example.pruebadosproyectoandres.R;
 
 import logica.producto.Producto;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecViewAdapter.ViewHolder> {
@@ -49,6 +52,12 @@ public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecVi
             holder.txtPrice.setText("$" + productos.get(position).getPrecio());
         else
             holder.txtPrice.setText(" - - -");
+
+        /*File imgFile = new File(productos.get(position).getUbicImg());
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.image.setImageBitmap(myBitmap);
+        };*/
 
         Glide.with(context)
                 .asBitmap()

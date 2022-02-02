@@ -1,5 +1,6 @@
 package edu.example.pruebadosproyectoandres;
 
+import android.Manifest;
 import android.os.Environment;
 import android.view.MotionEvent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Bloqueo;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import java.io.File;
 
@@ -123,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
         //g.borrarArchivo("empresas.json");
         //g.borrarArchivo("clientes.json");
         //g.borrarArchivo(".json");
+       String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        if (!EasyPermissions.hasPermissions(this, galleryPermissions)){
+            EasyPermissions.requestPermissions(this, "Access for storage",
+                    101, galleryPermissions);
+        }
 
         File path = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
