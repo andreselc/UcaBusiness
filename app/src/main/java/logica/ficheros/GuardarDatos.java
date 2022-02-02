@@ -5,6 +5,7 @@ import java.io.*;
 
 import android.app.Activity;
 import logica.usuario.*;
+import org.json.JSONException;
 import org.json.simple.*;
 
 public class GuardarDatos {
@@ -66,49 +67,44 @@ public class GuardarDatos {
          guardar.agregarAJsonEmpresas(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
     }
 
-    public static void procesoModEmpresas(Activity activity) {
-        Empresa empresa;
+    public static void procesoModEmpresas(Activity activity, Empresa emp) {
+
         GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
-        for (Empresa usuarioEmpresa : ListaUsuariosEmpresas.getListaUsuariosEmpresas()) {
-            if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(usuarioEmpresa.getEmail())) {
-                //si el usuario existe
-                empresa = ListaUsuariosEmpresas.buscarUsuarioEmpresa(usuarioEmpresa.getEmail());
-                System.out.println("Empresa:"+empresa.getEmail());
-                if (empresa != null) {
+
+        if (emp != null) {
                     System.out.println("modifica la empresa");
-                    ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().remove(empresa.getUsuarioJSON());
-                    if (!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(usuarioEmpresa.getEmail())){
-                        System.out.println("el usuario se borró de la lista");
-                    empresa.setUsuarioJSON(new JSONObject());
-                    empresa.llenarObjetoEmpresaJson();
-                    ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().add(empresa.getUsuarioJSON());}
-                }
+            try {
+                ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().remove(ListaUsuariosEmpresas.buscarIndexUsuarioEmpresasJSON(emp.getEmail()));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }
+            if (!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(emp.getEmail())){
+                        System.out.println("el usuario se borró de la lista");
+                    emp.setUsuarioJSON(new JSONObject());
+                    emp.llenarObjetoEmpresaJson();
+                    ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().add(emp.getUsuarioJSON());}
+
+            }
+
         a.borrarArchivo("empresas.json");
         guardar.agregarAJsonEmpresas(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
     }
 
-    public static void procesoModClientes(Activity activity) {
-        Cliente cliente;
+    public static void procesoModClientes(Activity activity, Cliente cl) throws JSONException {
         GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
-        for (Cliente usuarioCliente : ListaUsuariosClientes.getListaUsuariosClientes()) {
-            if (ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())) {
-                //si el usuario existe
-                cliente = ListaUsuariosClientes.buscarUsuarioClientes(usuarioCliente.getEmail());
-                System.out.println("Cliente:"+cliente.getEmail());
-                if (cliente != null) {
+
+                if (cl != null) {
                     System.out.println("modifica la empresa");
-                    ListaUsuariosClientes.getListaUsuariosClientesJSON().remove(cliente.getUsuarioJSON());
-                    if (!ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())){
+                    ListaUsuariosClientes.getListaUsuariosClientesJSON().remove(ListaUsuariosClientes.buscarIndexUsuarioClientesJSON(cl.getEmail()));
+                    if (!ListaUsuariosClientes.correoExisteEnClientesJSON(cl.getEmail())){
                         System.out.println("el usuario se borró de la lista");
-                        cliente.setUsuarioJSON(new JSONObject());
-                        cliente.llenarObjetoClienteJson();
-                        ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());}
-                }
-            }
+                        cl.setUsuarioJSON(new JSONObject());
+                        cl.llenarObjetoClienteJson();
+                        ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cl.getUsuarioJSON());}
+
+
         }
         a.borrarArchivo("clientes.json");
         guardar.agregarAJsonClientes(ListaUsuariosClientes.getListaUsuariosClientesJSON());
@@ -130,6 +126,7 @@ public class GuardarDatos {
             BufferedWriter buffer = new BufferedWriter(archivo);
             buffer.write(listaJson.toString());
             buffer.close();
+            System.out.println("Escribe en JSON");
         } catch (IOException e) {
             System.out.println("Problemas al ingresar datos  al archivo clientes. Clase Guardar Datos");
         }

@@ -4,6 +4,7 @@ package logica.ficheros;
 import logica.usuario.Empresa;
 import java.util.ArrayList;
 import logica.usuario.*;
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 
 public class ListaUsuariosEmpresas extends ListaUsuarios{
@@ -71,6 +72,13 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
         }
         return false;
     }
+
+    public static int buscarIndexUsuarioEmpresasJSON(String email) throws JSONException {
+        for (int i=0; i<=listaUsuariosEmpresasJSON.size();i++) {
+            org.json.simple.JSONObject empresa= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
+            if (empresa.get("correo").toString().equals(email))
+                return listaUsuariosEmpresasJSON.indexOf(empresa);}
+        return 0;}
 
     //TODO:Falta agregar el ciclo que me llene las publicaciones en la lista.
     //TODO: Detalles irrelevantes se cambiaron aquí
