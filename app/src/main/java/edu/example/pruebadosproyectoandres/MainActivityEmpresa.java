@@ -104,14 +104,16 @@ public class MainActivityEmpresa extends AppCompatActivity implements ProductosR
     public void onProductClick(int position) {
         Intent intent = new Intent(this, GalleryActivity.class);
 
-        intent.putExtra("product_name", currLista.getAdapter().getProductos().get(position).getNombre());
-        intent.putExtra("image_url", currLista.getAdapter().getProductos().get(position).getUbicImg());
+        Producto currProd = currLista.getAdapter().getProductos().get(position);
+        intent.putExtra("product_name", currProd.getNombre());
+        intent.putExtra("image_url", currProd.getUbicImg());
 
         //si el producto tiene el precio visible
-        if(currLista.getAdapter().getProductos().get(position).isPrecioVisible())
-            intent.putExtra("precio_producto", "$" + currLista.getAdapter().getProductos().get(position).getPrecio() + "");
-        intent.putExtra("descripcion_producto", currLista.getAdapter().getProductos().get(position).getDescripcion());
+        if(currProd.isPrecioVisible())
+            intent.putExtra("precio_producto", "$" + currProd.getPrecio() + "");
+        intent.putExtra("descripcion_producto", currProd.getDescripcion());
         intent.putExtra("userID", userID);
+        intent.putExtra("disponibilidad", currProd.getDisponibilidad() + "");
         startActivityForResult(intent,2);
     }
 }
