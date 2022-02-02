@@ -41,6 +41,10 @@ public class ListaProductosSistema{
         adapter.setProductos(lista, (ProductosRecViewAdapter.ViewHolder.OnNoteListener) context);
     }
 
+    public void setLista(ArrayList<Producto> productos){
+        lista = productos;
+    }
+
     public void setProductosRecView(RecyclerView productosRecView) {
         this.productosRecView = productosRecView;
     }
