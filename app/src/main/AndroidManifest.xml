@@ -7,19 +7,19 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="UcaBusiness"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.PruebaDosProyectoAndres">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="UcaBusiness"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.PruebaDosProyectoAndres">
+
         <activity
                 android:name=".MostrarDatosDespuesDeRegistro"
                 android:exported="false"/>
         <activity
-            android:name=".GalleryActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivityCliente"/>
+                android:name=".GalleryActivity"
+                android:exported="true"/>
         <activity
                 android:name=".MainActivityCliente"
                 android:exported="true"/>
@@ -58,6 +58,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
