@@ -37,6 +37,7 @@ public class GalleryActivity extends AppCompatActivity {
     @SuppressLint("LongLogTag")
     private void getIncomingIntent(){
         FloatingActionButton myButton = findViewById(R.id.deleteBtn);
+        FloatingActionButton myButton2 = findViewById(R.id.modifyBtn);
 
         if(getIntent().hasExtra("product_name")
                 && getIntent().hasExtra("image_url")
@@ -48,8 +49,10 @@ public class GalleryActivity extends AppCompatActivity {
             String descripcionProducto = getIntent().getStringExtra("descripcion_producto");
             if(getIntent().hasExtra("userID")) {
                 String userID = getIntent().getStringExtra("userID");
-                if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID))
+                if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID)) {
                     myButton.setVisibility(View.VISIBLE);
+                    myButton2.setVisibility(View.VISIBLE);
+                }
             }
             if(getIntent().hasExtra("precio_producto")) {
                 String precioProducto = getIntent().getStringExtra("precio_producto");
@@ -99,7 +102,6 @@ public class GalleryActivity extends AppCompatActivity {
             dialog.cancel();
             finish();
             ListaProductosSistema.getInstance().eliminarProducto(getIntent().getStringExtra("product_name"));
-            ListaProductosSistema.getInstance().buildRecyclerView(getParent());
         });
 
         builder.setNegativeButton("Cancelar", (dialog, which) -> {

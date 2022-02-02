@@ -20,7 +20,7 @@ public class ListaProductos {
      */
     public ListaProductos() {
         ListaProductos.listaProductos=new ArrayList<>();
-        ListaProductos.listaProductos.add(new Producto("grande", "perro", false, 28, 10,"https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", "polar"));
+        //ListaProductos.listaProductos.add(new Producto("grande", "perro", false, 28, 10,"https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59bbb29c5bafe878503c9872/husky-siberiano-bosque.jpg", "polar"));
         listaProductosJSON=new org.json.simple.JSONArray();
     }
 

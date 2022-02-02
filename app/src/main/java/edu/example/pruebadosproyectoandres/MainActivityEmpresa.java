@@ -35,10 +35,10 @@ public class MainActivityEmpresa extends AppCompatActivity implements ProductosR
 
     //para recibir datos de menuPublicacion
     public void onActivityResult(int requestCode, int resultCode, Intent datos){
-        if (datos!=null){
-        Bundle bundle=datos.getExtras();
         super.onActivityResult(requestCode, resultCode, datos);
-        if ((requestCode==1)&&(resultCode==RESULT_OK)){
+        System.out.println("REQUEST CODE IS: " + requestCode);
+        if (datos != null && (requestCode==1)&&(resultCode==RESULT_OK)){
+            Bundle bundle=datos.getExtras();
             //agregar los datos al producto
             p=new Producto(bundle.getString("desc"),bundle.getString("nombre"),
                     Boolean.parseBoolean(bundle.getString("visible")),
@@ -53,7 +53,11 @@ public class MainActivityEmpresa extends AppCompatActivity implements ProductosR
 
             currLista.updateListaProductos(userID);
             currLista.buildRecyclerView(this);
-        }}
+        }
+        if ( (requestCode==2)){
+            currLista.updateListaProductos(userID);
+            currLista.buildRecyclerView(this);
+        }
     }
 
     @Override
@@ -108,7 +112,6 @@ public class MainActivityEmpresa extends AppCompatActivity implements ProductosR
             intent.putExtra("precio_producto", "$" + currLista.getAdapter().getProductos().get(position).getPrecio() + "");
         intent.putExtra("descripcion_producto", currLista.getAdapter().getProductos().get(position).getDescripcion());
         intent.putExtra("userID", userID);
-        startActivity(intent);
-        //startActivityForResult(intent,1);
+        startActivityForResult(intent,2);
     }
 }

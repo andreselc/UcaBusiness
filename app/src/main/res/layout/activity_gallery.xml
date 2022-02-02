@@ -61,4 +61,15 @@
         app:srcCompat="@drawable/ic_delete"
         android:visibility="invisible"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/modifyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription = "Modificar publicación"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@drawable/ic_settings"
+        android:visibility="invisible"/>
+
 </LinearLayout>

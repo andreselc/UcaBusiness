@@ -35,7 +35,7 @@ public class ListaProductosSistema{
     //crear el Recycler View que hace las veces de la lista
     public void buildRecyclerView(Context context){
         productosRecView.setLayoutManager(new GridLayoutManager(context, 2));
-        productosRecView.setHasFixedSize(true);
+        //japroductosRecView.setHasFixedSize(true);
         adapter = new ProductosRecViewAdapter(context);
         productosRecView.setAdapter(adapter);
         adapter.setProductos(lista, (ProductosRecViewAdapter.ViewHolder.OnNoteListener) context);
@@ -48,6 +48,7 @@ public class ListaProductosSistema{
     public void updateListaProductos(String userID){
         lista.clear();
         ArrayList<Producto> listaProductos = ListaProductos.getListaProductos();
+        System.out.println(listaProductos);
         for(Producto producto: listaProductos){
             if(producto.getUserID().equals(userID))
                 lista.add(producto);

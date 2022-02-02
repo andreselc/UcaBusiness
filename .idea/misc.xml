@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/pruebaDosProyectoAndres/app/src/main/res/layout/activity_interfaz_registro.xml" value="0.25" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/pruebaDosProyectoAndres/app/src/main/res/layout/activity_interfaz_registro_usuario.xml" value="0.33" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/pruebaDosProyectoAndres/app/src/main/res/layout/activity_main.xml" value="0.33" />
@@ -29,7 +30,8 @@
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/UcaBusiness/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_envio_del_correo.xml" value="0.303125" />
-        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_interfaz_perfil.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/activity_interfaz_registro.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="app/src/main/res/layout/activity_main_cliente.xml" value="0.264" />
