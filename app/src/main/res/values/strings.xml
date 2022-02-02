@@ -16,6 +16,13 @@
     <string name="filter">Filtrar RecyclerView items</string>
     <string name="añadir_producto">Añadir producto</string>
     <string name="men_principal">Menú Principal</string>
+    <string name="consultar_perfil">CONSULTAR PERFIL</string>
+    <string name="consultar_perfil2">Consultar Perfil</string>
+    <string name="perfil_del_usuario">Perfil del Usuario</string>
+    <string name="correo_electr_nico">Correo Electrónico</string>
+    <string name="correo">correo</string>
+    <string name="direcci_n">Dirección</string>
+    <string name="dir_solo_visible_si_es_empresa">dir/solo visible si es empresa</string>
     <string-array name="edadSpinner">
         <item>-18</item>
         <item>18</item>

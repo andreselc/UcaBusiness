@@ -18,8 +18,8 @@ import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.escon
 
 public class InterfazRegistro extends AppCompatActivity {
 
-    Empresa empresa; Cliente cliente;
-    RadioButton userEmpresa, userCliente;
+    public Empresa empresa; public Cliente cliente;
+    public RadioButton userEmpresa, userCliente;
 
     //NUEVOOOOOOOOOOOOO
     public boolean validarDatosContacto(String datos){

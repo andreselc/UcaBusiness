@@ -80,7 +80,7 @@ public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecVi
         private ImageView image;
         private CardView parent;
         private final Context context;
-        OnNoteListener onNoteListener;
+        public OnNoteListener onNoteListener;
 
         public ViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);

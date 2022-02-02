@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
  */
 public class LeerDatos {
 
-    org.json.simple.JSONArray temp=new org.json.simple.JSONArray();
+    public org.json.simple.JSONArray temp=new org.json.simple.JSONArray();
     /**
      * Metodo encargado de realizar la correspondiente lectuta de la información
      * almacenada dentro del archivo JSON

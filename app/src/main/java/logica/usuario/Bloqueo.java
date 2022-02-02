@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Bloqueo {
 
-    public Boolean bloqueo=false;
+    public boolean bloqueo=false;
     @SuppressWarnings("deprecation")
     private static Date fechaBloqueo = new Date();
 
-    public Boolean getBloqueo() {
+    public boolean getBloqueo() {
         return bloqueo;
     }
 
-    public void setBloqueo(Boolean bloqueo) {
+    public void setBloqueo(boolean bloqueo) {
         this.bloqueo = bloqueo;
     }
 
@@ -20,7 +20,7 @@ public class Bloqueo {
         bloqueo=true;
     }
 
-    public Boolean Desbloqueo(){
+    public boolean Desbloqueo(){
         @SuppressWarnings("deprecation")
         Date fechaDesbloqueo = new Date();
         System.out.println("Fecha2: "+fechaDesbloqueo);
