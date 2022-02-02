@@ -15,6 +15,7 @@ public class GuardarDatos {
         Cliente cliente;
         GuardarDatosProducto a = new GuardarDatosProducto();
         GuardarDatos guardar = new GuardarDatos();
+
         ///busca que el cliente no exista en el json
         for (Cliente usuarioCliente : ListaUsuariosClientes.getListaUsuariosClientes()) {
             if (!ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())) {
@@ -35,6 +36,8 @@ public class GuardarDatos {
                     System.out.println ("Un objeto cliente es nulo");
             }
         }
+        //vaciar el archivo
+        a.borrarArchivo("clientes.json");
         guardar.agregarAJsonClientes(ListaUsuariosClientes.getListaUsuariosClientesJSON());
     }
 
@@ -59,7 +62,56 @@ public class GuardarDatos {
                 }
             }
         }
+        a.borrarArchivo("empresas.json");
          guardar.agregarAJsonEmpresas(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
+    }
+
+    public static void procesoModEmpresas(Activity activity) {
+        Empresa empresa;
+        GuardarDatosProducto a = new GuardarDatosProducto();
+        GuardarDatos guardar = new GuardarDatos();
+        for (Empresa usuarioEmpresa : ListaUsuariosEmpresas.getListaUsuariosEmpresas()) {
+            if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(usuarioEmpresa.getEmail())) {
+                //si el usuario existe
+                empresa = ListaUsuariosEmpresas.buscarUsuarioEmpresa(usuarioEmpresa.getEmail());
+                System.out.println("Empresa:"+empresa.getEmail());
+                if (empresa != null) {
+                    System.out.println("modifica la empresa");
+                    ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().remove(empresa.getUsuarioJSON());
+                    if (!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(usuarioEmpresa.getEmail())){
+                        System.out.println("el usuario se borró de la lista");
+                    empresa.setUsuarioJSON(new JSONObject());
+                    empresa.llenarObjetoEmpresaJson();
+                    ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().add(empresa.getUsuarioJSON());}
+                }
+            }
+        }
+        a.borrarArchivo("empresas.json");
+        guardar.agregarAJsonEmpresas(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON());
+    }
+
+    public static void procesoModClientes(Activity activity) {
+        Cliente cliente;
+        GuardarDatosProducto a = new GuardarDatosProducto();
+        GuardarDatos guardar = new GuardarDatos();
+        for (Cliente usuarioCliente : ListaUsuariosClientes.getListaUsuariosClientes()) {
+            if (ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())) {
+                //si el usuario existe
+                cliente = ListaUsuariosClientes.buscarUsuarioClientes(usuarioCliente.getEmail());
+                System.out.println("Cliente:"+cliente.getEmail());
+                if (cliente != null) {
+                    System.out.println("modifica la empresa");
+                    ListaUsuariosClientes.getListaUsuariosClientesJSON().remove(cliente.getUsuarioJSON());
+                    if (!ListaUsuariosClientes.correoExisteEnClientesJSON(usuarioCliente.getEmail())){
+                        System.out.println("el usuario se borró de la lista");
+                        cliente.setUsuarioJSON(new JSONObject());
+                        cliente.llenarObjetoClienteJson();
+                        ListaUsuariosClientes.getListaUsuariosClientesJSON().add(cliente.getUsuarioJSON());}
+                }
+            }
+        }
+        a.borrarArchivo("clientes.json");
+        guardar.agregarAJsonClientes(ListaUsuariosClientes.getListaUsuariosClientesJSON());
     }
 
     //TODO: se modificaron los nombres de los archivos para que se guardara la info en la memoria del tlf
@@ -81,6 +133,22 @@ public class GuardarDatos {
         } catch (IOException e) {
             System.out.println("Problemas al ingresar datos  al archivo clientes. Clase Guardar Datos");
         }
+
+
+    }
+    public static void eliminarEmpresa(String email){
+        Empresa temp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(email);
+        if (temp!=null){
+            //se elimina
+            ListaUsuariosEmpresas.getListaUsuariosEmpresas().remove(ListaUsuariosEmpresas.buscarIndexUsuarioEmpresa(email));
+        }
     }
 
+    public static void eliminarCliente(String email){
+        Cliente temp = ListaUsuariosClientes.buscarUsuarioClientes(email);
+        if (temp!=null){
+            //se elimina
+            ListaUsuariosClientes.getListaUsuariosClientes().remove(ListaUsuariosClientes.buscarIndexUsuarioClientes(email));
+        }
+    }
 }

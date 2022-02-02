@@ -21,7 +21,7 @@ public class Empresa extends Usuario{
         usuarioJSON=new JSONObject();
         this.direccion=direccion;
         this.datosContacto=datosContacto;
-        this.linkWhattsApp = generarLink(direccion);
+        this.linkWhattsApp = generarLink();
         this.privacidad=aPublic;
     }
 
@@ -31,7 +31,7 @@ public class Empresa extends Usuario{
         usuarioJSON=new JSONObject();
         this.direccion=direccion;
         this.datosContacto=datosContacto;
-        this.linkWhattsApp = generarLink(direccion);
+        this.linkWhattsApp = generarLink();
     }
     public ArrayList<Producto> getListaPublicaciones() {
         return listaPublicaciones;
@@ -89,7 +89,8 @@ public class Empresa extends Usuario{
     public String getprivacidad(){
         return privacidad;
     }
-    private String generarLink(String linkWhattsApp){
+
+    public String generarLink(){
         String texto= ("wa.me/58"+datosContacto+"/?text=Hola! Vengo de Ucabussines");
         return texto;
     }
