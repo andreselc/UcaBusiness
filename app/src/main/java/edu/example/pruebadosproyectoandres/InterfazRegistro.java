@@ -44,7 +44,7 @@ public class InterfazRegistro extends AppCompatActivity {
         TextView advertencia = findViewById(R.id.textView6);
         EditText datosContacto= findViewById(R.id.datosContacto);
 
-
+      if(!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(email.getAddress()) && !ListaUsuariosClientes.correoExisteEnClientesJSON(email.getAddress()))
         if (email.read(email.getAddress())) {
             if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
                 if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
@@ -70,10 +70,14 @@ public class InterfazRegistro extends AppCompatActivity {
             } else {
                 advertencia.setText("La contraseña debe cumplir con las indicaciones");
             }
-        } else {
+         } else {
             advertencia.setText("Correo no valido");
         }
-        return false;
+       else
+      {
+          advertencia.setText("¡Usuario ya registrado! Intente con un nuevo usuario");
+      }
+      return false;
     }
        /* if(email.read(email.getAddress())){
             if (!ListaUsuarios.correoExiste(email.getAddress())) {
@@ -123,71 +127,70 @@ public class InterfazRegistro extends AppCompatActivity {
 
     //TODO: Además de agregar lo comentado abajo, se quitaron aspectos irrelevantes
      public void buttonPress(View view) {
-        EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
-        EditText passwordIngresado = findViewById (R.id.editTextTextPassword2);
-        EditText passwordIngresado2 = findViewById (R.id.editTextTextPassword3);
-        String correo, password, passwordConfirmacion;
-        correo= correoIngresado.getText().toString();
-        password= passwordIngresado.getText().toString();
-        passwordConfirmacion= passwordIngresado2.getText().toString();
+         EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
+         EditText passwordIngresado = findViewById(R.id.editTextTextPassword2);
+         EditText passwordIngresado2 = findViewById(R.id.editTextTextPassword3);
+         String correo, password, passwordConfirmacion;
+         correo = correoIngresado.getText().toString();
+         password = passwordIngresado.getText().toString();
+         passwordConfirmacion = passwordIngresado2.getText().toString();
 
-        userEmpresa= findViewById(R.id.radioButton);
-        userCliente= findViewById(R.id.radioButton2);
+         userEmpresa = findViewById(R.id.radioButton);
+         userCliente = findViewById(R.id.radioButton2);
 
-        Spinner edad=findViewById(R.id.edadSpinner);
+         Spinner edad = findViewById(R.id.edadSpinner);
 
-        if ((userCliente.isChecked())&&(edad.getSelectedItem().toString().equals("-18"))) {
-            AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
-            alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
-            alerta.setCancelable(false);
-            alerta.setPositiveButton("Aceptar",(dialog, which) -> {//datos aceptados
-                dialog.cancel();
-                finish();
-            });
-            AlertDialog alertaf = alerta.create();
-            alertaf.show();
-        }
-
-        if (validarDatosRegistro(password, passwordConfirmacion,correo, userCliente, userEmpresa)) {
-            if (userEmpresa.isChecked()) {
-                //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
-                EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress2);
-                EditText datosContactoIngresado= findViewById(R.id.datosContacto);
-                String direccion=direccionIngresada.getText().toString();
-                String datosContacto = datosContactoIngresado.getText().toString();
-                RadioButton publico = findViewById(R.id.prueba2);
-                RadioButton privado = findViewById(R.id.prueba);
-                if(publico.isChecked()){
-                    empresa = new Empresa(password, correo,"e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
-                    UserName(empresa);
-                    ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-                    GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
-                    //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
-                    Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
-                }else{
-                    if(privado.isChecked()) {
-                        empresa = new Empresa(password, correo,"e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
-                        UserName(empresa);
-                        ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-                        GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
-                        //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
-                        Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        TextView advertencia = findViewById(R.id.textView4);
-                        advertencia.setText("Debe seleccionar una opción");
-                    }
+         if ((userCliente.isChecked()) && (edad.getSelectedItem().toString().equals("-18"))) {
+             AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
+             alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
+             alerta.setCancelable(false);
+             alerta.setPositiveButton("Aceptar", (dialog, which) -> {//datos aceptados
+                 dialog.cancel();
+                 finish();
+             });
+             AlertDialog alertaf = alerta.create();
+             alertaf.show();
+         }
+         else{
+         if (validarDatosRegistro(password, passwordConfirmacion, correo, userCliente, userEmpresa)) {
+             if (userEmpresa.isChecked()) {
+                 //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
+                 EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress2);
+                 EditText datosContactoIngresado = findViewById(R.id.datosContacto);
+                 String direccion = direccionIngresada.getText().toString();
+                 String datosContacto = datosContactoIngresado.getText().toString();
+                 RadioButton publico = findViewById(R.id.prueba2);
+                 RadioButton privado = findViewById(R.id.prueba);
+                 if (publico.isChecked()) {
+                     empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
+                     UserName(empresa);
+                     ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                     GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
+                     //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
+                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+                 } else {
+                     if (privado.isChecked()) {
+                         empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
+                         UserName(empresa);
+                         ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                         GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
+                         //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
+                         Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+                     } else {
+                         TextView advertencia = findViewById(R.id.textView4);
+                         advertencia.setText("Debe seleccionar una opción");
+                     }
+                 }
+             }
+             if (userCliente.isChecked()) {
+                 cliente = new Cliente(password, correo, "c", Integer.parseInt(String.valueOf(edad.getSelectedItem())));
+                 UserName(cliente);
+                 ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
+                 GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
+                 //escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
+                 Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
+                 //}
                 }
-
-            }
-                if (userCliente.isChecked()) {
-                    cliente = new Cliente(password, correo, "c",Integer.parseInt(String.valueOf(edad.getSelectedItem())));
-                    UserName(cliente);
-                    ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
-                        GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
-                        //escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
-                        Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
-                    //}
                 }
             }
         }

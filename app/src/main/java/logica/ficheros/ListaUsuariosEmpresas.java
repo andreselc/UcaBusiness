@@ -59,8 +59,7 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-
-        }
+         }
         return false;
     }
 
