@@ -181,7 +181,7 @@ public class InterfazRegistro extends AppCompatActivity {
 
             }
                 if (userCliente.isChecked()) {
-                    cliente = new Cliente(password, correo, "c");
+                    cliente = new Cliente(password, correo, "c",Integer.parseInt(String.valueOf(edad.getSelectedItem())));
                     UserName(cliente);
                     ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
                         GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);

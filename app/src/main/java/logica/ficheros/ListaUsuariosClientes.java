@@ -88,6 +88,8 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                     cliente.setAddress((String) json.get("correo"));
                     cliente.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                     cliente.setTipoCuenta((String) json.get("tipo"));
+                    System.out.println(json.get("edad"));
+                    cliente.setEdad((long) json.get("edad"));
                     listaUsuariosClientes.add(cliente);}
                 } catch (NumberFormatException e) {
                 e.printStackTrace();

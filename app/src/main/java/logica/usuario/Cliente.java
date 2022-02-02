@@ -4,11 +4,21 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 
 public class Cliente extends Usuario{
+    private long edad;
 
     public Cliente(){ }
 
-    public Cliente (String password, String email,String tipoDeCuenta) {
+    public long getEdad() {
+        return edad;
+    }
+
+    public void setEdad(long edad) {
+        this.edad = edad;
+    }
+
+    public Cliente (String password, String email, String tipoDeCuenta, int edad) {
         super(password, email,tipoDeCuenta);
+        this.edad=edad;
         this.usuarioJSON=new JSONObject();
         usuarioJSON =new JSONObject();
     }
@@ -28,7 +38,8 @@ public class Cliente extends Usuario{
         else{
         usuarioJSON.put("contraseña",passwordAux);
         usuarioJSON.put("correo",getEmail());
-        usuarioJSON.put("tipo",getTipoCuenta());}
+        usuarioJSON.put("tipo",getTipoCuenta());
+        usuarioJSON.put("edad",edad);}
     }
 
 
