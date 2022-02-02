@@ -80,6 +80,9 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
                 empresa.setPassword(desencriptar.getAESDecrypt((String) json.get("contraseña")));
                 empresa.setTipoCuenta((String) json.get("tipo"));
                 empresa.setDireccion((String) json.get("direccion"));
+                empresa.setDatosContacto((String) json.get("datosContacto"));
+                empresa.setLinkWhattsApp((String) json.get("linkWhattsApp"));
+                empresa.setPrivacidad((String) json.get("privacidad"));
                 System.out.println(empresa.getTipoCuenta());
                 System.out.println(empresa.getDireccion());
                 listaUsuariosEmpresas.add(empresa);
