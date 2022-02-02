@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import logica.ficheros.GuardarDatosProducto;
+import logica.ficheros.ListaProductos;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
+import logica.producto.Producto;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
 
@@ -37,7 +40,7 @@ public class InterfazPerfil extends AppCompatActivity {
         mostrarPerfil();
     }
 
-    private void mostrarPerfil(){
+    public void mostrarPerfil(){
         Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(userID);
         Cliente cl = ListaUsuariosClientes.buscarUsuarioClientes(userID);
 
@@ -72,10 +75,29 @@ public class InterfazPerfil extends AppCompatActivity {
 
     }
 
-    public void buttonPressModificar(View view){
+    private void buttonPressModificar(View view){
         Intent newIntent = new Intent(this, InterfazModPerfil.class);
         newIntent.putExtra("userID",userID);
         getSupportActionBar().setTitle("Modificar Perfil");
-        startActivity(newIntent);
+        startActivityForResult(newIntent,2);
+
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {
+            mostrarPerfil();
+        }
+    }
+
+
+
+
+
+
 }
