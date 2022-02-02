@@ -10,18 +10,29 @@ public class Empresa extends Usuario{
 
     //por ahora, no se llena esta
     private ArrayList<Producto> listaPublicaciones;
-    private String direccion;
+    private String datosContacto,linkWhattsApp,direccion,privacidad;
 
     public Empresa(){usuarioJSON=new JSONObject();
     }
     //TODO: Aquí se cambió el orden de los atributos en función de lo que aparece en el constructor Usuario
-    public Empresa(String password,String email, String tipoCuenta, String direccion) {
+    public Empresa(String password, String email, String tipoCuenta, String direccion, String datosContacto, String aPublic) {
         super(password, email, tipoCuenta);
         listaPublicaciones = new ArrayList<Producto>();
         usuarioJSON=new JSONObject();
         this.direccion=direccion;
+        this.datosContacto=datosContacto;
+        this.linkWhattsApp = generarLink(direccion);
+        this.privacidad=aPublic;
     }
 
+    public Empresa(String password,String email, String tipoCuenta, String direccion, String datosContacto){
+        super(password, email, tipoCuenta);
+        listaPublicaciones = new ArrayList<Producto>();
+        usuarioJSON=new JSONObject();
+        this.direccion=direccion;
+        this.datosContacto=datosContacto;
+        this.linkWhattsApp = generarLink(direccion);
+    }
     public ArrayList<Producto> getListaPublicaciones() {
         return listaPublicaciones;
     }
@@ -37,7 +48,15 @@ public class Empresa extends Usuario{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
+    public void setDatosContacto(String direccion) {
+        this.datosContacto = direccion;
+    }
+    public void setLinkWhattsApp(String direccion) {
+        this.linkWhattsApp = direccion;
+    }
+    public void setPrivacidad(String direccion) {
+        this.privacidad = direccion;
+    }
 
       public void llenarObjetoEmpresaJson() {
           Encrypt encriptar=new Encrypt();
@@ -52,10 +71,27 @@ public class Empresa extends Usuario{
           usuarioJSON.put("contraseña",passwordAux);
           usuarioJSON.put("correo",getEmail());
           usuarioJSON.put("tipo",getTipoCuenta());
-          usuarioJSON.put("direccion",getDireccion());}
+          usuarioJSON.put("direccion",getDireccion());
+          usuarioJSON.put("datosContacto",getDatosContacto());
+          usuarioJSON.put("linkWhattsApp", getLinkWhattsApp());
+          usuarioJSON.put("privacidad", getprivacidad());}
           else
               System.out.println("nulleado una empresa");
       }
 
+    public String getDatosContacto() {
+        return datosContacto;
+    }
+
+    public String getLinkWhattsApp(){
+        return linkWhattsApp;
+    }
+    public String getprivacidad(){
+        return privacidad;
+    }
+    private String generarLink(String linkWhattsApp){
+        String texto= ("wa.me/58"+datosContacto+"/?text=Hola! Vengo de Ucabussines");
+        return texto;
+    }
 
 }

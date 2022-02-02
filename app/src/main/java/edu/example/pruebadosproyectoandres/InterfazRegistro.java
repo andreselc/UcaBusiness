@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import logica.ficheros.GuardarDatos;
-import logica.ficheros.ListaUsuarios;
 import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.*;
@@ -22,15 +21,61 @@ public class InterfazRegistro extends AppCompatActivity {
     Empresa empresa; Cliente cliente;
     RadioButton userEmpresa, userCliente;
 
+    //NUEVOOOOOOOOOOOOO
+    public boolean validarDatosContacto(String datos){
+        if((datos.length() ==10) && (datos.matches("[+-]?\\d*(\\.\\d+)?"))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
     public boolean validarDatosRegistro(String password1, String password2,
                                         String correo, RadioButton cliente,
                                         RadioButton empresa){
+
+
 
         Password contrasena1 = new Password(password1);
         Password contrasena2 =new Password (password2);
         Correo email= new Correo(correo);
         TextView advertencia = findViewById(R.id.textView6);
-        if(email.read(email.getAddress())){
+        EditText datosContacto= findViewById(R.id.datosContacto);
+
+
+        if (email.read(email.getAddress())) {
+            if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
+                if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
+                    if ((empresa.isChecked()) || (cliente.isChecked())) {
+                        if((empresa.isChecked()) && (validarDatosContacto(datosContacto.getText().toString()))){
+                            return true;
+                        }
+                        else {
+                            if((empresa.isChecked()) && !(validarDatosContacto(datosContacto.getText().toString()))){
+                                advertencia.setText("Datos de contacto invalidos");
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                    } else {
+                        advertencia.setText("Debe seleccionar un tipo de usuario");
+                    }
+                } else {
+
+                    advertencia.setText("Las contraseñas no coinciden");
+                }
+            } else {
+                advertencia.setText("La contraseña debe cumplir con las indicaciones");
+            }
+        } else {
+            advertencia.setText("Correo no valido");
+        }
+        return false;
+    }
+       /* if(email.read(email.getAddress())){
             if (!ListaUsuarios.correoExiste(email.getAddress())) {
                 if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
                     if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
@@ -56,7 +101,7 @@ public class InterfazRegistro extends AppCompatActivity {
             advertencia.setText("Correo no valido");
         }
         return false;
-    }
+    }*/
 
     /*public void escribirArchivo (org.json.simple.JSONArray listaUsuario, Activity a, String nombreFichero) {
 
@@ -90,6 +135,7 @@ public class InterfazRegistro extends AppCompatActivity {
         userCliente= findViewById(R.id.radioButton2);
 
         Spinner edad=findViewById(R.id.edadSpinner);
+
         if ((userCliente.isChecked())&&(edad.getSelectedItem().toString().equals("-18"))) {
             AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
             alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
@@ -105,16 +151,33 @@ public class InterfazRegistro extends AppCompatActivity {
         if (validarDatosRegistro(password, passwordConfirmacion,correo, userCliente, userEmpresa)) {
             if (userEmpresa.isChecked()) {
                 //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
-                EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress);
+                EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress2);
+                EditText datosContactoIngresado= findViewById(R.id.datosContacto);
                 String direccion=direccionIngresada.getText().toString();
-                System.out.println (correo);
-                //TODO: Como se cambió el orden del constructos, se cambia aquí también al instanciar
-                empresa = new Empresa(password, correo, "e", direccion);
-                UserName(empresa);
-                ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                String datosContacto = datosContactoIngresado.getText().toString();
+                RadioButton publico = findViewById(R.id.prueba2);
+                RadioButton privado = findViewById(R.id.prueba);
+                if(publico.isChecked()){
+                    empresa = new Empresa(password, correo,"e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
+                    UserName(empresa);
+                    ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
                     GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
                     //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(privado.isChecked()) {
+                        empresa = new Empresa(password, correo,"e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
+                        UserName(empresa);
+                        ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                        GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
+                        //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
+                        Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        TextView advertencia = findViewById(R.id.textView4);
+                        advertencia.setText("Debe seleccionar una opción");
+                    }
+                }
 
             }
                 if (userCliente.isChecked()) {
@@ -133,8 +196,11 @@ public class InterfazRegistro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interfaz_registro);
         findViewById(R.id.edadSpinner).setEnabled(false);
-        findViewById(R.id.editTextTextPostalAddress).setEnabled(false);
-
+        findViewById(R.id.datosContacto).setEnabled(false);
+        findViewById(R.id.editTextTextPostalAddress2).setEnabled(false);
+        findViewById(R.id.radioGroup2).setEnabled(false);
+        findViewById(R.id.prueba).setEnabled(false);
+        findViewById(R.id.prueba2).setEnabled(false);
 
         //para esconder el teclado
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
@@ -148,8 +214,12 @@ public class InterfazRegistro extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //cliente
+                findViewById(R.id.datosContacto).setEnabled(false);
+                findViewById(R.id.editTextTextPostalAddress2).setEnabled(false);
+                findViewById(R.id.radioGroup2).setEnabled(false);
+                findViewById(R.id.prueba).setEnabled(false);
+                findViewById(R.id.prueba2).setEnabled(false);
                 findViewById(R.id.edadSpinner).setEnabled(true);
-                findViewById(R.id.editTextTextPostalAddress).setEnabled(false);
                 return false;
             }
         });
@@ -158,7 +228,12 @@ public class InterfazRegistro extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 //cliente
                 findViewById(R.id.edadSpinner).setEnabled(false);
-                findViewById(R.id.editTextTextPostalAddress).setEnabled(true);
+                findViewById(R.id.datosContacto).setEnabled(true);
+                findViewById(R.id.editTextTextPostalAddress2).setEnabled(true);
+                findViewById(R.id.radioGroup2).setEnabled(true);
+                findViewById(R.id.prueba).setEnabled(true);
+                findViewById(R.id.prueba2).setEnabled(true);
+
                 return false;
             }
 
@@ -166,7 +241,7 @@ public class InterfazRegistro extends AppCompatActivity {
         });
 
         userEmpresa = findViewById(R.id.radioButton);
-        userCliente = findViewById(R.id.radioButton2);
+        userCliente = findViewById(R.id.prueba2);
         /*Button button = findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,9 +263,9 @@ public class InterfazRegistro extends AppCompatActivity {
         });*/
     }
 
-    public void UserName(Usuario usuario){
+    public void UserName(Usuario usuario) {
         String subCadena = usuario.getEmailNoAt();
-        subCadena = subCadena.substring(1,5);
-        usuario.setUserName(subCadena+"ucauser");
+        subCadena = subCadena.substring(1, 5);
+        usuario.setUserName(subCadena + "ucauser");
     }
 }
