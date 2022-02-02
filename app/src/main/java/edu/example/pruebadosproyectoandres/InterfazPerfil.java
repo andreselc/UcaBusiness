@@ -1,5 +1,6 @@
 package edu.example.pruebadosproyectoandres;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,10 +34,10 @@ public class InterfazPerfil extends AppCompatActivity {
         contactoLabel=findViewById(R.id.textView19);
         whatsappLabel=findViewById(R.id.textView17);
         visibleLabel=findViewById(R.id.textView21);
-        cargarPerfil();
+        mostrarPerfil();
     }
 
-    private void cargarPerfil(){
+    private void mostrarPerfil(){
         Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(userID);
         Cliente cl = ListaUsuariosClientes.buscarUsuarioClientes(userID);
 
@@ -69,5 +70,12 @@ public class InterfazPerfil extends AppCompatActivity {
 
         }
 
+    }
+
+    public void buttonPressModificar(View view){
+        Intent newIntent = new Intent(this, InterfazModPerfil.class);
+        newIntent.putExtra("userID",userID);
+        getSupportActionBar().setTitle("Modificar Perfil");
+        startActivity(newIntent);
     }
 }

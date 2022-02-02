@@ -102,4 +102,12 @@
                 android:layout_marginTop="19dp" app:layout_constraintStart_toStartOf="@+id/textView21"
                 android:layout_marginStart="3dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+            android:text="MODIFICAR PERFIL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button7"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            android:layout_marginTop="368dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.125"
+            android:onClick="buttonPressModificar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
