@@ -44,7 +44,8 @@
         android:contentDescription="@string/filter"
         android:focusable="true"
         android:fontFamily="@font/roboto_regular"
-        android:src="@drawable/ic_profile_icon" />
+        android:src="@drawable/ic_profile_icon"
+        android:onClick="activityPerfil"/>
 
 
 

@@ -245,4 +245,11 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
         intent.putExtra("disponibilidad", currProd.getDisponibilidad() + "");
         startActivity(intent);
     }
+
+    public void activityPerfil(View view){
+        Intent intent = new Intent(this, InterfazPerfil.class);
+        intent.putExtra("userID",userID);
+        startActivity(intent);
+    }
+
 }
