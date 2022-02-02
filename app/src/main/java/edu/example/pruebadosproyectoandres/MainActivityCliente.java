@@ -24,6 +24,7 @@ import android.widget.SearchView;
 
 import edu.example.pruebadosproyectoandres.R;
 import logica.ficheros.ListaProductos;
+import logica.producto.ListaProductosSistema;
 import logica.producto.Producto;
 import logica.producto.filtros.Filtro;
 import logica.producto.filtros.FiltroImagenVisible;
@@ -42,22 +43,27 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
     private ArrayList<Filtro> filtros;
     private PopupMenu popupMenu;
     private SearchView searchView;
-
+    private ListaProductosSistema currLista = ListaProductosSistema.getInstance();
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_cliente);
 
+        Bundle b= getIntent().getExtras();
+        userID=b.getString("userID");
+
         //no love
         myButton = findViewById(R.id.floating_filter);
-        productosRecView = findViewById(R.id.contactsRecView);
+        //productosRecView = findViewById(R.id.contactsRecView);
+        currLista.setProductosRecView(findViewById(R.id.contactsRecView));
+        currLista.buildRecyclerView(this);
 
-        buildRecyclerView();
         crearFiltros();
         onFilterFabClick();
-        onAddProductClick(); //click handler para añadir producto
     }
+
     // calling on create option menu
     // layout to inflate our menu file.
     @Override
@@ -135,11 +141,11 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
     private void filter(String text){
         ArrayList<Producto> listaFiltrada = new ArrayList<>();
 
-        for(Producto producto: productos){
+        for(Producto producto: currLista.getListaProductos()){
             if(aplicarFiltros(producto) && producto.getNombre().contains(text))
                 listaFiltrada.add(producto);
         }
-        adapter.setProductos(listaFiltrada, this);
+        currLista.getAdapter().setProductos(listaFiltrada, this);
     }
 
     //crear el Recycler View que hace las veces de la lista
@@ -158,19 +164,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
     }
 
     //mandar el intent a Gallery Activity una vez que se selecciono un producto
-    @Override
-    public void onProductClick(int position) {
-        Intent intent = new Intent(this, GalleryActivity.class);
 
-        intent.putExtra("product_name", adapter.getProductos().get(position).getNombre());
-        intent.putExtra("image_url", adapter.getProductos().get(position).getUbicImg());
-
-        //si el producto tiene el precio visible
-        if(adapter.getProductos().get(position).isPrecioVisible())
-            intent.putExtra("precio_producto", "$" + adapter.getProductos().get(position).getPrecio() + "");
-        intent.putExtra("descripcion_producto", adapter.getProductos().get(position).getDescripcion());
-        startActivity(intent);
-    }
 
     //Crear el floating action button
     public void onFilterFabClick(){
@@ -256,5 +250,20 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
             }
         });
         alert.show();
+    }
+
+    @Override
+    public void onProductClick(int position) {
+        Intent intent = new Intent(this, GalleryActivity.class);
+
+        intent.putExtra("product_name", currLista.getAdapter().getProductos().get(position).getNombre());
+        intent.putExtra("image_url", currLista.getAdapter().getProductos().get(position).getUbicImg());
+
+        //si el producto tiene el precio visible
+        if(currLista.getAdapter().getProductos().get(position).isPrecioVisible())
+            intent.putExtra("precio_producto", "$" + currLista.getAdapter().getProductos().get(position).getPrecio() + "");
+        intent.putExtra("descripcion_producto", currLista.getAdapter().getProductos().get(position).getDescripcion());
+        intent.putExtra("userID", userID);
+        startActivity(intent);
     }
 }

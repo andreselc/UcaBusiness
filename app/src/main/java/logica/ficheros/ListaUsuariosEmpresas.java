@@ -57,9 +57,11 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
             org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
             System.out.println("correo empresa: "+json.get("correo"));
                 palabra=(String)json.get("correo");
-                if (palabra.compareTo(correo)==0)
-                    return true;
-         }
+                if(palabra != null) {
+                    if (palabra.compareTo(correo) == 0)
+                        return true;
+                }
+        }
         return false;
     }
 

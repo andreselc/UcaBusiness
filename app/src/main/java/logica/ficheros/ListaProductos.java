@@ -1,5 +1,7 @@
 package logica.ficheros;
 
+import com.google.android.gms.common.util.JsonUtils;
+
 import logica.producto.Producto;
 import logica.usuario.Cliente;
 import logica.usuario.Encrypt;
@@ -52,12 +54,20 @@ public class ListaProductos {
         lista.add(producto);
     }
 
+    public static void eliminarProductoAListaJSON(org.json.simple.JSONObject producto, org.json.simple.JSONArray lista){
+        lista.remove(producto);
+    }
+
     //agregar a la lista normal
 
     public static void agregarProductoALista (Producto p){
         listaProductos.add(p);
     }
 
+    public static void eliminarProductoALista(Producto p){
+        listaProductos.remove(p);
+        System.out.println(listaProductos);
+    }
     //buscar en lista
 
 
@@ -74,12 +84,14 @@ public class ListaProductos {
     }
 
     public static boolean productoExisteJSONGral(String nombre){
-        String palabra;
+        String palabra="";
         for(int i=0;i<listaProductosJSON.size();i++) {
             org.json.simple.JSONObject json= (org.json.simple.JSONObject)listaProductosJSON.get(i);
             palabra=(String)json.get("name");
-            if (palabra.compareTo(nombre)==0)
-                return true;
+            if(palabra != null) {
+                if (palabra.compareTo(nombre) == 0)
+                    return true;
+            }
         }
         return false;
     }

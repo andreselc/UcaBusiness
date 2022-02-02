@@ -114,6 +114,11 @@ public class Producto {
         this.productoJSON = productoJSON;
     }
 
+    @Override
+    public String toString(){
+        return nombre + " " + precio + " ";
+    }
+
     public void llenarObjetoProductoJSON(Producto producto){
         getProductoJSON().put("name", producto.getNombre());
         getProductoJSON().put("desc", producto.getDescripcion());

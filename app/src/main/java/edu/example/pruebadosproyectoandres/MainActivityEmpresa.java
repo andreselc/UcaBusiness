@@ -1,21 +1,33 @@
 package edu.example.pruebadosproyectoandres;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import logica.ficheros.*;
+import logica.producto.ListaProductosSistema;
 import logica.producto.Producto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
-public class MainActivityEmpresa extends AppCompatActivity {
+public class MainActivityEmpresa extends AppCompatActivity implements ProductosRecViewAdapter.ViewHolder.OnNoteListener{
     private Producto p = new Producto();
     private GuardarDatosProducto j = new GuardarDatosProducto();
+    public static ArrayList<Producto> productos = new ArrayList<>();
     private LeerDatos l=new LeerDatos();
     private String userID="n/a";
+    //private RecyclerView productosRecView;
+    //private  ProductosRecViewAdapter adapter = new ProductosRecViewAdapter(this);
+    private ListaProductosSistema currLista = ListaProductosSistema.getInstance();
 
     public void siguienteActivity(View v) {
         startActivityForResult(new Intent(MainActivityEmpresa.this, InterfazNuevaPublicacion.class),1);
@@ -38,25 +50,65 @@ public class MainActivityEmpresa extends AppCompatActivity {
             l.leerListaProductos();
             ListaProductos.agregarProductoALista(p);
             GuardarDatosProducto.guardarProducto(MainActivityEmpresa.this);
+
+            currLista.updateListaProductos(userID);
+            currLista.buildRecyclerView(this);
         }}
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Menú de Empresa");
+        setContentView(R.layout.activity_main_crearproducto);
+
         //esto permite obtener los datos del primer activity
         Bundle b= getIntent().getExtras();
         userID=b.getString("userID");
-        System.out.println("User ID en On Create: "+userID);
-        setContentView(R.layout.activity_main_crearproducto);
+        setTitle("Menú de Empresa");
 
+        //productosRecView = findViewById(R.id.companiesRecView);
+        currLista.setProductosRecView(findViewById(R.id.companiesRecView));
+
+        currLista.updateListaProductos(userID);
+        currLista.buildRecyclerView(this);
     }
 
     public void activityPerfil(View view) {
         Intent intent = new Intent(this, InterfazPerfil.class);
         intent.putExtra("userID",userID);
         startActivity(intent);
+    }
+
+    /*public void updateListaProductos(){
+        ArrayList<Producto> listaProductos = ListaProductos.getListaProductos();
+        for(Producto producto: listaProductos){
+            if(producto.getUserID().equals(userID))
+                productos.add(producto);
+        }
+    }*/
+
+    //crear el Recycler View que hace las veces de la lista
+    /*private void buildRecyclerView(){
+        productosRecView.setLayoutManager(new GridLayoutManager(this, 2));
+        productosRecView.setHasFixedSize(true);
+        adapter = new ProductosRecViewAdapter(this);
+        productosRecView.setAdapter(adapter);
+        adapter.setProductos(productos, this);
+    }*/
+
+    @Override
+    public void onProductClick(int position) {
+        Intent intent = new Intent(this, GalleryActivity.class);
+
+        intent.putExtra("product_name", currLista.getAdapter().getProductos().get(position).getNombre());
+        intent.putExtra("image_url", currLista.getAdapter().getProductos().get(position).getUbicImg());
+
+        //si el producto tiene el precio visible
+        if(currLista.getAdapter().getProductos().get(position).isPrecioVisible())
+            intent.putExtra("precio_producto", "$" + currLista.getAdapter().getProductos().get(position).getPrecio() + "");
+        intent.putExtra("descripcion_producto", currLista.getAdapter().getProductos().get(position).getDescripcion());
+        intent.putExtra("userID", userID);
+        startActivity(intent);
+        //startActivityForResult(intent,1);
     }
 }

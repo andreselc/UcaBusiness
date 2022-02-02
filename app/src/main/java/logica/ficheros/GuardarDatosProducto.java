@@ -50,6 +50,13 @@ public class GuardarDatosProducto {
         guardar.agregarAJSONProductos(ListaProductos.getListaProductosJSON());
     }
 
+    public static void eliminarProducto(Producto p){
+        for(Producto prod: ListaProductos.getListaProductos()){
+            if(p == prod)
+                ListaProductos.eliminarProductoAListaJSON(prod.getProductoJSON(), ListaProductos.getListaProductosJSON());
+        }
+    }
+
 
     //debe agregarse al json de lista de productos de empresa y al json de lista de productos en general
     public void agregarAJSONProductos(JSONArray ListaJson) {
