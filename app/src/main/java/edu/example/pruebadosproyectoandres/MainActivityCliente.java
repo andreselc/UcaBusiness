@@ -58,6 +58,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
         myButton = findViewById(R.id.floating_filter);
         //productosRecView = findViewById(R.id.contactsRecView);
         currLista.setProductosRecView(findViewById(R.id.contactsRecView));
+        currLista.setLista(ListaProductos.getListaProductos());
         currLista.buildRecyclerView(this);
 
         crearFiltros();
