@@ -64,7 +64,7 @@ public class GuardarDatos {
 
     //TODO: se modificaron los nombres de los archivos para que se guardara la info en la memoria del tlf
     public void agregarAJsonEmpresas(JSONArray ListaJson) {
-        try (FileWriter archivo = new FileWriter("data/data/edu.example.pruebadosproyectoandres/files/usuariosEmpresas.json")) {
+        try (FileWriter archivo = new FileWriter("data/data/edu.example.pruebadosproyectoandres/files/empresas.json")) {
             BufferedWriter buffer = new BufferedWriter(archivo);
             buffer.write(ListaJson.toString());
             buffer.close();
@@ -74,7 +74,7 @@ public class GuardarDatos {
     }
 
     public void agregarAJsonClientes(JSONArray listaJson) {
-        try (FileWriter archivo = new FileWriter("data/data/edu.example.pruebadosproyectoandres/files/usuariosClientes.json")) {
+        try (FileWriter archivo = new FileWriter("data/data/edu.example.pruebadosproyectoandres/files/clientes.json")) {
             BufferedWriter buffer = new BufferedWriter(archivo);
             buffer.write(listaJson.toString());
             buffer.close();
