@@ -50,6 +50,13 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
                 return empresa;}
         return null;}
 
+    public static int buscarIndexUsuarioEmpresa(String email) {
+        for (Empresa empresa: listaUsuariosEmpresas) {
+            if (empresa.getEmail().compareTo(email)==0)
+                return listaUsuariosEmpresas.indexOf(empresa);}
+        return 0;}
+
+
     public static boolean correoExisteEnEmpresasJSON(String correo)  {
         String palabra;
         System.out.println("listaJSON:"+listaUsuariosEmpresasJSON.toString());

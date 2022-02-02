@@ -97,6 +97,7 @@ public class GuardarDatosProducto {
         try {
             pw = new PrintWriter("/data/data/edu.example.pruebadosproyectoandres/files/"+nombreArchivo);
             pw.print("");
+            System.out.println("Archivo Borrado:"+pw);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

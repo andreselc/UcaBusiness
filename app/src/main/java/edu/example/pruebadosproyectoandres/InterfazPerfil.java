@@ -75,7 +75,7 @@ public class InterfazPerfil extends AppCompatActivity {
 
     }
 
-    private void buttonPressModificar(View view){
+    public void buttonPressModificar(View view){
         Intent newIntent = new Intent(this, InterfazModPerfil.class);
         newIntent.putExtra("userID",userID);
         getSupportActionBar().setTitle("Modificar Perfil");

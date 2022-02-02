@@ -59,6 +59,12 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                 return cliente;}
         return null;}
 
+    public static int buscarIndexUsuarioClientes(String email) {
+        for (Cliente cliente: listaUsuariosClientes) {
+            if (cliente.getEmail().compareTo(email)==0)
+                return listaUsuariosClientes.indexOf(cliente);}
+        return 0;}
+
     public static boolean correoExisteEnClientesJSON(String correo)  {
         String palabra;
         for(int i=0;i<listaUsuariosClientesJSON.size();i++) {
