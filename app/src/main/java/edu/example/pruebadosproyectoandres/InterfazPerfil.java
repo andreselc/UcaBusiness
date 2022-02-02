@@ -12,7 +12,8 @@ import logica.usuario.Empresa;
 public class InterfazPerfil extends AppCompatActivity {
 
     private String userID="n/a";
-    TextView correo, direccion, direccionLabel, contacto, whatsapp, visible;
+    TextView correo, direccion, direccionLabel, contacto, whatsapp, visible,
+            contactoLabel, whatsappLabel, visibleLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,9 @@ public class InterfazPerfil extends AppCompatActivity {
         contacto=findViewById(R.id.textView20);
         whatsapp=findViewById(R.id.textView18);
         visible=findViewById(R.id.textView22);
+        contactoLabel=findViewById(R.id.textView19);
+        whatsappLabel=findViewById(R.id.textView17);
+        visibleLabel=findViewById(R.id.textView21);
         cargarPerfil();
     }
 
@@ -54,11 +58,14 @@ public class InterfazPerfil extends AppCompatActivity {
         else if (cl!=null){
             //el usuario es cliente, se esconde la direccion
             correo.setText(cl.getEmail());
-            direccion.setVisibility(View.INVISIBLE);
-            direccionLabel.setVisibility(View.INVISIBLE);
+            direccion.setText(Math.toIntExact(cl.getEdad()));
+            direccionLabel.setText("Edad");
             contacto.setVisibility(View.INVISIBLE);
             whatsapp.setVisibility(View.INVISIBLE);
             visible.setVisibility(View.INVISIBLE);
+            contactoLabel.setVisibility(View.INVISIBLE);
+            whatsappLabel.setVisibility(View.INVISIBLE);
+            visibleLabel.setVisibility(View.INVISIBLE);
 
         }
 
