@@ -63,6 +63,12 @@ public class ListaUsuariosClientes extends ListaUsuarios {
         System.out.println("No encontrado");
         return null;}
 
+    public static boolean clienteExiste(String email) {
+        for (Cliente cliente: listaUsuariosClientes) {
+            if (cliente.getEmail().compareTo(email)==0){
+                return true;}}
+        return false;}
+
     public static int buscarIndexUsuarioClientes(String email) {
         for (Cliente cliente: listaUsuariosClientes) {
             if (cliente.getEmail().compareTo(email)==0)

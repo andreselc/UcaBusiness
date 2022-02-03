@@ -51,6 +51,12 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
                 return empresa;}
         return null;}
 
+    public static boolean empresaExiste(String email) {
+        for (Empresa empresa: listaUsuariosEmpresas) {
+            if (empresa.getEmail().compareTo(email)==0)
+                return true;}
+        return false;}
+
     public static int buscarIndexUsuarioEmpresa(String email) {
         for (Empresa empresa: listaUsuariosEmpresas) {
             if (empresa.getEmail().compareTo(email)==0)

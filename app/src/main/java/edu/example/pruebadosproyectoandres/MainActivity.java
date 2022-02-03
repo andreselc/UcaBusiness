@@ -53,17 +53,18 @@ public class MainActivity extends AppCompatActivity {
         Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(correoString);
 
         String correo="", clave="";
-        System.out.println("Correo antes:"+currCorreo.getText().toString());
-        System.out.println("Longitud listas:"+ListaUsuariosClientes.getListaUsuariosClientes().size()+","+ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().size());
+        System.out.println("Correo existe:"+ListaUsuariosEmpresas.empresaExiste(correoString)
+                +","+ListaUsuariosClientes.clienteExiste(correoString));
 
-            if (ListaUsuariosEmpresas.correoExiste(correoString)) {
+
+            if (ListaUsuariosEmpresas.empresaExiste(correoString)) {
                 //es empresa
                 System.out.println("Entra a empresa");
                 assert emp != null;
                 correo=emp.getEmail();
                 clave=emp.getPassword();
 
-            } else if (ListaUsuariosClientes.correoExiste(correoString)) {
+            } else if (ListaUsuariosClientes.clienteExiste(correoString)) {
                 //es cliente
                 System.out.println("Entra a cliente");
                 assert cl != null;
