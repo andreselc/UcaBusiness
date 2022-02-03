@@ -121,6 +121,8 @@ public class InterfazRegistro extends AppCompatActivity {
                     if (publico.isChecked()) {
                         empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
                         UserName(empresa);
+                        ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                        GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
                         String aver=empresa.getEmail();
                         Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
                         newIntent.putExtra("reci",aver);
@@ -129,6 +131,8 @@ public class InterfazRegistro extends AppCompatActivity {
                         if (privado.isChecked()) {
                             empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
                             UserName(empresa);
+                            ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
+                            GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
                             String aver=empresa.getEmail();
                             Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
                             newIntent.putExtra("reci",aver);
@@ -143,6 +147,8 @@ public class InterfazRegistro extends AppCompatActivity {
                 if (userCliente.isChecked()) {
                     cliente = new Cliente(password, correo, "c", Integer.parseInt(String.valueOf(edad.getSelectedItem())));
                     UserName(cliente);
+                    ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
+                    GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
                     String aver=cliente.getEmail();
                     Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
                     newIntent.putExtra("reci",aver);

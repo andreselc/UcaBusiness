@@ -65,18 +65,23 @@
             android:id="@+id/spinner"
             android:layout_width="146dp"
             android:layout_height="48dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             android:entries="@array/edadSpinner"
             app:layout_constraintStart_toStartOf="@+id/textView28"
             app:layout_constraintTop_toTopOf="@+id/textView28" />
+
         <TextView
-                android:text="Visibilidad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView27"
-                android:textSize="14sp" android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@+id/editTextPhone" android:layout_marginTop="45dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline6"/>
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Visibilidad"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/editTextPhone" />
+
         <TextView
                 android:text="@string/direcci_n"
                 android:layout_width="wrap_content"
@@ -90,13 +95,18 @@
                 android:textSize="14sp" android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="@+id/editTextTextPostalAddress" android:layout_marginTop="45dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline6"/>
+
         <TextView
-                android:text="Edad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView28"
-                android:textSize="14sp" android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@+id/switch2" android:layout_marginTop="27dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline6"/>
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="Edad"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/switch2" />
+
         <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content" android:id="@+id/guideline6"
                                                     android:orientation="vertical"
