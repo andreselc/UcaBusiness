@@ -18,8 +18,10 @@ import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Bloqueo;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
+import logica.usuario.EnviarCorreo;
 import pub.devrel.easypermissions.EasyPermissions;
 
+import javax.mail.MessagingException;
 import java.io.File;
 
 import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
@@ -40,6 +42,33 @@ public class MainActivity extends AppCompatActivity {
     public void btnClientes(View v){
         Intent newIntent = new Intent(this, MainActivityCliente.class);
         startActivity(newIntent);
+    }
+
+    public void btnLostPass(View v){
+        EditText currCorreo = findViewById(R.id.editTextTextEmailAddress);
+        String correo="", clave="";
+        if (!currCorreo.getText().toString().equals(null)){
+            if (ListaUsuariosEmpresas.correoExiste(currCorreo.getText().toString())) {
+                //es empresa
+                Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(currCorreo.getText().toString());
+                correo=emp.getEmail();
+                clave=emp.getPassword();
+
+            } else if (ListaUsuariosClientes.correoExiste(currCorreo.getText().toString())) {
+                //es cliente
+                Cliente cl = ListaUsuariosClientes.buscarUsuarioClientes(currCorreo.getText().toString());
+                correo=cl.getEmail();
+                clave=cl.getPassword();
+            }
+            /*TODO: ESTO ES PARA ENVIAR CORREO. INSTRUCCIONES:
+                PRIMERO GENERAN UN ENVIARCORREO. EL PRIMER VALOR ES EL CORREO DESTINO, EL SEGUNDO EL SUJETO DEL CORREO
+                Y EL TERCERO EL TEXTO DEL CORREO.
+                LUEGO, EXECUTE TAL COMO ESTÁ AHI.*/
+
+        EnviarCorreo temp = new EnviarCorreo(correo,"Clave olvidada", clave);
+        temp.execute("");
+        Toast.makeText(MainActivity.this,"Contraseña enviada al correo", Toast.LENGTH_LONG).show();}
+        else{Toast.makeText(MainActivity.this,"Introduzca un correo válido", Toast.LENGTH_LONG).show();}
     }
 
     public void btnIniciarSesion(View v){
