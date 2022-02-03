@@ -7,21 +7,6 @@
                                                    tools:context=".InterfazRegistro">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Ingrese que tipo de cuenta desea crear:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824" />
-
-    <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.426" />
+        app:layout_constraintVertical_bias="0.424" />
 
     <TextView
             android:id="@+id/textView6"
@@ -61,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintVertical_bias="0.887" />
 
     <EditText
         android:id="@+id/editTextTextPassword2"
@@ -101,20 +86,20 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="153dp"
-        android:layout_height="227dp"
+        android:layout_width="154dp"
+        android:layout_height="287dp"
         android:fontFamily="@font/roboto_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662"
+        app:layout_constraintVertical_bias="0.768"
         tools:ignore="MissingConstraints">
 
         <RadioButton
             android:id="@+id/radioButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="133dp"
             android:fontFamily="@font/roboto_regular"
             android:minHeight="48dp"
@@ -128,7 +113,7 @@
 
         <RadioButton
             android:id="@+id/radioButton2"
-            android:layout_width="128dp"
+            android:layout_width="88dp"
             android:layout_height="149dp"
             android:fontFamily="@font/roboto_regular"
             android:minHeight="48dp"
@@ -176,7 +161,7 @@
     <Spinner
         android:id="@+id/edadSpinner"
         android:layout_width="213dp"
-        android:layout_height="33dp"
+        android:layout_height="48dp"
         android:entries="@array/edadSpinner"
         android:fontFamily="@font/roboto_regular"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -185,13 +170,14 @@
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.773" />
 
     <EditText
         android:id="@+id/datosContacto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
         android:ems="10"
         android:fontFamily="@font/roboto_regular"
         android:hint="Celular"
@@ -203,13 +189,14 @@
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintVertical_bias="0.582" />
 
     <EditText
         android:id="@+id/editTextTextPostalAddress2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
         android:ems="10"
         android:fontFamily="@font/roboto_regular"
         android:hint="Dirección"
@@ -225,8 +212,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="221dp"
-        android:layout_height="54dp"
+        android:layout_width="229dp"
+        android:layout_height="55dp"
         android:fontFamily="@font/roboto_regular"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -255,7 +242,7 @@
         <RadioButton
             android:id="@+id/prueba2"
             android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:fontFamily="@font/roboto_regular"
             android:minHeight="48dp"
             android:text="Público"

@@ -2,6 +2,7 @@ package edu.example.pruebadosproyectoandres;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import static edu.example.pruebadosproyectoandres.InterfazNuevaPublicacion.esconderTeclado;
+
+import java.io.Serializable;
 
 
 public class InterfazRegistro extends AppCompatActivity {
@@ -36,13 +39,15 @@ public class InterfazRegistro extends AppCompatActivity {
                                         String correo, RadioButton cliente,
                                         RadioButton empresa){
 
+
+
         Password contrasena1 = new Password(password1);
         Password contrasena2 =new Password (password2);
         Correo email= new Correo(correo);
         TextView advertencia = findViewById(R.id.textView6);
         EditText datosContacto= findViewById(R.id.datosContacto);
 
-      if(!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(email.getAddress()) && !ListaUsuariosClientes.correoExisteEnClientesJSON(email.getAddress()))
+        //if(!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(email.getAddress()) && !ListaUsuariosClientes.correoExisteEnClientesJSON(email.getAddress()))
         if (email.read(email.getAddress())) {
             if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
                 if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
@@ -68,130 +73,84 @@ public class InterfazRegistro extends AppCompatActivity {
             } else {
                 advertencia.setText("La contraseña debe cumplir con las indicaciones");
             }
-         } else {
+        } else {
             advertencia.setText("Correo no valido");
         }
-       else
-      {
+        //else
+      /*{
           advertencia.setText("¡Usuario ya registrado! Intente con un nuevo usuario");
-      }
-      return false;
-    }
-       /* if(email.read(email.getAddress())){
-            if (!ListaUsuarios.correoExiste(email.getAddress())) {
-                if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
-                    if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
-                        if ((empresa.isChecked()) || (cliente.isChecked())) {
-                            return true;
-                        } else {
-                            advertencia.setText("Debe seleccionar un tipo de cuenta");
-                        }
-                    } else {
-                        advertencia.setText("Las contraseñas no coinciden");
-                    }
-                } else {
-                    advertencia.setText("La contraseña debe cumplir con las indicaciones");
-                    Toast.makeText(InterfazRegistro.this, "Contraseña: mínimo 8 caract., 1 núm., 1 letra mayús y minus, 1 caract. especial", Toast.LENGTH_LONG).show();
-                }
-            }
-            else{
-                Toast.makeText(InterfazRegistro.this, "El Correo ya existe, intente con otro", Toast.LENGTH_LONG).show();
-            }
-
-        }
-        else{
-            advertencia.setText("Correo no valido");
-        }
+      }*/
         return false;
-    }*/
-
-    /*public void escribirArchivo (org.json.simple.JSONArray listaUsuario, Activity a, String nombreFichero) {
-
-        File file =new File(a.getFilesDir(), "files");
-        if (!file.exists()){
-            file.mkdir();
-        }
-        try {
-            File f =new File (file, nombreFichero);
-            FileWriter fileW= new FileWriter(f);
-            fileW.append(listaUsuario.toString());
-            fileW.flush();
-            fileW.close();
-            }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }*/
+    }
 
     //TODO: Además de agregar lo comentado abajo, se quitaron aspectos irrelevantes
-     public void buttonPress(View view) {
-         EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
-         EditText passwordIngresado = findViewById(R.id.editTextTextPassword2);
-         EditText passwordIngresado2 = findViewById(R.id.editTextTextPassword3);
-         String correo, password, passwordConfirmacion;
-         correo = correoIngresado.getText().toString();
-         password = passwordIngresado.getText().toString();
-         passwordConfirmacion = passwordIngresado2.getText().toString();
+    public void buttonPress(View view) {
+        EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
+        EditText passwordIngresado = findViewById(R.id.editTextTextPassword2);
+        EditText passwordIngresado2 = findViewById(R.id.editTextTextPassword3);
+        String correo, password, passwordConfirmacion;
+        correo = correoIngresado.getText().toString();
+        password = passwordIngresado.getText().toString();
+        passwordConfirmacion = passwordIngresado2.getText().toString();
 
-         userEmpresa = findViewById(R.id.radioButton);
-         userCliente = findViewById(R.id.radioButton2);
+        userEmpresa = findViewById(R.id.radioButton);
+        userCliente = findViewById(R.id.radioButton2);
 
-         Spinner edad = findViewById(R.id.edadSpinner);
+        Spinner edad = findViewById(R.id.edadSpinner);
+        if ((userCliente.isChecked()) && (edad.getSelectedItem().toString().equals("-18"))) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
+            alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
+            alerta.setCancelable(false);
+            alerta.setPositiveButton("Aceptar", (dialog, which) -> {//datos aceptados
+                dialog.cancel();
+                finish();
+            });
+            AlertDialog alertaf = alerta.create();
+            alertaf.show();
+        }
+        else{
+            if (validarDatosRegistro(password, passwordConfirmacion, correo, userCliente, userEmpresa)) {
+                if (userEmpresa.isChecked()) {
+                    //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
+                    EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress2);
+                    EditText datosContactoIngresado = findViewById(R.id.datosContacto);
+                    String direccion = direccionIngresada.getText().toString();
+                    String datosContacto = datosContactoIngresado.getText().toString();
+                    RadioButton publico = findViewById(R.id.prueba2);
+                    RadioButton privado = findViewById(R.id.prueba);
+                    if (publico.isChecked()) {
+                        empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
+                        UserName(empresa);
+                        String aver=empresa.getEmail();
+                        Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
+                        newIntent.putExtra("reci",aver);
+                        startActivity(newIntent);
+                    } else {
+                        if (privado.isChecked()) {
+                            empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
+                            UserName(empresa);
+                            String aver=empresa.getEmail();
+                            Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
+                            newIntent.putExtra("reci",aver);
+                            startActivity(newIntent);
 
-         if ((userCliente.isChecked()) && (edad.getSelectedItem().toString().equals("-18"))) {
-             AlertDialog.Builder alerta = new AlertDialog.Builder(InterfazRegistro.this);
-             alerta.setMessage("Lo sentimos: sólo mayores de 18 años pueden usar esta aplicación.");
-             alerta.setCancelable(false);
-             alerta.setPositiveButton("Aceptar", (dialog, which) -> {//datos aceptados
-                 dialog.cancel();
-                 finish();
-             });
-             AlertDialog alertaf = alerta.create();
-             alertaf.show();
-         }
-         else{
-         if (validarDatosRegistro(password, passwordConfirmacion, correo, userCliente, userEmpresa)) {
-             if (userEmpresa.isChecked()) {
-                 //TODO: Aquí se le asigna la dirección que se escribe en el textbox si eres empresa
-                 EditText direccionIngresada = findViewById(R.id.editTextTextPostalAddress2);
-                 EditText datosContactoIngresado = findViewById(R.id.datosContacto);
-                 String direccion = direccionIngresada.getText().toString();
-                 String datosContacto = datosContactoIngresado.getText().toString();
-                 RadioButton publico = findViewById(R.id.prueba2);
-                 RadioButton privado = findViewById(R.id.prueba);
-                 if (publico.isChecked()) {
-                     empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "public");
-                     UserName(empresa);
-                     ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-                     GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
-                     //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
-                     Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
-                 } else {
-                     if (privado.isChecked()) {
-                         empresa = new Empresa(password, correo, "e", direccionIngresada.getText().toString(), datosContactoIngresado.getText().toString(), "private");
-                         UserName(empresa);
-                         ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(empresa);
-                         GuardarDatos.procesoGuardadoEmpresas(InterfazRegistro.this);
-                         //escribirArchivo(ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON(), InterfazRegistro.this, "usuariosEmpresas.json");
-                         Toast.makeText(getApplicationContext(), "¡usuario empresa registrado existosamente!", Toast.LENGTH_SHORT).show();
-                     } else {
-                         TextView advertencia = findViewById(R.id.textView4);
-                         advertencia.setText("Debe seleccionar una opción");
-                     }
-                 }
-             }
-             if (userCliente.isChecked()) {
-                 cliente = new Cliente(password, correo, "c", Integer.parseInt(String.valueOf(edad.getSelectedItem())));
-                 UserName(cliente);
-                 ListaUsuariosClientes.getListaUsuariosClientes().add(cliente);
-                 GuardarDatos.procesoGuardadoClientes(InterfazRegistro.this);
-                 //escribirArchivo(ListaUsuariosClientes.getListaUsuariosClientesJSON(), InterfazRegistro.this, "usuariosClientes.json");
-                 Toast.makeText(getApplicationContext(), "¡usuario cliente registrado existosamente!", Toast.LENGTH_SHORT).show();
-                 //}
+                        } else {
+                            TextView advertencia = findViewById(R.id.textView4);
+                            advertencia.setText("Debe seleccionar una opción");
+                        }
+                    }
                 }
+                if (userCliente.isChecked()) {
+                    cliente = new Cliente(password, correo, "c", Integer.parseInt(String.valueOf(edad.getSelectedItem())));
+                    UserName(cliente);
+                    String aver=cliente.getEmail();
+                    Intent newIntent =new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
+                    newIntent.putExtra("reci",aver);
+                    startActivity(newIntent);
                 }
             }
         }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,7 +161,6 @@ public class InterfazRegistro extends AppCompatActivity {
         findViewById(R.id.radioGroup2).setEnabled(false);
         findViewById(R.id.prueba).setEnabled(false);
         findViewById(R.id.prueba2).setEnabled(false);
-
         //para esconder el teclado
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -243,25 +201,6 @@ public class InterfazRegistro extends AppCompatActivity {
 
         userEmpresa = findViewById(R.id.radioButton);
         userCliente = findViewById(R.id.prueba2);
-        /*Button button = findViewById(R.id.button3);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validarDatosRegistro(passwordIngresado.getText().toString(),
-                        passwordIngresado2.getText().toString(), correoIngresado.getText().toString(),
-                        userCliente, userEmpresa)) {
-                    Intent intent = new Intent(InterfazRegistro.this, EnvioDelCorreo.class);
-                    EditText correoIngresado = findViewById(R.id.editTextTextEmailAddress2);
-                    String correo = correoIngresado.getText().toString();
-                    intent.putExtra("correo", correo);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(InterfazRegistro.this, "Debe llenar los campos correctamente", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });*/
     }
 
     public void UserName(Usuario usuario) {
