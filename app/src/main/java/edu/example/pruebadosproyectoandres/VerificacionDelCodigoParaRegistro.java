@@ -35,7 +35,7 @@ public class VerificacionDelCodigoParaRegistro extends MainActivity  {
             advertencia.setText("Codigo correcto");
             Intent intent= getIntent();
             String correo=intent.getStringExtra("correo");
-            Intent myIntent = new Intent(this, MostrarDatosDespuesDeRegistro.class);
+            Intent myIntent = new Intent(this, MainActivity.class);
             myIntent.putExtra("correo",correo);
             startActivity(myIntent);
         }

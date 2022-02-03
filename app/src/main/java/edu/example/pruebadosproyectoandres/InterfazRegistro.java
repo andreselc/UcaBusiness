@@ -47,7 +47,7 @@ public class InterfazRegistro extends AppCompatActivity {
         TextView advertencia = findViewById(R.id.textView6);
         EditText datosContacto= findViewById(R.id.datosContacto);
 
-        //if(!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(email.getAddress()) && !ListaUsuariosClientes.correoExisteEnClientesJSON(email.getAddress()))
+        if(!ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(email.getAddress()) && !ListaUsuariosClientes.correoExisteEnClientesJSON(email.getAddress()))
         if (email.read(email.getAddress())) {
             if (contrasena1.ValidarPassword(contrasena1.getPassword())) {
                 if (contrasena1.getPassword().compareTo(contrasena2.getPassword()) == 0) {
@@ -76,10 +76,10 @@ public class InterfazRegistro extends AppCompatActivity {
         } else {
             advertencia.setText("Correo no valido");
         }
-        //else
-      /*{
+        else
+      {
           advertencia.setText("¡Usuario ya registrado! Intente con un nuevo usuario");
-      }*/
+      }
         return false;
     }
 

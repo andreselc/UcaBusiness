@@ -70,59 +70,40 @@
             android:fontFamily="@font/roboto_regular"/>
 
     <TextView
-            android:id="@+id/textView"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.568"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.715"
-            android:fontFamily="@font/roboto_regular"/>
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.798" />
 
     <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="406dp"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_foreground" app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/imageView"
+        android:layout_width="274dp"
+        android:layout_height="209dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:onClick="btnEmpresas"
-            android:text="Ir a menu Crear producto"
-            android:layout_marginTop="105dp"
-            app:layout_constraintTop_toBottomOf="@+id/button10" android:layout_marginBottom="14dp"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
-            app:layout_constraintStart_toStartOf="@+id/button10"
-            app:layout_constraintEnd_toEndOf="@+id/button10"></Button>
-    <Button
-            android:text="Ir a menú ver lista productos"
-            android:onClick="btnClientes"
-            android:fontFamily="@font/roboto_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button5"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:layout_marginBottom="27dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
-    <Button
-            android:text="Olvidé mi contraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button10"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/button"
-            android:layout_marginTop="58dp"
-            android:onClick="btnLostPass"/>
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:onClick="btnLostPass"
+        android:text="Olvidé mi contraseña"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

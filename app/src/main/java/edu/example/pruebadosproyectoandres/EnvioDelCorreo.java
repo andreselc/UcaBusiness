@@ -67,7 +67,7 @@ public class EnvioDelCorreo extends Activity implements View.OnClickListener  {
         correo=new EnviarCorreo(rec,subject,textMessage);
         correo.execute("");
         Intent newIntent =new Intent(EnvioDelCorreo.this, VerificacionDelCodigoParaRegistro.class);
-        newIntent.putExtra("codigo",codigo);
+        newIntent.putExtra("codigo",Integer.toString(codigo));
         startActivity(newIntent);
     }
 
