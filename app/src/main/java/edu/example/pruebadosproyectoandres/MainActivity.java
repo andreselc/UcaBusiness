@@ -76,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 Y EL TERCERO EL TEXTO DEL CORREO.
                 LUEGO, EXECUTE TAL COMO ESTÁ AHI.*/
             System.out.println("correo obtenido:"+correo);
+            if (!correo.equals("")){
         EnviarCorreo temp = new EnviarCorreo(correo,"Clave olvidada", clave);
         temp.execute("");
-        Toast.makeText(MainActivity.this,"Contraseña enviada al correo", Toast.LENGTH_LONG).show();
-        //Toast.makeText(MainActivity.this,"Introduzca un correo válido", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,"Contraseña enviada al correo", Toast.LENGTH_LONG).show();}
+            else{Toast.makeText(MainActivity.this,"Introduzca un correo válido", Toast.LENGTH_LONG).show();}
         }
 
 
