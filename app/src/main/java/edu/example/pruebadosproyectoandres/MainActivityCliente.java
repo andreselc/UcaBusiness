@@ -5,9 +5,11 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +20,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 
@@ -68,6 +72,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
 
     // calling on create option menu
     // layout to inflate our menu file.
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -76,6 +81,12 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
 
         // inside inflater we are inflating our menu file.
         inflater.inflate(R.menu.menu, menu);
+
+
+        if(menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
 
         // below line is to get our menu item.
         MenuItem searchItem = menu.findItem(R.id.nav_search);

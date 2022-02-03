@@ -53,11 +53,11 @@ public class ProductosRecViewAdapter extends RecyclerView.Adapter<ProductosRecVi
         else
             holder.txtPrice.setText(" - - -");
 
-        /*File imgFile = new File(productos.get(position).getUbicImg());
+        File imgFile = new File(productos.get(position).getUbicImg());
         if(imgFile.exists()){
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.image.setImageBitmap(myBitmap);
-        };*/
+        }
 
         Glide.with(context)
                 .asBitmap()

@@ -27,6 +27,11 @@
         <activity
                 android:name=".MainActivityCliente"
                 android:exported="true"/>
+
+        <activity android:name=".InterfazReportarPublicacion"
+            android:exported="true"
+            android:parentActivityName=".GalleryActivity"/>
+
         <activity
                 android:name=".InterfazPerfil"
                 android:exported="true"/>

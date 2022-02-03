@@ -5,6 +5,8 @@ import static logica.ficheros.ListaUsuariosEmpresas.buscarUsuarioEmpresa;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +41,12 @@ import logica.usuario.Empresa;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+
 public class GalleryActivity extends AppCompatActivity {
     private static final String TAG = "Gallery Activity";
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -48,9 +54,12 @@ public class GalleryActivity extends AppCompatActivity {
         getIncomingIntent();
 
         Button btnComprar = findViewById(R.id.btnComprar);
-        if(ListaUsuariosClientes.correoExisteEnClientesJSON(getIntent().getStringExtra("userID")))
+        Button btnReportar = findViewById(R.id.btnReportar);
+        if(ListaUsuariosClientes.correoExisteEnClientesJSON(getIntent().getStringExtra("userID"))){
             btnComprar.setVisibility(View.VISIBLE);
-    }
+            btnReportar.setVisibility(View.VISIBLE);
+        }
+      }
 
     @SuppressLint("LongLogTag")
     private void getIncomingIntent(){
@@ -63,7 +72,8 @@ public class GalleryActivity extends AppCompatActivity {
                 && getIntent().hasExtra("image_url")
                 && getIntent().hasExtra("descripcion_producto")
                 && getIntent().hasExtra("userID")
-                && getIntent().hasExtra("precio_producto")){
+                && getIntent().hasExtra("precio_producto")
+                && getIntent().hasExtra("disponibilidad")){
 
             String imageName = getIntent().getStringExtra("product_name");
             String imageUrl = getIntent().getStringExtra("image_url");
@@ -94,22 +104,31 @@ public class GalleryActivity extends AppCompatActivity {
         nameTxt.setText(imageName);
         String userID = getIntent().getStringExtra("userID");
         String textoPrecio;
+        Producto producto = ListaProductos.buscarProductoGral(getIntent().getStringExtra("product_name"));
 
         if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID))
             textoPrecio = precio;
         else{
-            Producto producto = ListaProductos.buscarProductoGral(getIntent().getStringExtra("product_name"));
             if(producto.isPrecioVisible())
                 textoPrecio = precio;
             else
                 textoPrecio = "- - -";
         }
-
         precioTxt.setText(textoPrecio);
         disponibilidadTxt.setText(disponibilidad + " disponibles");
         descripcionTxt.setText(descripcion);
         ImageView image = findViewById(R.id.myImage);
-        Glide.with(this).asBitmap().load(imageUrl).into(image);
+        /*File imgFile = new File(producto.getUbicImg());
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            image.setImageBitmap(myBitmap);
+        }*/
+
+        Glide.with(this).
+                asBitmap().load(imageUrl).
+                placeholder(android.R.drawable.progress_indeterminate_horizontal).
+                error(android.R.drawable.stat_notify_error).
+                into(image);
     }
 
     public void onDeleteClick(View view){
@@ -173,5 +192,10 @@ public class GalleryActivity extends AppCompatActivity {
             Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(linkWha));
             startActivity(browse);
         }
+    }
+
+    public void goToReportar(View view){
+        Intent intent = new Intent(this, InterfazReportarPublicacion.class);
+        startActivity(intent);
     }
 }

@@ -43,10 +43,8 @@ public class ListaProductosSistema{
 
     public void setLista(ArrayList<Producto> productos){
         lista.clear();
-        ArrayList<Producto> listaProductos = ListaProductos.getListaProductos();
-        System.out.println(listaProductos);
-        for(Producto producto: listaProductos)
-            lista.add(producto);
+        System.out.println(productos);
+        lista.addAll(productos);
     }
 
     public void setProductosRecView(RecyclerView productosRecView) {

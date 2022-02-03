@@ -70,4 +70,12 @@
         <item>60</item>
         <item>60+</item>
     </string-array>
+    <string-array name="spinnerReporte">
+        <item>Spam</item>
+        <item>Publicacion ofensiva</item>
+        <item>Contenido sexual</item>
+        <item>No es un producto</item>
+        <item>Estafa</item>
+        <item>Otro</item>
+    </string-array>
 </resources>

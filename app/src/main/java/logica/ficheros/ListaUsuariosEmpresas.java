@@ -60,7 +60,6 @@ public class ListaUsuariosEmpresas extends ListaUsuarios{
 
     public static boolean correoExisteEnEmpresasJSON(String correo)  {
         String palabra;
-        System.out.println("listaJSON:"+listaUsuariosEmpresasJSON.toString());
         for(int i=0;i<listaUsuariosEmpresasJSON.size();i++) {
             org.json.simple.JSONObject json= (org.json.simple.JSONObject) listaUsuariosEmpresasJSON.get(i);
             System.out.println("correo empresa: "+json.get("correo"));
