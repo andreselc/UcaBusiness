@@ -1,12 +1,19 @@
 package edu.example.pruebadosproyectoandres;
 
+import static logica.ficheros.ListaUsuariosEmpresas.buscarUsuarioEmpresa;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +34,7 @@ import logica.ficheros.ListaUsuariosEmpresas;
 import logica.producto.ListaProductosSistema;
 import logica.producto.Producto;
 import logica.producto.filtros.FiltroPrecio;
+import logica.usuario.Empresa;
 
 import org.w3c.dom.Text;
 
@@ -37,8 +45,11 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-
         getIncomingIntent();
+
+        Button btnComprar = findViewById(R.id.btnComprar);
+        if(ListaUsuariosClientes.correoExisteEnClientesJSON(getIntent().getStringExtra("userID")))
+            btnComprar.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("LongLogTag")
@@ -152,5 +163,15 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
         alert.show();
+    }
+    public void goToWhatsapp(View view){
+        String userID = getIntent().getStringExtra("productID");
+        String linkWha = "";
+        if (ListaUsuariosEmpresas.correoExisteEnEmpresasJSON(userID)) {
+            Empresa empresa = ListaUsuariosEmpresas.buscarUsuarioEmpresa(userID);
+            linkWha = empresa.getLinkWhattsApp();
+            Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(linkWha));
+            startActivity(browse);
+        }
     }
 }

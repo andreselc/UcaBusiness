@@ -68,6 +68,8 @@
                 android:text="link"
                 android:layout_width="354dp"
                 android:layout_height="20dp" android:id="@+id/textView18"
+                android:linksClickable="true"
+                android:onClick="goToWhatsapp"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/textView17" android:layout_marginTop="20dp"
         />

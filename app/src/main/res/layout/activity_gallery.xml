@@ -12,7 +12,7 @@
         android:layout_height="282dp"
         android:layout_weight="70"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,9 +43,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/cantidad_disponibles"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="No hay disponibles"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="#000"
         android:fontFamily="@font/roboto_regular"
         android:visibility="invisible"/>
@@ -80,10 +80,21 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:contentDescription = "Modificar publicación"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="10dp"
         app:srcCompat="@drawable/ic_settings"
         android:onClick="onModifyClick"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/btnComprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="70"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="1dp"
+        android:onClick="goToWhatsapp"
+        android:text="Comprar"
         android:visibility="invisible"/>
 
 </LinearLayout>

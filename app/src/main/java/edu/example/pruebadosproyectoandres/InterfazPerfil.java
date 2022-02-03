@@ -1,6 +1,8 @@
 package edu.example.pruebadosproyectoandres;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +35,7 @@ public class InterfazPerfil extends AppCompatActivity {
         direccionLabel = findViewById(R.id.textView15);
         contacto=findViewById(R.id.textView20);
         whatsapp=findViewById(R.id.textView18);
+        whatsapp.setMovementMethod(LinkMovementMethod.getInstance());
         visible=findViewById(R.id.textView22);
         contactoLabel=findViewById(R.id.textView19);
         whatsappLabel=findViewById(R.id.textView17);
@@ -92,6 +95,10 @@ public class InterfazPerfil extends AppCompatActivity {
 
     }
 
+    public void goToWhatsapp(View v){
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(whatsapp.getText().toString()));
+        startActivity(browse);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

@@ -58,6 +58,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
         myButton = findViewById(R.id.floating_filter);
         //productosRecView = findViewById(R.id.contactsRecView);
         currLista.setProductosRecView(findViewById(R.id.contactsRecView));
+
         currLista.setLista(ListaProductos.getListaProductos());
         currLista.buildRecyclerView(this);
 
@@ -243,6 +244,7 @@ public class MainActivityCliente extends AppCompatActivity implements ProductosR
         intent.putExtra("precio_producto", "$" + currProd.getPrecio() + "");
         intent.putExtra("descripcion_producto", currProd.getDescripcion());
         intent.putExtra("userID", userID);
+        intent.putExtra("productID", currProd.getUserID());
         intent.putExtra("disponibilidad", currProd.getDisponibilidad() + "");
         startActivity(intent);
     }
