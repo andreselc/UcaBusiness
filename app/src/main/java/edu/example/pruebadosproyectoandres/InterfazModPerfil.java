@@ -73,7 +73,7 @@ public class InterfazModPerfil extends AppCompatActivity {
 
     }
 
-    public void regresar(View view){
+    public void buttonPressModificar(View view){
         alerta("Datos guardados");
     }
 
@@ -89,8 +89,8 @@ public class InterfazModPerfil extends AppCompatActivity {
         builder.setCancelable(false);
         builder.setPositiveButton("Aceptar", (dialog, which) -> {//datos aceptados
             dialog.cancel();
-            //aqui modificar el usuario
             try {
+                //aqui se modifica el usuario
                 modificarPerfil();
             } catch (JSONException e) {
                 e.printStackTrace();

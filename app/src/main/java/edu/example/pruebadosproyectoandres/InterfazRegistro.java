@@ -36,8 +36,6 @@ public class InterfazRegistro extends AppCompatActivity {
                                         String correo, RadioButton cliente,
                                         RadioButton empresa){
 
-
-
         Password contrasena1 = new Password(password1);
         Password contrasena2 =new Password (password2);
         Correo email= new Correo(correo);

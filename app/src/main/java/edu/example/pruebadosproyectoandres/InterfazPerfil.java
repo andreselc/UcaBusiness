@@ -16,7 +16,7 @@ import logica.usuario.Empresa;
 public class InterfazPerfil extends AppCompatActivity {
 
     private String userID="n/a";
-    TextView correo, direccion, direccionLabel, contacto, whatsapp, visible,
+    private TextView correo, direccion, direccionLabel, contacto, whatsapp, visible,
             contactoLabel, whatsappLabel, visibleLabel;
 
     @Override
@@ -80,6 +80,14 @@ public class InterfazPerfil extends AppCompatActivity {
         Intent newIntent = new Intent(this, InterfazModPerfil.class);
         newIntent.putExtra("userID",userID);
         getSupportActionBar().setTitle("Modificar Perfil");
+        startActivityForResult(newIntent,2);
+
+    }
+
+    public void buttonPressContrasena(View view){
+        Intent newIntent = new Intent(this, InterfazModContrasena.class);
+        newIntent.putExtra("userID",userID);
+        getSupportActionBar().setTitle("Modificar Contraseña");
         startActivityForResult(newIntent,2);
 
     }

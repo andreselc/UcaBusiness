@@ -103,5 +103,5 @@
             app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
             android:layout_marginTop="380dp" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.094"
-            android:onClick="regresar"/>
+            android:onClick="buttonPressModificar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

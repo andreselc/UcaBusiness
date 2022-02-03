@@ -13,8 +13,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.PruebaDosProyectoAndres">
-        <activity android:name=".InterfazModPerfil"
-                  android:exported="true"/>
+        <activity android:name=".InterfazModContrasena">
+        </activity>
+        <activity
+                android:name=".InterfazModPerfil"
+                android:exported="true"/>
         <activity
                 android:name=".MostrarDatosDespuesDeRegistro"
                 android:exported="false"/>
