@@ -136,8 +136,6 @@ public class InterfazModPerfil extends AppCompatActivity {
             //3: se guarda en el archivo
             GuardarDatos.procesoModClientes(InterfazModPerfil.this);
 
-
-
         }
 
 

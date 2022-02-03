@@ -84,15 +84,16 @@ public class Empresa extends Usuario{
     }
 
     public String getLinkWhattsApp(){
-        return linkWhattsApp;
+        return generarLink();
     }
     public String getprivacidad(){
         return privacidad;
     }
 
     public String generarLink(){
-        String texto= ("wa.me/58"+datosContacto+"/?text=Hola! Vengo de Ucabussines");
+        String texto= ("https://wa.me/58"+datosContacto+"?text=Hola!%20Vengo%20de%20UcaBusiness");
         return texto;
     }
+
 
 }
