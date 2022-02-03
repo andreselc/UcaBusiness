@@ -1,5 +1,7 @@
 package logica.ficheros;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.simple.JSONArray;
 
 import java.util.*;
@@ -73,11 +75,16 @@ public class ListaUsuariosClientes extends ListaUsuarios {
                 palabra=(String)json.get("correo");
                 if (palabra.compareTo(correo)==0)
                     return true;
-
-
         }
         return false;
     }
+
+    public static int buscarIndexUsuarioClientesJSON(String email) throws JSONException {
+        for (int i=0; i<=listaUsuariosClientesJSON.size();i++) {
+            org.json.simple.JSONObject cliente= (org.json.simple.JSONObject) listaUsuariosClientesJSON.get(i);
+            if (cliente.get("correo").toString().equals(email))
+                return listaUsuariosClientesJSON.indexOf(cliente);}
+        return 0;}
 
     //TODO: Detalles irrelevantes se cambiaron aquí tambipen
     public static void llenarListaEstaticaClientes() {

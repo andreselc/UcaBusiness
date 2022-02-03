@@ -14,6 +14,7 @@ import logica.ficheros.ListaUsuariosClientes;
 import logica.ficheros.ListaUsuariosEmpresas;
 import logica.usuario.Cliente;
 import logica.usuario.Empresa;
+import org.json.JSONException;
 import org.json.simple.JSONObject;
 
 import java.security.Guard;
@@ -89,7 +90,11 @@ public class InterfazModPerfil extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", (dialog, which) -> {//datos aceptados
             dialog.cancel();
             //aqui modificar el usuario
-            modificarPerfil();
+            try {
+                modificarPerfil();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             finish();
 
         });
@@ -98,7 +103,7 @@ public class InterfazModPerfil extends AppCompatActivity {
     }
 
 
-    private void modificarPerfil(){
+    private void modificarPerfil() throws JSONException {
         //para agregar mas datos, sencillamente
         //se deben agregar los campos
         //y obtener los datos del objeto correspondiente.
@@ -119,7 +124,7 @@ public class InterfazModPerfil extends AppCompatActivity {
             //2: se agrega el nuevo
             ListaUsuariosEmpresas.getListaUsuariosEmpresas().add(emp);
             //3: se guarda en el archivo
-            GuardarDatos.procesoModEmpresas(InterfazModPerfil.this);
+            GuardarDatos.procesoModEmpresas(InterfazModPerfil.this,emp);
 
         }
         else if (cl!=null){
@@ -129,12 +134,13 @@ public class InterfazModPerfil extends AppCompatActivity {
                 cl.setEdad(18);
             }
             else cl.setEdad(Long.parseLong(edad.getSelectedItem().toString()));
-            //1: se elimina el anterior y se crea el nuevo json
+            System.out.println(edad.getSelectedItem().toString());
+            //1: se elimina el anterior
             GuardarDatos.eliminarCliente(userID);
             //2: se agrega el nuevo
             ListaUsuariosClientes.getListaUsuariosClientes().add(cl);
             //3: se guarda en el archivo
-            GuardarDatos.procesoModClientes(InterfazModPerfil.this);
+            GuardarDatos.procesoModClientes(InterfazModPerfil.this, cl);
 
         }
 
