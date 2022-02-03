@@ -45,18 +45,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnLostPass(View v){
+
         EditText currCorreo = findViewById(R.id.editTextTextEmailAddress);
+
+        String correoString = currCorreo.getText().toString();
+        Cliente cl = ListaUsuariosClientes.buscarUsuarioClientes(correoString);
+        Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(correoString);
+
         String correo="", clave="";
-        if (!currCorreo.getText().toString().equals(null)){
-            if (ListaUsuariosEmpresas.correoExiste(currCorreo.getText().toString())) {
+        System.out.println("Correo antes:"+currCorreo.getText().toString());
+        System.out.println("Longitud listas:"+ListaUsuariosClientes.getListaUsuariosClientes().size()+","+ListaUsuariosEmpresas.getListaUsuariosEmpresasJSON().size());
+
+            if (ListaUsuariosEmpresas.correoExiste(correoString)) {
                 //es empresa
-                Empresa emp = ListaUsuariosEmpresas.buscarUsuarioEmpresa(currCorreo.getText().toString());
+                System.out.println("Entra a empresa");
+                assert emp != null;
                 correo=emp.getEmail();
                 clave=emp.getPassword();
 
-            } else if (ListaUsuariosClientes.correoExiste(currCorreo.getText().toString())) {
+            } else if (ListaUsuariosClientes.correoExiste(correoString)) {
                 //es cliente
-                Cliente cl = ListaUsuariosClientes.buscarUsuarioClientes(currCorreo.getText().toString());
+                System.out.println("Entra a cliente");
+                assert cl != null;
                 correo=cl.getEmail();
                 clave=cl.getPassword();
             }
@@ -64,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
                 PRIMERO GENERAN UN ENVIARCORREO. EL PRIMER VALOR ES EL CORREO DESTINO, EL SEGUNDO EL SUJETO DEL CORREO
                 Y EL TERCERO EL TEXTO DEL CORREO.
                 LUEGO, EXECUTE TAL COMO ESTÁ AHI.*/
-
+            System.out.println("correo obtenido:"+correo);
         EnviarCorreo temp = new EnviarCorreo(correo,"Clave olvidada", clave);
         temp.execute("");
-        Toast.makeText(MainActivity.this,"Contraseña enviada al correo", Toast.LENGTH_LONG).show();}
-        else{Toast.makeText(MainActivity.this,"Introduzca un correo válido", Toast.LENGTH_LONG).show();}
-    }
+        Toast.makeText(MainActivity.this,"Contraseña enviada al correo", Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this,"Introduzca un correo válido", Toast.LENGTH_LONG).show();
+        }
+
 
     public void btnIniciarSesion(View v){
         //este carga el menú del cliente (buscar productoo)

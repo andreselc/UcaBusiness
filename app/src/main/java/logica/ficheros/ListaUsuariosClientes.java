@@ -57,8 +57,10 @@ public class ListaUsuariosClientes extends ListaUsuarios {
 
     public static Cliente buscarUsuarioClientes(String email) {
         for (Cliente cliente: listaUsuariosClientes) {
-            if (cliente.getEmail().compareTo(email)==0)
-                return cliente;}
+            if (cliente.getEmail().compareTo(email)==0){
+                System.out.println("Encontrado:"+cliente.getEmail());
+                return cliente;}}
+        System.out.println("No encontrado");
         return null;}
 
     public static int buscarIndexUsuarioClientes(String email) {
