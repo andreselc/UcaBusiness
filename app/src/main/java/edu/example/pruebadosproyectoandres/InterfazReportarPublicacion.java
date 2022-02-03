@@ -40,6 +40,6 @@ public class InterfazReportarPublicacion extends AppCompatActivity {
             dialog.cancel();
             finish();
         });
-        builder.show();j
+        builder.show();
     }
 }
